@@ -2,8 +2,14 @@
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        18: "4.5rem",
+      },
+      fontFamily: {
+        Raleway: ["Raleway"],
+      },
+    },
   },
   plugins: [],
-}
-
+};

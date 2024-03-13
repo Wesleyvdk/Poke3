@@ -1,16 +1,28 @@
-function closeModal() {
-  const modal = document.getElementById("notPermitedModal");  
-  modal.classList.add("hidden");
-}
+// Not Permitted Modal - Project Page
+const openNotPermittedModal = document.querySelectorAll("#openNotPermittedModal");
+const CloseNotPermittedModal = document.querySelector("#closeNotPermittedModal");
+const notPermittedModal = document.querySelector("#notPermittedModal");
 
-function openModal() {
-  const modal = document.getElementById("notPermitedModal");
-  modal.classList.remove("hidden");
-}
-
-window.onclick = function(event) {
-  const modal = document.getElementById("notPermitedModal");
-  if (event.target == modal) {
-    modal.style.display = "none";
+notPermittedModal.addEventListener("click", e => {
+  const notPermittedModalDimensions = notPermittedModal.getBoundingClientRect()
+  if (
+    e.clientX < notPermittedModalDimensions.left ||
+    e.clientX > notPermittedModalDimensions.right ||
+    e.clientY < notPermittedModalDimensions.top ||
+    e.clientY > notPermittedModalDimensions.bottom
+  ) {
+    notPermittedModal.close()
   }
-} 
+});
+
+//Because id is use multiple times across the project page
+openNotPermittedModal.forEach(link => {
+  link.addEventListener('click', () => {
+    notPermittedModal.showModal();
+  });
+});
+
+CloseNotPermittedModal.addEventListener('click', () => {
+  notPermittedModal.close();
+});
+

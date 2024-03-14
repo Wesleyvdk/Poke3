@@ -11,6 +11,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100..900&display=swap" rel="stylesheet">
+  <!-- For development only!! use npx tailwindcss -i ./src/input.css -o ./src/output.css for production -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            Raleway: ["Raleway", "sans-serif"],
+          }
+        }
+      }
+    }
+  </script>
 </head>
 
 <body class="font-Raleway h-screen bg-neutral-900">

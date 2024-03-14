@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Poke3</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100..900&display=swap" rel="stylesheet">
+  <link href="./index.css" rel="stylesheet">
+  <link href="./output.css" rel="stylesheet">
+
+</head>
+
+<body class="font-Raleway h-screen bg-neutral-900">
+  <header class=" px-8 h-20 flex justify-between items-center ">
+    <h1 class="font-black text-neutral-50 text-4xl tracking-wider">POKE3</h1>
+    <nav>
+      <div class="hidden md:block">
+        <a href="./login.html" class="text-neutral-50 mx-4 font-semibold text-lg">Log in</a>
+        <a href="./register.html"
+          class="bg-blue-500 text-white py-3 px-6 rounded-lg font-semibold text-lg">Registreer</a>
+      </div>
+      <div class="block md:hidden">
+        <button class="text-neutral-50 focus:outline-none">
+          <svg class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+  <main class="px-8">
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 gap-y-6 my-8">
+      <a href="#" class="overflow-hidden relative block rounded-lg shadow-md group">
+
+        <img alt="Placeholder" id="openNotPermittedModal"
+          class="w-full object-cover object-center hover:brightness-75 brightness-75 sm:brightness-100 transition-all duration-300 pointer-events-auto"
+          src="./public/assets/images/LOTR.png" />
+        <h1
+          class="absolute top-1/2 left-1/2 text-neutral-50 uppercase text-4xl lg:text-5xl md:text-5xl sm:text-7xl text-center font-semibold -translate-x-1/2 -translate-y-1/2 pointer-events-none visible sm:invisible group-hover:visible ">
+          Lord Of The Rings</h1>
+
+      </a>
+      <a href="#" class="overflow-hidden relative block rounded-lg shadow-md group">
+        <img alt="Placeholder" id="openNotPermittedModal"
+          class="w-full object-cover object-center hover:brightness-75 brightness-75 sm:brightness-100 transition-all duration-300 pointer-events-auto"
+          src="./public/assets/images/Lego.jpg" />
+        <h1
+          class="absolute top-1/2 left-1/2 text-neutral-50 uppercase text-4xl lg:text-5xl md:text-5xl sm:text-7xl text-center font-semibold -translate-x-1/2 -translate-y-1/2 pointer-events-none visible sm:invisible group-hover:visible ">
+          Lego</h1>
+
+      </a>
+      <a href="#" id="openNotLoggedInModal" class="overflow-hidden relative block rounded-lg shadow-md group">
+        <img alt="Placeholder"
+          class="w-full object-cover object-center hover:brightness-75 brightness-75 sm:brightness-100 transition-all duration-300 pointer-events-auto"
+          src="./public/assets/images/Pokemon.png" />
+        <h1
+          class="absolute top-1/2 left-1/2 text-neutral-50 uppercase text-4xl lg:text-5xl md:text-5xl sm:text-7xl text-center font-semibold -translate-x-1/2 -translate-y-1/2 pointer-events-none visible sm:invisible group-hover:visible ">
+          Pokemon</h1>
+      </a>
+      <a href="#" class="overflow-hidden relative block rounded-lg shadow-md group">
+        <img alt="Placeholder" id="openNotPermittedModal"
+          class="w-full object-cover object-center hover:brightness-75 brightness-75 sm:brightness-100 transition-all duration-300 pointer-events-auto"
+          src="./public/assets/images/Fifa.jpg" />
+        <h1
+          class="absolute top-1/2 left-1/2 text-neutral-50 uppercase text-4xl md:text-5xl sm:text-7xl text-center font-semibold -translate-x-1/2 -translate-y-1/2 pointer-events-none visible sm:invisible group-hover:visible ">
+          Fifa</h1>
+      </a>
+      <a href="#" class="overflow-hidden relative block rounded-lg shadow-md group">
+        <img alt="Placeholder" id="openNotPermittedModal"
+          class="w-full object-cover object-center hover:brightness-75 brightness-75 sm:brightness-100 transition-all duration-300 pointer-events-auto"
+          src="./public/assets/images/MTG.jpeg" />
+        <h1
+          class="absolute top-1/2 left-1/2 text-neutral-50 uppercase text-4xl lg:text-5xl md:text-5xl sm:text-7xl text-center font-semibold -translate-x-1/2 -translate-y-1/2 pointer-events-none visible sm:invisible group-hover:visible ">
+          Magic The Gathering</h1>
+      </a><a href="#" class="overflow-hidden relative block rounded-lg shadow-md group">
+        <img alt="Placeholder" id="openNotPermittedModal"
+          class="w-full object-cover object-center hover:brightness-75 brightness-75 sm:brightness-100 transition-all duration-300 pointer-events-auto"
+          src="./public/assets/images/Fortnite.jpeg" />
+        <h1
+          class="absolute top-1/2 left-1/2 text-neutral-50 uppercase text-4xl lg:text-5xl md:text-5xl sm:text-7xl text-center font-semibold -translate-x-1/2 -translate-y-1/2 pointer-events-none visible sm:invisible group-hover:visible ">
+          Fortnite</h1>
+      </a>
+    </section>
+    <dialog id="notPermittedModal" class="backdrop:bg-neutral-900 backdrop:opacity-75 rounded-lg bg-neutral-800">
+      <article class="flex flex-col items-center justify-center space-y-10 mb-5 bg-neutral-800 px-12 py-6">
+        <img class="w-96 aspect-auto"  src="./public/assets/images/UnderConstruction.png" alt="">
+        <h3 class="mt-3 sm:mt-0 sm:ml-4 text-center text-3xl font-semibold leading-6 text-gray-100 uppercase"
+          id="modal-title">Oeps! Hier werken
+          we nog aan!
+        </h3>
+      </article>
+      <svg id="closeNotPermittedModal" class="h-9 w-9 absolute top-1 right-1 cursor-pointer" viewBox="0 -0.5 25 25"
+        fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M6.96967 16.4697C6.67678 16.7626 6.67678 17.2374 6.96967 17.5303C7.26256 17.8232 7.73744 17.8232 8.03033 17.5303L6.96967 16.4697ZM13.0303 12.5303C13.3232 12.2374 13.3232 11.7626 13.0303 11.4697C12.7374 11.1768 12.2626 11.1768 11.9697 11.4697L13.0303 12.5303ZM11.9697 11.4697C11.6768 11.7626 11.6768 12.2374 11.9697 12.5303C12.2626 12.8232 12.7374 12.8232 13.0303 12.5303L11.9697 11.4697ZM18.0303 7.53033C18.3232 7.23744 18.3232 6.76256 18.0303 6.46967C17.7374 6.17678 17.2626 6.17678 16.9697 6.46967L18.0303 7.53033ZM13.0303 11.4697C12.7374 11.1768 12.2626 11.1768 11.9697 11.4697C11.6768 11.7626 11.6768 12.2374 11.9697 12.5303L13.0303 11.4697ZM16.9697 17.5303C17.2626 17.8232 17.7374 17.8232 18.0303 17.5303C18.3232 17.2374 18.3232 16.7626 18.0303 16.4697L16.9697 17.5303ZM11.9697 12.5303C12.2626 12.8232 12.7374 12.8232 13.0303 12.5303C13.3232 12.2374 13.3232 11.7626 13.0303 11.4697L11.9697 12.5303ZM8.03033 6.46967C7.73744 6.17678 7.26256 6.17678 6.96967 6.46967C6.67678 6.76256 6.67678 7.23744 6.96967 7.53033L8.03033 6.46967ZM8.03033 17.5303L13.0303 12.5303L11.9697 11.4697L6.96967 16.4697L8.03033 17.5303ZM13.0303 12.5303L18.0303 7.53033L16.9697 6.46967L11.9697 11.4697L13.0303 12.5303ZM11.9697 12.5303L16.9697 17.5303L18.0303 16.4697L13.0303 11.4697L11.9697 12.5303ZM13.0303 11.4697L8.03033 6.46967L6.96967 7.53033L11.9697 12.5303L13.0303 11.4697Z"
+          class="fill-neutral-300" />
+      </svg>
+    </dialog>
+    <dialog id="notLoggedInModal" class="backdrop:bg-neutral-900 backdrop:opacity-75 rounded-lg bg-neutral-800">
+      <article class="flex flex-col space-y-10 items-center justify-center bg-neutral-800 px-12 py-6">
+        <img class="w-96 aspect-auto" src="./public/assets/images/DeniedAccess.png" alt="">
+        <h3 class="mt-3 text-center text-2xl font-semibold leading-6 text-gray-100 uppercase" id="modal-title">Je bent
+          nog niet ingelogd!
+        </h3>
+        
+        <a type="button" href="./login.html"
+          class="cursor-pointer inline-flex w-1/2 justify-center rounded-md bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">Inloggen</a>
+      </article>
+
+      <svg id="closeNotLoggedInModal" class="h-9 w-9 absolute top-1 right-1 cursor-pointer" viewBox="0 -0.5 25 25"
+        fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M6.96967 16.4697C6.67678 16.7626 6.67678 17.2374 6.96967 17.5303C7.26256 17.8232 7.73744 17.8232 8.03033 17.5303L6.96967 16.4697ZM13.0303 12.5303C13.3232 12.2374 13.3232 11.7626 13.0303 11.4697C12.7374 11.1768 12.2626 11.1768 11.9697 11.4697L13.0303 12.5303ZM11.9697 11.4697C11.6768 11.7626 11.6768 12.2374 11.9697 12.5303C12.2626 12.8232 12.7374 12.8232 13.0303 12.5303L11.9697 11.4697ZM18.0303 7.53033C18.3232 7.23744 18.3232 6.76256 18.0303 6.46967C17.7374 6.17678 17.2626 6.17678 16.9697 6.46967L18.0303 7.53033ZM13.0303 11.4697C12.7374 11.1768 12.2626 11.1768 11.9697 11.4697C11.6768 11.7626 11.6768 12.2374 11.9697 12.5303L13.0303 11.4697ZM16.9697 17.5303C17.2626 17.8232 17.7374 17.8232 18.0303 17.5303C18.3232 17.2374 18.3232 16.7626 18.0303 16.4697L16.9697 17.5303ZM11.9697 12.5303C12.2626 12.8232 12.7374 12.8232 13.0303 12.5303C13.3232 12.2374 13.3232 11.7626 13.0303 11.4697L11.9697 12.5303ZM8.03033 6.46967C7.73744 6.17678 7.26256 6.17678 6.96967 6.46967C6.67678 6.76256 6.67678 7.23744 6.96967 7.53033L8.03033 6.46967ZM8.03033 17.5303L13.0303 12.5303L11.9697 11.4697L6.96967 16.4697L8.03033 17.5303ZM13.0303 12.5303L18.0303 7.53033L16.9697 6.46967L11.9697 11.4697L13.0303 12.5303ZM11.9697 12.5303L16.9697 17.5303L18.0303 16.4697L13.0303 11.4697L11.9697 12.5303ZM13.0303 11.4697L8.03033 6.46967L6.96967 7.53033L11.9697 12.5303L13.0303 11.4697Z"
+          class="fill-neutral-300" />
+      </svg>
+    </dialog>
+  </main>
+</body>
+<script src="./public/js/scripts.js"></script>
+
+</html>

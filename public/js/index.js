@@ -37,27 +37,26 @@ const notLoggedInModal = document.querySelector("#notLoggedInModal");
 let notLoggedIn = false;
 
 // notLoggedInModal.showModal();
-notLoggedInModal.addEventListener("click", e => {
-  const notLoggedInModalDimensions = notLoggedInModal.getBoundingClientRect()
+notLoggedInModal.addEventListener("click", (e) => {
+  const notLoggedInModalDimensions = notLoggedInModal.getBoundingClientRect();
   if (
     e.clientX < notLoggedInModalDimensions.left ||
     e.clientX > notLoggedInModalDimensions.right ||
     e.clientY < notLoggedInModalDimensions.top ||
     e.clientY > notLoggedInModalDimensions.bottom
   ) {
-    notLoggedInModal.close()
+    notLoggedInModal.close();
   }
 });
 
 //Because id is used multiple times across the project page
 openNotLoggedInModal.addEventListener("click", () => {
-  if(!notLoggedIn){
+  if (localStorage.getItem('isLoggedIn') == false) {
     notLoggedInModal.showModal();
   } else {
     //If logged in go to Game
-    window.location.href = "./login.html"
+    window.location.href = "./landing.html";
   }
-  
 });
 
 closeNotLoggedInModal.addEventListener("click", () => {

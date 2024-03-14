@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
 <body class="bg-neutral-900">
   <header class="fixed px-8 h-20 flex justify-between items-center ">
     <a href="./index.html" class="flex justify-center items-center">
@@ -25,21 +23,21 @@
         <h1 class="text-xl font-bold leading-tight tracking-tight text-neutral-50 md:text-2xl">
           Login in jouw account
         </h1>
-        <form class="space-y-4 md:space-y-6" action="#">
+        <form class="space-y-4 md:space-y-6" action="" id="login">
           <label for="email" class="block mb-2 text-sm font-medium text-neutral-50">Jouw email</label>
           <input type="email" name="email" id="email"
             class="border sm:text-sm rounded-lg block w-full p-2.5 bg-neutral-700 border-neutral-600 placeholder-neutral-400 text-white focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Tom@gmail.com" required="">
+            placeholder="Tom@gmail.com" required="true">
           <label for="password" class="block mb-2 text-sm font-medium text-neutral-50">Wachtwoord</label>
           <input type="password" name="password" id="password" placeholder="••••••••"
             class=" border sm:text-sm rounded-lg block w-full p-2.5 bg-neutral-700 border-neutral-600 placeholder-neutral-400 text-white focus:ring-blue-500 focus:border-blue-500"
-            required="">
+            required="true">
           <article class="flex items-center justify-between">
             <section class="flex items-start">
-              <input id="remember" aria-describedby="remember" type="checkbox"
+              <input id="remember"  type="checkbox"
                 class="w-4 h-4 border rounded focus:ring-3 bg-neutral-700 border-neutral-600 focus:ring-blue-600 ring-offset-neutral-800"
-                required="">
-              <label for="remember" class="text-neutral-300 ml-3 text-sm" aria-required="false">Onthoud
+                aria-required="false">
+              <label for="remember" class="text-neutral-300 ml-3 text-sm">Onthoud
                 mij</label>
             </section>
             <a href="#" class="text-base font-medium hover:underline text-blue-500">Wachtwoord
@@ -56,5 +54,5 @@
     </section>
   </main>
 </body>
-
+<script src="./public/js/login.js"></script>
 </html>

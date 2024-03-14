@@ -7,8 +7,17 @@
   <title>Login</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-neutral-900">
-  <header>
+  <header class="fixed px-8 h-20 flex justify-between items-center ">
+    <a href="#" class="flex justify-center items-center">
+      <svg class="h-10 w-10 fill-neutral-50" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+        <path d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z" />
+        <path
+          d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z" />
+      </svg>
+      <h1 class="font-black text-neutral-50 invisible sm:visible sm:text-xl md:text-2xl lg:text-3xl ml-4 tracking-wider">Terug naar de website</h1>
+    </a>
   </header>
   <main class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
     <section class="w-full rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0 bg-neutral-800">
@@ -47,4 +56,5 @@
     </section>
   </main>
 </body>
+
 </html>

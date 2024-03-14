@@ -34,22 +34,30 @@ CloseNotPermittedModal.addEventListener("click", () => {
 const openNotLoggedInModal = document.querySelector("#openNotLoggedInModal");
 const closeNotLoggedInModal = document.querySelector("#closeNotLoggedInModal");
 const notLoggedInModal = document.querySelector("#notLoggedInModal");
-notLoggedInModal.showModal();
-// notLoggedInModal.addEventListener("click", e => {
-//   const notLoggedInModalDimensions = notLoggedInModal.getBoundingClientRect()
-//   if (
-//     e.clientX < notLoggedInModalDimensions.left ||
-//     e.clientX > notLoggedInModalDimensions.right ||
-//     e.clientY < notLoggedInModalDimensions.top ||
-//     e.clientY > notLoggedInModalDimensions.bottom
-//   ) {
-//     notLoggedInModal.close()
-//   }
-// });
+let notLoggedIn = false;
+
+// notLoggedInModal.showModal();
+notLoggedInModal.addEventListener("click", e => {
+  const notLoggedInModalDimensions = notLoggedInModal.getBoundingClientRect()
+  if (
+    e.clientX < notLoggedInModalDimensions.left ||
+    e.clientX > notLoggedInModalDimensions.right ||
+    e.clientY < notLoggedInModalDimensions.top ||
+    e.clientY > notLoggedInModalDimensions.bottom
+  ) {
+    notLoggedInModal.close()
+  }
+});
 
 //Because id is used multiple times across the project page
 openNotLoggedInModal.addEventListener("click", () => {
-  notLoggedInModal.showModal();
+  if(!notLoggedIn){
+    notLoggedInModal.showModal();
+  } else {
+    //If logged in go to Game
+    window.location.href = "./login.html"
+  }
+  
 });
 
 closeNotLoggedInModal.addEventListener("click", () => {

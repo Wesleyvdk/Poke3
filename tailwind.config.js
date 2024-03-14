@@ -4,10 +4,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        "Raleway": ['Raleway']
-      }
+        Raleway: ["Raleway", "sans-serif"],
+      },
     },
   },
   plugins: [],
-}
-
+};

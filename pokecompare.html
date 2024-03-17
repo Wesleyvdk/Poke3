@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Poke3</title>
+  <!-- Tailwind css -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Raleway Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100..900&display=swap" rel="stylesheet">
+  <!-- For development only!! use npx tailwindcss -i ./src/input.css -o ./src/output.css for production -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            Raleway: ["Raleway", "sans-serif"],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-blue-300 p-8">
+    <header>
+        <h1 class="text-6xl md:text-7xl font-bold mb-4 text-yellow-400 text-center">PokéCompare</h1>
+    </header>
+    <main class="min-h-screen flex justify-center items-center">
+      <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="pokemon-card border border-gray-300 bg-gray-100 rounded-lg p-6">
+            <h2 class="text-2xl font-semibold mb-4 text-center">Pikachu</h2>
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="Pikachu" class="mx-auto mb-4">
+            <div class="pokemon-stats grid grid-cols-2 gap-4">
+                <div class="stat bg-gray-200 p-4 rounded-lg">hp: <span class="text-red-500">32</span></div>
+                <div class="stat bg-gray-200 p-4 rounded-lg">Attack: <span class="text-red-500">55</span></div>
+                <div class="stat bg-gray-200 p-4 rounded-lg">Defense: <span class="text-green-500">40</span></div>
+                <div class="stat bg-gray-200 p-4 rounded-lg">Special Attack: <span class="text-red-500">50</span></div>
+                <div class="stat bg-gray-200 p-4 rounded-lg">Special Defense: <span class="">50</span></div>
+                <div class="stat bg-gray-200 p-4 rounded-lg">Speed: <span class="text-green-500">90</span></div>
+            </div>
+        </div>
+        <div class="pokemon-card border border-gray-300 bg-gray-100 rounded-lg p-6">
+            <h2 class="text-2xl font-semibold mb-4 text-center">Charmander</h2>
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png" alt="Charmander" class="mx-auto mb-4">
+            <div class="pokemon-stats grid grid-cols-2 gap-4">
+                <div class="stat bg-gray-200 p-4 rounded-lg">hp: <span class="text-green-500">35</span></div>
+                <div class="stat bg-gray-200 p-4 rounded-lg">Attack: <span class="text-green-500">52</span></div>
+                <div class="stat bg-gray-200 p-4 rounded-lg">Defense: <span class="text-red-500">43</span></div>
+                <div class="stat bg-gray-200 p-4 rounded-lg">Special Attack: <span class="text-green-500">60</span></div>
+                <div class="stat bg-gray-200 p-4 rounded-lg">Special Defense: <span class="">50</span></div>
+                <div class="stat bg-gray-200 p-4 rounded-lg">Speed: <span class="text-red-500">65</span></div>
+            </div>
+        </div>
+    </div>
+</body>
+    </main>
+</body>
+</html>

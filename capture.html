@@ -11,6 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Raleway:wght@100..900&display=swap"
       rel="stylesheet"
     />
+    <script src="public/assets/scripts/capture.js"></script>
   </head>
   <body class="font-Raleway h-screen bg-neutral-900">
     <header class="px-8 h-20 flex justify-between items-center">
@@ -60,11 +61,34 @@
           />
         </figure>
       </section>
+
       <section class="relative h-1/2 bg-lime-400">
-        <button class="absolute left-1/2">
+        <button id="pokeball" class="absolute left-1/2">
           <div
+            id="redhalf"
             class="absolute top-[10.5rem] h-[4.5rem] w-36 -translate-x-1/2 rounded-t-full bg-red-600 border-black border-4"
           ></div>
+          <svg
+            id="svg-container"
+            class="absolute top-[11rem] w-10 h-10 -translate-x-1/2"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect width="24" height="24" />
+            <path
+              d="M7 17L16.8995 7.10051"
+              stroke="#000000"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M7 7.00001L16.8995 16.8995"
+              stroke="#000000"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
           <div
             class="absolute top-60 h-[4.5rem] w-36 -translate-x-1/2 rounded-b-full bg-white border-black border-4"
           ></div>
@@ -76,6 +100,10 @@
           ></div>
         </button>
       </section>
+      <section
+        id="modal"
+        class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center"
+      ></section>
     </main>
   </body>
 </html>

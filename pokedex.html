@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Poke3</title>
+    <!-- Tailwind css -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Raleway Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100..900&display=swap" rel="stylesheet">
+    <!-- For development only!! use npx tailwindcss -i ./src/input.css -o ./src/output.css for production -->
+    <script>
+       tailwind.config = {
+         theme: {
+           extend: {
+            fontFamily: {
+             Raleway: ["Raleway", "sans-serif"],
+             }
+           }
+        }
+    }
+</script>
+      </head>
+<body class="bg-neutral-100 p-8">
+    <header>
+        <h1 class="text-7xl font-bold mb-4 text-yellow-400 text-center">Pokédex</h1>
+    </header>
+        <main class="w-full mx-auto">
+            <section class="flex flex-wrap gap-4 gap-y-6 my-8 mx-auto justify-center">
+                <a href="" class="flex justify-between min-w-[22rem] w-1/4 bg-gray-200 rounded-lg p-4 relative">
+                    <div class="flex  flex-col justify-between">
+                    <h1 class="font-medium text-3xl ">Bulbasaur</h1>
+                    <p class="items-start text-start text-white py-2 text-xl">
+                        <span class="inline-flex font-medium rounded-md bg-green-500 shadow-lg py-1 px-4 ">Grass</span> 
+                        <span class="inline-flex font-medium rounded-md bg-purple-500 shadow-lg py-1 px-4">Poison</span>
+                    </p>
+                    </div>
+                    <img class="w-32 z-10" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="Bulbasaur" />
+                    <span class="absolute top-0 right-5 font-black text-4xl text-neutral-400 z-0 text-black-400">#0001</span>
+                </a>
+                <a href="" class="flex justify-between min-w-[22rem] w-1/4 bg-gray-200 rounded-lg p-4 relative">
+                    <div class="flex  flex-col justify-between">
+                    <h1 class="font-medium text-3xl">Ivysaur</h1>
+                    <p class="items-center text-center text-white py-2 text-xl">
+                        <span class="inline-flex font-medium rounded-md bg-green-500 shadow-lg py-1 px-4 ">Grass</span> 
+                        <span class="inline-flex font-medium rounded-md bg-purple-500 shadow-lg py-1 px-4">Poison</span>
+                    </p>
+                    </div>
+                    <img class="w-32 z-10" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png" alt="Ivysaur" />
+                    <span class="absolute top-0 right-5 font-black text-4xl text-neutral-400 z-0 text-black-400">#0002</span>
+                </a>
+                <a href="" class="flex justify-between grayscale min-w-[22rem] w-1/4 bg-gray-200 rounded-lg p-4 relative">
+                    <div class="flex  flex-col justify-between">
+                    <h1 class="font-medium text-3xl ">Venusaur</h1>
+                    <p class="items-start text-start text-white py-2 text-xl">
+                        <span class="inline-flex font-medium rounded-md bg-green-500 shadow-lg py-1 px-4">Grass</span> 
+                        <span class="inline-flex font-medium rounded-md bg-purple-500 shadow-lg py-1 px-4">Poison</span>
+                    </p>
+                    </div>
+                    <img class="w-32 z-10" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png" alt="Venusaur" />
+                    <span class="absolute top-0 right-5 font-black text-4xl text-neutral-400 z-0 text-black-400">#0003</span>
+                </a>
+                <a href="" class="flex justify-between min-w-[22rem] w-1/4 bg-gray-200 rounded-lg p-4 relative">
+                    <div class="flex  flex-col justify-between">
+                    <h1 class="font-medium text-3xl ">Charmander</h1>
+                    <p class="items-start text-start text-white py-2 text-xl">
+                        <span class="inline-flex font-medium rounded-md bg-red-500 shadow-lg py-1 px-4 ">Fire</span> 
+                    </p>
+                    </div>
+                    <img class="w-32 z-10" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png" alt="Charmander" />
+                    <span class="absolute top-0 right-5 font-black text-4xl text-neutral-400 z-0 text-black-400">#0004</span>
+                </a>
+                <a href="" class="flex justify-between min-w-[22rem] w-1/4 bg-gray-200 rounded-lg p-4 relative">
+                    <div class="flex  flex-col justify-between">
+                    <h1 class="font-medium text-3xl ">Charmeleon</h1>
+                    <p class="items-start text-start text-white py-2 text-xl">
+                        <span class="inline-flex font-medium rounded-md bg-red-500 shadow-lg py-1 px-4 ">Fire</span> 
+                    </p>
+                    </div>
+                    <img class="w-32 z-10" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png" alt="Charmeleon" />
+                    <span class="absolute top-0 right-5 font-black text-4xl text-neutral-400 z-0 text-black-400">#0005</span>
+                </a>
+                <a href="" class="flex justify-between min-w-[22rem] w-1/4 bg-gray-200 rounded-lg p-4 relative">
+                    <div class="flex  flex-col justify-between">
+                    <h1 class="font-medium text-3xl ">Charizard</h1>
+                    <p class="items-start text-start text-white py-2 text-xl">
+                        <span class="inline-flex font-medium rounded-md bg-red-500 shadow-lg py-1 px-4 ">Fire</span>
+                        <span class="inline-flex font-medium rounded-md bg-blue-300 shadow-lg py-1 px-4 ">Flying</span>
+                    </p>
+                    </div>
+                    <img class="w-32 z-10" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png" alt="Charizard" />
+                    <span class="absolute top-0 right-5 font-black text-4xl text-neutral-400 z-0 text-black-400">#0006</span>
+                </a>
+                <a href="" class="flex justify-between min-w-[22rem] w-1/4 bg-gray-200 rounded-lg p-4 relative">
+                    <div class="flex  flex-col justify-between">
+                    <h1 class="font-medium text-3xl ">Squirtle</h1>
+                    <p class="items-start text-start text-white py-2 text-xl">
+                        <span class="inline-flex font-medium rounded-md bg-blue-500 shadow-lg py-1 px-4 ">Water</span> 
+                    </p>
+                    </div>
+                    <img class="w-32 z-10" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png" alt="Squirtle" />
+                    <span class="absolute top-0 right-5 font-black text-4xl text-neutral-400 z-0 text-black-400">#0007</span>
+                </a>
+                <a href="" class="flex justify-between min-w-[22rem] w-1/4 bg-gray-200 rounded-lg p-4 relative">
+                    <div class="flex  flex-col justify-between">
+                    <h1 class="font-medium text-3xl ">Wartortle</h1>
+                    <p class="items-start text-start text-white py-2 text-xl">
+                        <span class="inline-flex font-medium rounded-md bg-blue-500 shadow-lg py-1 px-4 ">Water</span> 
+                    </p>
+                    </div>
+                    <img class="w-32 z-10" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/8.png" alt="Wartortle" />
+                    <span class="absolute top-0 right-5 font-black text-4xl text-neutral-400 z-0 text-black-400">#0008</span>
+                </a>
+                <a href="" class="flex justify-between grayscale min-w-[22rem] w-1/4 bg-gray-200 rounded-lg p-4 relative">
+                    <div class="flex  flex-col justify-between">
+                    <h1 class="font-medium text-3xl ">Blastoise</h1>
+                    <p class="items-start text-start text-white py-2 text-xl">
+                        <span class="inline-flex font-medium rounded-md bg-blue-500 shadow-lg py-1 px-4 ">Water</span> 
+                    </p>
+                    </div>
+                    <img class="w-32 z-10" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png" alt="Blastoise" />
+                    <span class="absolute top-0 right-5 font-black text-4xl text-neutral-400 z-0 text-black-400">#0009</span>
+                </a>
+                <a href="" class="flex justify-between min-w-[22rem] w-1/4 bg-gray-200 rounded-lg p-4 relative">
+                    <div class="flex  flex-col justify-between">
+                    <h1 class="font-medium text-3xl ">Caterpie</h1>
+                    <p class="items-start text-start text-white py-2 text-xl">
+                        <span class="inline-flex font-medium rounded-md bg-green-700 shadow-lg py-1 px-4 ">Bug</span>
+                    </p>
+                    </div>
+                    <img class="w-32 z-10" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10.png" alt="Caterpie" />
+                    <span class="absolute top-0 right-5 font-black text-4xl text-neutral-400 z-0 text-black-400">#0010</span>
+                </a>
+                <a href="" class="flex justify-between min-w-[22rem] w-1/4 bg-gray-200 rounded-lg p-4 relative">
+                    <div class="flex  flex-col justify-between">
+                    <h1 class="font-medium text-3xl ">Metapod</h1>
+                    <p class="items-start text-start text-white py-2 text-xl">
+                        <span class="inline-flex font-medium rounded-md bg-green-700 shadow-lg py-1 px-4 ">Bug</span>
+                    </p>
+                    </div>
+                    <img class="w-32 z-10" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/11.png" alt="Metapod" />
+                    <span class="absolute top-0 right-5 font-black text-4xl text-neutral-400 z-0 text-black-400">#0011</span>
+                </a>
+                <a href="" class="flex justify-between min-w-[22rem] w-1/4 bg-gray-200 rounded-lg p-4 relative">
+                    <div class="flex  flex-col justify-between">
+                    <h1 class="font-medium text-3xl ">Butterfree</h1>
+                    <p class="items-start text-start text-white py-2 text-xl">
+                        <span class="inline-flex font-medium rounded-md bg-green-700 shadow-lg py-1 px-4 ">Bug</span>
+                    </p>
+                    </div>
+                    <img class="w-32 z-10" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/12.png" alt="Butterfree" />
+                    <span class="absolute top-0 right-5 font-black text-4xl text-neutral-400 z-0 text-black-400">#0012</span>
+                </a>
+                <a href="" class="flex justify-between min-w-[22rem] w-1/4 bg-gray-200 rounded-lg p-4 relative">
+                    <div class="flex  flex-col justify-between">
+                    <h1 class="font-medium text-3xl ">Weedle</h1>
+                    <p class="items-start text-start text-white py-2 text-xl">
+                        <span class="inline-flex font-medium rounded-md bg-green-700 shadow-lg py-1 px-4 ">bug</span> 
+                        <span class="inline-flex font-medium rounded-md bg-purple-500 shadow-lg py-1 px-4">poison</span>
+                    </p>
+                    </div>
+                    <img class="w-32 z-10" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/13.png" alt="Weedle" />
+                    <span class="absolute top-0 right-5 font-black text-4xl text-neutral-400 z-0 text-black-400">#0013</span>
+                </a>
+                <a href="" class="flex justify-between  grayscale min-w-[22rem] w-1/4 bg-gray-200 rounded-lg p-4 relative">
+                    <div class="flex  flex-col justify-between">
+                    <h1 class="font-medium text-3xl ">Kakuna</h1>
+                    <p class="items-start text-start text-white py-2 text-xl">
+                        <span class="inline-flex font-medium rounded-md bg-green-700 shadow-lg py-1 px-4 ">bug</span> 
+                        <span class="inline-flex font-medium rounded-md bg-purple-500 shadow-lg py-1 px-4">poison</span>
+                    </p>
+                    </div>
+                    <img class="w-32 z-10" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/14.png" alt="Kakuna" />
+                    <span class="absolute top-0 right-5 font-black text-4xl text-neutral-400 z-0 text-black-400">#0014</span>
+                </a>
+                <a href="" class="flex justify-between grayscale min-w-[22rem] w-1/4 bg-gray-200 rounded-lg p-4 relative">
+                    <div class="flex  flex-col justify-between">
+                    <h1 class="font-medium text-3xl ">Beedrill</h1>
+                    <p class="items-start text-start text-white py-2 text-xl">
+                        <span class="inline-flex font-medium rounded-md bg-green-700 shadow-lg py-1 px-4 ">bug</span> 
+                        <span class="inline-flex font-medium rounded-md bg-purple-500 shadow-lg py-1 px-4">poison</span>
+                    </p>
+                    </div>
+                    <img class="w-32 z-10" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/15.png" alt="Beedrill" />
+                    <span class="absolute top-0 right-5 font-black text-4xl text-neutral-400 z-0 text-black-400">#0015</span>
+                </a>
+            </section>
+        </main>
+</body>
+</html>

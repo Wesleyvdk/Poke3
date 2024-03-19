@@ -51,7 +51,7 @@ notLoggedInModal.addEventListener("click", (e) => {
 
 //Because id is used multiple times across the project page
 openNotLoggedInModal.addEventListener("click", () => {
-  if (localStorage.getItem("isLoggedIn") == false) {
+  if (localStorage.getItem("isLoggedIn") == "false" || localStorage.getItem("isLoggedIn") == null) {
     notLoggedInModal.showModal();
   } else {
     //If logged in go to Game
@@ -65,8 +65,8 @@ closeNotLoggedInModal.addEventListener("click", () => {
 
 // Dropdown hamburger menu
 
-const dropdownHamburger = document.querySelector("#navbar");
-const dropdownMenu = document.querySelector("#navbarMenu");
+const dropdownHamburger = document.querySelector("#hamburgerIcon");
+const dropdownMenu = document.querySelector("#hamburgerMenu");
 
 dropdownMenu.addEventListener("click", (e) => {
   const clickedElement = e.target;
@@ -92,3 +92,17 @@ dropdownHamburger.addEventListener("click", () => {
     dropdownMenu.classList.add("hidden");
   }
 });
+
+// If logged in -> log in and register hidden and profile avatar visible
+
+const navbar = document.querySelector("#navbar")
+
+if (localStorage.getItem("isLoggedIn") == "true") {
+  navbar.classList.add("hidden");
+  
+  console.log("Is logged in");
+} else {
+  navbar.classList.remove("hidden");
+  console.log("Is not logged in")
+  console.log(localStorage.getItem("isLoggedIn"));
+}

@@ -99,10 +99,44 @@ const navbar = document.querySelector("#navbar")
 
 if (localStorage.getItem("isLoggedIn") == "true") {
   navbar.classList.add("hidden");
-  
-  console.log("Is logged in");
 } else {
   navbar.classList.remove("hidden");
-  console.log("Is not logged in")
-  console.log(localStorage.getItem("isLoggedIn"));
 }
+
+//Profile icon
+
+const profileIcon = document.querySelector("#profileIcon")
+
+if (localStorage.getItem("isLoggedIn") == "true") {
+  profileIcon.classList.remove("hidden");
+} else {
+  profileIcon.classList.add("hidden");
+}
+
+
+// Dropdown Profile menu
+
+const dropdownProfileBtn = document.querySelector('.relative button');
+const dropdownProfileMenu = document.querySelector('.relative div');
+
+dropdownProfileBtn.addEventListener('click', function() {
+  dropdownProfileMenu.classList.toggle('hidden');
+});
+
+dropdownProfileBtn.addEventListener("click", (e) => {
+  const dropdownProfileBtnDimensions = dropdownProfileBtn.getBoundingClientRect();
+  if (
+    e.clientX < dropdownProfileBtnDimensions.left ||
+    e.clientX > dropdownProfileBtnDimensions.right ||
+    e.clientY < dropdownProfileBtnDimensions.top ||
+    e.clientY > dropdownProfileBtnDimensions.bottom
+  ) {
+    dropdownProfileBtn.classList.remove('hidden');
+  }
+});
+
+
+dropdownProfileMenu.addEventListener('click', () => {
+  localStorage.removeItem("isLoggedIn");
+  window.location.href = "./index.html";
+})

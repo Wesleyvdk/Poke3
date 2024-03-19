@@ -51,7 +51,10 @@ notLoggedInModal.addEventListener("click", (e) => {
 
 //Because id is used multiple times across the project page
 openNotLoggedInModal.addEventListener("click", () => {
-  if (localStorage.getItem("isLoggedIn") == "false" || localStorage.getItem("isLoggedIn") == null) {
+  if (
+    localStorage.getItem("isLoggedIn") == "false" ||
+    localStorage.getItem("isLoggedIn") == null
+  ) {
     notLoggedInModal.showModal();
   } else {
     //If logged in go to Game
@@ -84,7 +87,6 @@ dropdownMenu.addEventListener("click", (e) => {
   }
 });
 
-
 dropdownHamburger.addEventListener("click", () => {
   if (dropdownMenu.classList.contains("hidden")) {
     dropdownMenu.classList.remove("hidden");
@@ -95,7 +97,7 @@ dropdownHamburger.addEventListener("click", () => {
 
 // If logged in -> log in and register hidden and profile avatar visible
 
-const navbar = document.querySelector("#navbar")
+const navbar = document.querySelector("#navbar");
 
 if (localStorage.getItem("isLoggedIn") == "true") {
   navbar.classList.add("hidden");
@@ -105,7 +107,7 @@ if (localStorage.getItem("isLoggedIn") == "true") {
 
 //Profile icon
 
-const profileIcon = document.querySelector("#profileIcon")
+const profileIcon = document.querySelector("#profileIcon");
 
 if (localStorage.getItem("isLoggedIn") == "true") {
   profileIcon.classList.remove("hidden");
@@ -113,30 +115,29 @@ if (localStorage.getItem("isLoggedIn") == "true") {
   profileIcon.classList.add("hidden");
 }
 
-
 // Dropdown Profile menu
 
-const dropdownProfileBtn = document.querySelector('.relative button');
-const dropdownProfileMenu = document.querySelector('.relative div');
+const dropdownProfileBtn = document.querySelector(".relative button");
+const dropdownProfileMenu = document.querySelector(".relative div");
 
-dropdownProfileBtn.addEventListener('click', function() {
-  dropdownProfileMenu.classList.toggle('hidden');
+dropdownProfileBtn.addEventListener("click", function () {
+  dropdownProfileMenu.classList.toggle("hidden");
 });
 
 dropdownProfileBtn.addEventListener("click", (e) => {
-  const dropdownProfileBtnDimensions = dropdownProfileBtn.getBoundingClientRect();
+  const dropdownProfileBtnDimensions =
+    dropdownProfileBtn.getBoundingClientRect();
   if (
     e.clientX < dropdownProfileBtnDimensions.left ||
     e.clientX > dropdownProfileBtnDimensions.right ||
     e.clientY < dropdownProfileBtnDimensions.top ||
     e.clientY > dropdownProfileBtnDimensions.bottom
   ) {
-    dropdownProfileBtn.classList.remove('hidden');
+    dropdownProfileBtn.classList.remove("hidden");
   }
 });
 
-
-dropdownProfileMenu.addEventListener('click', () => {
+dropdownProfileMenu.addEventListener("click", () => {
   localStorage.removeItem("isLoggedIn");
   window.location.href = "./index.html";
-})
+});

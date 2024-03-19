@@ -15,8 +15,8 @@
     <link href="public/assets/fonts/Pokemon Solid.ttf" rel="stylesheet" />
     <script src="public/js/quiz.js" defer></script>
   </head>
-  <body class="font-Raleway h-screen bg-neutral-900">
-    <header class="px-8 h-20 flex justify-between items-center">
+  <body class="font-Raleway h-screen bg-slate-50">
+    <header class="bg-neutral-900 px-8 h-20 flex justify-between items-center">
       <h1 class="font-black text-neutral-50 text-4xl tracking-wider">POKE3</h1>
       <nav>
         <div class="hidden md:block">
@@ -49,9 +49,7 @@
         </div>
       </nav>
     </header>
-    <main
-      class="bg-slate-50 flex items-center justify-center h-[calc(100vh-5rem)]"
-    >
+    <main class="flex items-center justify-center py-8">
       <article
         id="notification"
         class="hidden fixed top-24 right-5 bg-green-200 border-green-600 text-green-600 border-l-4 p-4 rounded"
@@ -74,27 +72,28 @@
           id="pokemon"
           src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png"
           alt="Who's that Pokémon"
-          class="w-64 h-64 mx-auto filter brightness-0"
+          class="mx-auto brightness-0"
         />
 
         <form
           id="quizForm"
           action="#"
           method="post"
-          class="flex justify-center items-center mb-4"
+          class="flex flex-col justify-center items-center mb-4 mx-auto gap-4 w-1/2"
         >
           <input
             type="text"
             name="guess"
             id="input"
-            placeholder="Jouw gok"
-            class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="Wie is deze Pokémon?"
+            class="shadow appearance-none border rounded py-3 text-center w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
-          <input
+          <button
             type="submit"
-            value="Gok"
-            class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          />
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 w-full rounded focus:outline-none focus:shadow-outline"
+          >
+            Doe een gok
+          </button>
         </form>
         <button
           id="next"

@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         Raleway: ["Raleway", "sans-serif"],
-        Pokemon: ["Pokemon", 'sans-serif']
+        Pokemon: ["Pokemon", "sans-serif"],
       },
     },
   },

@@ -14,66 +14,39 @@
     <link rel="stylesheet" href="./public/styles/global.css" />
     <script src="public/js/capture.js" defer></script>
   </head>
-  <body class="font-Raleway h-screen bg-neutral-900">
-    <header class="px-8 h-20 flex justify-between items-center">
-      <h1 class="font-black text-neutral-50 text-4xl tracking-wider">POKE3</h1>
-      <nav>
-        <span class="hidden md:block">
-          <a
-            href="./login.html"
-            class="text-neutral-50 mx-4 font-semibold text-lg"
-            >Log in</a
+  <body class="bg-neutral-50">
+    <header class="h-20 w-full shadow-sm py-4">
+      <div
+        class="max-w-[1864px] px-8 flex mx-auto justify-between items-center"
+      >
+        <a href="./landing.html" class="flex justify-center items-center">
+          <!-- <img class="h-10 aspect-auto" src="./public/assets/images/Pokemon_Logo.png" alt=""> -->
+          <svg
+            class="h-10 w-10 fill-neutral-900"
+            viewBox="0 0 1024 1024"
+            xmlns="http://www.w3.org/2000/svg"
           >
-          <a
-            href="./register.html"
-            class="bg-blue-500 text-white py-3 px-6 rounded-lg font-semibold text-lg"
-            >Registreer</a
+            <path d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z" />
+            <path
+              d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"
+            />
+          </svg>
+          <h1
+            class="font-black text-neutral-800 invisible sm:visible sm:text-xl md:text-2xl lg:text-3xl ml-4 tracking-wider"
           >
-        </span>
-        <div class="block md:hidden">
-          <button class="text-neutral-50 focus:outline-none" id="navbar">
-            <svg
-              class="h-10 w-10"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-              />
-            </svg>
-          </button>
-          <div
-            class="w-full hidden absolute top-20 right-0 left-0 md:w-auto z-50 transition-all"
-            id="navbarMenu"
-          >
-            <ul
-              class="w-full font-medium flex flex-col p-4 rounded-lg rtl:space-x-reverse bg-neutral-800 dark:bg-neutral-900 border-neutral-700"
-            >
-              <li>
-                <a
-                  href="#"
-                  class="block py-4 px-4 text-xl text-white"
-                  aria-current="page"
-                  >Login</a
-                >
-              </li>
-              <li>
-                <a href="#" class="block py-4 px-4 text-xl text-white"
-                  >Registreer</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+            Terug naar menu
+          </h1>
+        </a>
+        <a href="./pokedex.html" class="bg-gray-200 rounded-full w-12 h-12">
+          <img
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+            alt=""
+          />
+        </a>
+      </div>
     </header>
     <main
-      class="relative h-[calc(100vh-5rem)] flex flex-col justify-center bg-slate-50"
+      class="relative h-[calc(100vh-5rem)] flex flex-col justify-center bg-slate-50 mx-auto"
     >
       <section class="relative h-1/2">
         <p class="absolute pt-5 left-1/2 -translate-x-1/2 text-4xl">Ditto</p>

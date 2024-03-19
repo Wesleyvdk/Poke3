@@ -29,13 +29,61 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     } else {
       modal.innerHTML = `
-        <article class="bg-white p-4 rounded-lg shadow-lg text-center">
-          <p>Je hebt de Pokemon gevangen!</p>
-          <button id="showPokemon" class="bg-green-500 text-white py-2 px-4 rounded-lg m-2">Bekijk Pokemon</button>
-          <button id="catchAnother" class="bg-blue-500 text-white py-2 px-4 rounded-lg m-2">Vang een nieuwe Pokemon</button>
-        </article>
-      `;
+      <article class="bg-white p-4 rounded-lg shadow-lg text-center">
+        <p>Je hebt de Pokemon gevangen! Wil je deze een naam geven?</p>
+        <button id="giveName" class="bg-green-500 text-white py-2 px-4 rounded-lg m-2">Ja</button>
+        <button id="defaultName" class="bg-blue-500 text-white py-2 px-4 rounded-lg m-2">Nee</button>
+      </article>`;
       modal.classList.remove("hidden");
+      document
+        .getElementById("giveName")
+        .addEventListener("click", function () {
+          modal.innerHTML = `
+          <form
+          id="nameForm"
+          action="#"
+          method="post"
+          class="bg-white p-4 rounded-lg shadow-lg text-center"
+        >
+          <label for="name">Vul een naam in</label><br />
+          <input
+            type="text"
+            name="name"
+            id="input"
+            placeholder="Ditto"
+            class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+          <input
+            type="submit"
+            value="Accept"
+            class="bg-green-500 text-white py-2 px-4 rounded-lg m-2"
+          />
+        </form>`;
+        });
+      const form = document.getElementById("nameForm");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        modal.innerHTML = `
+          <article class="bg-white p-4 rounded-lg shadow-lg text-center">
+            <p>Je hebt de Pokemon gevangen!</p>
+            <button id="showPokemon" class="bg-green-500 text-white py-2 px-4 rounded-lg m-2">Bekijk Pokemon</button>
+            <button id="catchAnother" class="bg-blue-500 text-white py-2 px-4 rounded-lg m-2">Vang een nieuwe Pokemon</button>
+          </article>
+        `;
+      });
+      document
+        .getElementById("defaultName")
+        .addEventListener("click", function () {
+          modal.innerHTML = `
+          <article class="bg-white p-4 rounded-lg shadow-lg text-center">
+            <p>Je hebt de Pokemon gevangen!</p>
+            <button id="showPokemon" class="bg-green-500 text-white py-2 px-4 rounded-lg m-2">Bekijk Pokemon</button>
+            <button id="catchAnother" class="bg-blue-500 text-white py-2 px-4 rounded-lg m-2">Vang een nieuwe Pokemon</button>
+          </article>
+        `;
+        });
 
       document
         .getElementById("showPokemon")

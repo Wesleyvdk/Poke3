@@ -11,7 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Raleway:wght@100..900&display=swap"
       rel="stylesheet"
     />
-    <script src="public/assets/scripts/capture.js"></script>
+    <script src="public/assets/scripts/capture.js" defer></script>
   </head>
   <body class="font-Raleway h-screen bg-neutral-900">
     <header class="px-8 h-20 flex justify-between items-center">
@@ -50,11 +50,13 @@
     <main
       class="relative h-[calc(100vh-5rem)] flex flex-col justify-center bg-gray-50"
     >
-      <section
-        class="relative h-1/2 bg-gradient-to-b from-blue-300 to-lime-400"
-      >
+      <section class="relative h-1/2 bg-slate-50">
         <p class="absolute pt-5 left-1/2 -translate-x-1/2 text-4xl">Ditto</p>
         <figure>
+          <img
+            src="public/assets/images/grass.png"
+            class="absolute top-1/3 left-1/2 -translate-y-4 -translate-x-1/2 w-80 h-auto"
+          />
           <img
             class="absolute top-1/3 left-1/2 -translate-x-1/2 w-80 h-auto"
             src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"
@@ -62,7 +64,7 @@
         </figure>
       </section>
 
-      <section class="relative h-1/2 bg-lime-400">
+      <section class="relative h-1/2 bg-slate-50">
         <button id="pokeball" class="absolute left-1/2">
           <div
             id="redhalf"

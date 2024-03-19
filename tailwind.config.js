@@ -1,13 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,js}"],
+  content: ["./**/*.{html,js}"],
   theme: {
     extend: {
-      height: {
-        18: "4.5rem",
-      },
       fontFamily: {
-        Raleway: ["Raleway"],
+        Raleway: ["Raleway", "sans-serif"],
+        Pokemon: ["Pokemon", "sans-serif"],
       },
     },
   },

@@ -17,18 +17,20 @@
     <header class="px-8 h-20 flex justify-between items-center">
       <h1 class="font-black text-neutral-50 text-4xl tracking-wider">POKE3</h1>
       <nav>
-        <div class="hidden md:block">
-          <a href="#" class="text-neutral-50 mx-4 font-semibold text-lg"
+        <span class="hidden md:block">
+          <a
+            href="./login.html"
+            class="text-neutral-50 mx-4 font-semibold text-lg"
             >Log in</a
           >
           <a
-            href="#"
+            href="./register.html"
             class="bg-blue-500 text-white py-3 px-6 rounded-lg font-semibold text-lg"
             >Registreer</a
           >
-        </div>
+        </span>
         <div class="block md:hidden">
-          <button class="text-neutral-50 focus:outline-none">
+          <button class="text-neutral-50 focus:outline-none" id="navbar">
             <svg
               class="h-10 w-10"
               fill="none"
@@ -44,13 +46,35 @@
               />
             </svg>
           </button>
+          <div
+            class="w-full hidden absolute top-20 right-0 left-0 md:w-auto z-50 transition-all"
+            id="navbarMenu"
+          >
+            <ul
+              class="w-full font-medium flex flex-col p-4 rounded-lg rtl:space-x-reverse bg-neutral-800 dark:bg-neutral-900 border-neutral-700"
+            >
+              <li>
+                <a
+                  href="#"
+                  class="block py-4 px-4 text-xl text-white"
+                  aria-current="page"
+                  >Login</a
+                >
+              </li>
+              <li>
+                <a href="#" class="block py-4 px-4 text-xl text-white"
+                  >Registreer</a
+                >
+              </li>
+            </ul>
+          </div>
         </div>
       </nav>
     </header>
     <main
-      class="relative h-[calc(100vh-5rem)] flex flex-col justify-center bg-gray-50"
+      class="relative h-[calc(100vh-5rem)] flex flex-col justify-center bg-slate-50"
     >
-      <section class="relative h-1/2 bg-slate-50">
+      <section class="relative h-1/2">
         <p class="absolute pt-5 left-1/2 -translate-x-1/2 text-4xl">Ditto</p>
         <figure>
           <img
@@ -64,7 +88,7 @@
         </figure>
       </section>
 
-      <section class="relative h-1/2 bg-slate-50">
+      <section class="relative h-1/2">
         <button id="pokeball" class="absolute left-1/2">
           <div
             id="redhalf"
@@ -102,10 +126,98 @@
           ></div>
         </button>
       </section>
-      <section
-        id="modal"
-        class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center"
-      ></section>
+      <dialog
+        id="caughtPokemon"
+        class="backdrop:bg-neutral-900 backdrop:opacity-75 rounded-lg bg-neutral-800"
+      >
+        <article
+          class="flex flex-col bg-white p-4 rounded-lg shadow-lg text-center"
+        >
+          <p>Je hebt de Pokemon gevangen! Wil je deze een naam geven?</p>
+          <button
+            id="giveName"
+            class="bg-green-500 text-white py-2 px-4 rounded-lg m-2"
+          >
+            Ja
+          </button>
+          <button
+            id="defaultName"
+            class="bg-blue-500 text-white py-2 px-4 rounded-lg m-2"
+          >
+            Nee
+          </button>
+        </article>
+      </dialog>
+      <dialog
+        id="giveNickname"
+        class="backdrop:bg-neutral-900 backdrop:opacity-75 rounded-lg bg-neutral-800"
+      >
+        <form
+          id="nameForm"
+          action="#"
+          method="post"
+          class="flex flex-col bg-white p-4 rounded-lg shadow-lg text-center"
+        >
+          <label for="name">Vul een naam in</label><br />
+          <input
+            type="text"
+            name="name"
+            id="input"
+            placeholder="Ditto"
+            class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+          <button
+            type="submit"
+            class="bg-green-500 text-white py-2 px-4 rounded-lg m-2"
+          >
+            Accept
+          </button>
+        </form>
+      </dialog>
+      <dialog
+        id="nextModal"
+        class="backdrop:bg-neutral-900 backdrop:opacity-75 rounded-lg bg-neutral-800"
+      >
+        <article
+          class="flex flex-col bg-white p-4 rounded-lg shadow-lg text-center"
+        >
+          <p>Wat wil je nu doen?</p>
+          <button
+            id="showPokemon"
+            class="bg-green-500 text-white py-2 px-4 rounded-lg m-2"
+          >
+            Bekijk Pokemon
+          </button>
+          <button
+            id="catchAnother"
+            class="bg-blue-500 text-white py-2 px-4 rounded-lg m-2"
+          >
+            Vang een nieuwe Pokemon
+          </button>
+        </article>
+      </dialog>
+      <dialog
+        id="alreadyCaptured"
+        class="backdrop:bg-neutral-900 backdrop:opacity-75 rounded-lg bg-neutral-800"
+      >
+        <article
+          class="flex flex-col bg-white p-4 rounded-lg shadow-lg text-center"
+        >
+          <p>Je hebt deze Pokemon al gevangen. Wil je deze vrijlaten?</p>
+          <button
+            id="yesRelease"
+            class="bg-red-500 text-white py-2 px-4 rounded-lg m-2"
+          >
+            Ja
+          </button>
+          <button
+            id="noRelease"
+            class="bg-blue-500 text-white py-2 px-4 rounded-lg m-2"
+          >
+            Nee
+          </button>
+        </article>
+      </dialog>
     </main>
   </body>
 </html>

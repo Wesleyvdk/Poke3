@@ -51,7 +51,7 @@ notLoggedInModal.addEventListener("click", (e) => {
 
 //Because id is used multiple times across the project page
 openNotLoggedInModal.addEventListener("click", () => {
-  if (localStorage.getItem('isLoggedIn') == false) {
+  if (localStorage.getItem("isLoggedIn") == false) {
     notLoggedInModal.showModal();
   } else {
     //If logged in go to Game
@@ -61,4 +61,34 @@ openNotLoggedInModal.addEventListener("click", () => {
 
 closeNotLoggedInModal.addEventListener("click", () => {
   notLoggedInModal.close();
+});
+
+// Dropdown hamburger menu
+
+const dropdownHamburger = document.querySelector("#navbar");
+const dropdownMenu = document.querySelector("#navbarMenu");
+
+dropdownMenu.addEventListener("click", (e) => {
+  const clickedElement = e.target;
+  const dropdownMenuWidth = dropdownMenu.offsetWidth;
+  const dropdownMenuHeight = dropdownMenu.offsetHeight;
+
+  if (
+    !dropdownMenu.contains(clickedElement) ||
+    e.clientX < dropdownMenu.offsetLeft ||
+    e.clientX > dropdownMenu.offsetLeft + dropdownMenuWidth ||
+    e.clientY < dropdownMenu.offsetTop ||
+    e.clientY > dropdownMenu.offsetTop + dropdownMenuHeight
+  ) {
+    dropdownMenu.classList.add("hidden");
+  }
+});
+
+
+dropdownHamburger.addEventListener("click", () => {
+  if (dropdownMenu.classList.contains("hidden")) {
+    dropdownMenu.classList.remove("hidden");
+  } else {
+    dropdownMenu.classList.add("hidden");
+  }
 });

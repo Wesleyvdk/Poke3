@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Poke3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link href="public/css/style.css" rel="stylesheet" />
+    <link href="public/assets/fonts/Pokemon Solid.ttf" rel="stylesheet" />
+    <script src="public/js/quiz.js" defer></script>
+  </head>
+  <body class="font-Raleway h-screen bg-slate-50">
+    <header class="bg-neutral-900 px-8 h-20 flex justify-between items-center">
+      <h1 class="font-black text-neutral-50 text-4xl tracking-wider">POKE3</h1>
+      <nav>
+        <div class="hidden md:block">
+          <a href="#" class="text-neutral-50 mx-4 font-semibold text-lg"
+            >Log in</a
+          >
+          <a
+            href="#"
+            class="bg-blue-500 text-white py-3 px-6 rounded-lg font-semibold text-lg"
+            >Registreer</a
+          >
+        </div>
+        <div class="block md:hidden">
+          <button class="text-neutral-50 focus:outline-none">
+            <svg
+              class="h-10 w-10"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <main class="flex items-center justify-center py-8">
+      <article
+        id="notification"
+        class="hidden fixed top-24 right-5 bg-green-200 border-green-600 text-green-600 border-l-4 p-4 rounded"
+        role="alert"
+      >
+        <p id="notificationText">
+          [pokemon] verdediging en aanval ging omhoog!
+        </p>
+      </article>
+      <section class="text-center">
+        <figure class="mb-4">
+          <img
+            src="/public/assets/images/Whos-that-Pokemon.png"
+            alt="Pokémon"
+            class="mx-auto h-20 w-auto"
+          />
+        </figure>
+
+        <img
+          id="pokemon"
+          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png"
+          alt="Who's that Pokémon"
+          class="mx-auto brightness-0"
+        />
+
+        <form
+          id="quizForm"
+          action="#"
+          method="post"
+          class="flex flex-col justify-center items-center mb-4 mx-auto gap-4 w-1/2"
+        >
+          <input
+            type="text"
+            name="guess"
+            id="input"
+            placeholder="Wie is deze Pokémon?"
+            class="shadow appearance-none border rounded py-3 text-center w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+          <button
+            type="submit"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 w-full rounded focus:outline-none focus:shadow-outline"
+          >
+            Doe een gok
+          </button>
+        </form>
+        <button
+          id="next"
+          class="hidden ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          Volgende
+        </button>
+      </section>
+    </main>
+  </body>
+</html>

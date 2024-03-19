@@ -21,7 +21,7 @@ form.addEventListener("submit", function (e) {
       notification.style.animation = "";
       notification.classList.add("opacity-0");
       notification.classList.add("hidden");
-    }, 5000);
+    }, 3000);
   } else {
     alert("Wrong! Try again.");
   }

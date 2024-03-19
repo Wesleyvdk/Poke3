@@ -1,13 +1,17 @@
 @font-face {
   font-family: "Pokemon";
+
   src: url("../fonts/Pokemon\ Solid.ttf");
+
   font-display: swap;
 }
+
 @keyframes slideUp {
   from {
     transform: translateY(20px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;

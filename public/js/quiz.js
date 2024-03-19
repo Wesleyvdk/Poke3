@@ -3,7 +3,7 @@ const form = document.getElementById("quizForm");
 form.addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const guess = document.getElementById("input").value;
+  const guess = document.getElementById("input").value.toLowerCase();
   const correctAnswer = "ditto";
   const next = document.getElementById("next");
 

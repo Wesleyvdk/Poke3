@@ -58,7 +58,7 @@ openNotLoggedInModal.addEventListener("click", () => {
     notLoggedInModal.showModal();
   } else {
     //If logged in go to Game
-    window.location.href = "./landing.html";
+    window.location.href = "./starter.html";
   }
 });
 

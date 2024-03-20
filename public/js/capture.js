@@ -44,6 +44,20 @@ document.addEventListener("DOMContentLoaded", () => {
       yesRelease.addEventListener("click", () => {
         redhalf.classList.remove("bg-green-500");
         redhalf.classList.add("bg-red-600");
+        svgContainer.innerHTML = `            
+        <rect width="24" height="24" />
+        <path
+          d="M7 17L16.8995 7.10051"
+          stroke="#000000"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M7 7.00001L16.8995 16.8995"
+          stroke="#000000"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />`;
         alreadyCaptured.close();
       });
     }

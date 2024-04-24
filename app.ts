@@ -1,4 +1,5 @@
 import express from "express";
+import {Connect} from "./database";
 
 const app = express();
 
@@ -9,6 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get("/", async (req, res) => {
+    
     return res.render("index");
 });
 
@@ -48,9 +50,9 @@ app.get("/starter", async (req, res) => {
 })
 
 app.listen(3000, async () => {
+    Connect();
     let response = await fetch("https://pokeapi.co/api/v2/pokemon");
     // Gebruik het juiste type voor data
     let data: any = await response.json();
-    console.log(data.results);
     console.log(`The application is listening on http://localhost:3000`);
 })

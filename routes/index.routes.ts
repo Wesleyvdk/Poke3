@@ -17,8 +17,7 @@ const projects: projectProps[] = [
 export default function indexRoutes(){
   const router = express.Router();
 
-  router.get("", (req, res) => {
-
+  router.get("/", (req, res) => {
     res.render("index", {projects: projects});
   });
 

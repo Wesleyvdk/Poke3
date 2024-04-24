@@ -1,45 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Poke3</title>
-    <!-- Tailwind css -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Raleway Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Raleway:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
-    <script src="./public/js/index.js" defer></script>
-    <!-- For development only!! use npx tailwindcss -i ./src/input.css -o ./src/output.css for production -->
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              Raleway: ["Raleway", "sans-serif"],
-            },
-          },
-        },
-      };
-    </script>
-  </head>
-
-  <body class="font-Raleway h-screen bg-neutral-900">
+<%- include("partials/header") %>
     <header class="px-8 h-20 flex justify-between items-center">
       <h1 class="font-black text-neutral-50 text-4xl tracking-wider">POKE3</h1>
       <nav id="navbar">
         <span class="hidden md:block">
           <a
-            href="./login.html"
+            href="/login"
             class="text-neutral-50 mx-4 font-semibold text-lg"
             >Log in</a
           >
           <a
-            href="./register.html"
+            href="/register"
             class="bg-blue-500 text-white py-3 px-6 rounded-lg font-semibold text-lg"
             >Registreer</a
           >

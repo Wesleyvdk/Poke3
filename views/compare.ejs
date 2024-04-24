@@ -1,39 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Poke3</title>
-    <!-- Tailwind css -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Raleway Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Raleway:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
-    <script src="./public/js/compare.js" defer></script>
-    <!-- For development only!! use npx tailwindcss -i ./src/input.css -o ./src/output.css for production -->
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              Raleway: ["Raleway", "sans-serif"],
-            },
-          },
-        },
-      };
-    </script>
-  </head>
-
-  <body class="bg-neutral-50">
+<%- include("partials/header") %>
+<%- include("partials/nav") %>
     <header class="h-20 w-full shadow-sm py-4">
       <div
         class="max-w-[1864px] px-8 flex mx-auto justify-between items-center"
       >
-        <a href="./landing.html" class="flex justify-center items-center">
+        <a href="/landing.html" class="flex justify-center items-center">
           <svg
             class="h-10 w-10 fill-neutral-900"
             viewBox="0 0 1024 1024"
@@ -50,7 +21,7 @@
             Terug naar menu
           </h1>
         </a>
-        <a href="./pokedex.html" class="bg-gray-200 rounded-full w-12 h-12">
+        <a href="/pokedex.html" class="bg-gray-200 rounded-full w-12 h-12">
           <img
             src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
             alt=""

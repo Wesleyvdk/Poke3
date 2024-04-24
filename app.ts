@@ -1,13 +1,9 @@
 import express from "express";
 import {Connect} from "./database";
-import captureRouter from "./routers/capture";
-import compareRouter from "./routers/compare";
-import pokedexRouter from "./routers/pokedex";
-import loginRouter from "./routers/login";
-import registerRouter from "./routers/register";
-import battleRouter from "./routers/battle";
-import quizRouter from "./routers/quiz";
-import starterRouter from "./routers/starter";
+import loginRoutes from "./routes/login.routes";
+import registerRoutes from "./routes/register.routes";
+import indexRouter from "./routes/index.routes";
+import pokemonGameRoutes from "./routes/pokemonGame.routes";
 
 const app = express();
 
@@ -18,20 +14,10 @@ app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-app.get("/", async (req, res) => {
-    return res.render("index");
-});
-app.get("/landing", async (req, res) => {
-    return res.render("landing")
-});
-app.get("/capture", captureRouter);
-app.get("/compare", compareRouter);
-app.get("/pokedex", pokedexRouter);
-app.get("/login", loginRouter);
-app.get("/register", registerRouter);
-app.get("/battle", battleRouter);
-app.get("/quiz", quizRouter);
-app.get("/starter", starterRouter);
+app.get("/", indexRouter());
+app.get("/login", loginRoutes);
+app.get("/register", registerRoutes);
+app.get("/pokemon", pokemonGameRoutes);
 
 app.use((req, res) => {
     res.type("text/html");

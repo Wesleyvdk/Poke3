@@ -1,5 +1,6 @@
 import express from "express";
-import {Connect} from "./database";
+import {connect, getPokemons, seed} from "./database";
+import { Pokemon } from "./types";
 
 const app = express();
 
@@ -50,9 +51,17 @@ app.get("/starter", async (req, res) => {
 })
 
 app.listen(3000, async () => {
-    Connect();
-    let response = await fetch("https://pokeapi.co/api/v2/pokemon");
-    // Gebruik het juiste type voor data
-    let data: any = await response.json();
+    connect();
+    seed();
     console.log(`The application is listening on http://localhost:3000`);
 })
+
+export async function randomPokemon(){
+    let response = await fetch("https://pokeapi.co/api/v2/pokemon");
+    console.log(response);
+    let data: any = await response.json();
+    let count = data.count;
+    let random = Math.floor(Math.random() * count) + 1;
+    response = await fetch(`https://pokeapi.co/api/v2/pokemon/${random}`);
+    return response.json();
+}

@@ -14,10 +14,10 @@ app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-app.get("/", indexRouter());
-app.get("/login", loginRoutes());
-app.get("/register", registerRoutes());
-app.get("/pokemon", pokemonGameRoutes());
+app.use("/", indexRouter());
+app.use("/login", loginRoutes());
+app.use("/register", registerRoutes());
+app.use("/pokemon", pokemonGameRoutes());
 
 app.use((req, res) => {
     res.type("text/html");

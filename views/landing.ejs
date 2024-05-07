@@ -1,120 +1,88 @@
-<%- include('partials/header') %>
-    <main class="max-w-[1864px] px-8 mx-auto">
-      <section class="grid grid-cols-2 lg:grid-cols-4 grid-flow-row gap-8 py-8">
-        <a
-          class="col-span-2 group bg-neutral-200 max-h-96 h-48 md:h-60 lg:h-64 xl:h-80 2xl:h-96 rounded-2xl p-8 flex flex-col justify-end items-start overflow-hidden relative hover:translate-x-1 hover:-translate-y-1 hover:bg-red-500 transition-all"
-          href="/pokemon/capture"
-        >
-          <h1
-            class="font-Pokemon text-6xl 2xl:text-8xl text-neutral-950 tracking-wider mb-8 2xl:mb-12 group-hover:text-neutral-50 z-10"
-          >
-            Pokéjacht
-          </h1>
-          <h2
-            class="font-Raleway font-black text-neutral-500 text-xl md:text-3xl 2xl:text-4xl lg:text-2xl group-hover:text-neutral-50 z-10"
-          >
-            Vang pokemons
-          </h2>
-          <img
-            src="assets/images/Pokemon_Trainer_2.png"
-            alt=""
-            class="absolute top-0 w-[50rem] -right-5 translate-x-1/4"
-          />
-        </a>
-        <a
-          class="col-span-2 group bg-neutral-200 max-h-96 h-48 md:h-60 lg:h-64 xl:h-80 2xl:h-96 rounded-2xl p-8 flex flex-col justify-end items-start overflow-hidden relative hover:translate-x-1 hover:-translate-y-1 hover:bg-red-500 transition-all"
-          href="/pokemon/pokedex"
-        >
-          <h1
-            class="font-Pokemon text-6xl 2xl:text-8xl text-neutral-950 tracking-wider mb-8 2xl:mb-12 group-hover:text-neutral-50 z-10"
-          >
-            Pokedex
-          </h1>
-          <h2
-            class="font-Raleway font-black text-neutral-500 text-xl md:text-3xl 2xl:text-4xl lg:text-2xl group-hover:text-neutral-50 z-10"
-          >
-            Bekijk al jouw pokemons
-          </h2>
-          <svg
-            class="fill-red-500 group-hover:fill-neutral-50 absolute top-0 right-0 translate-x-1/3 -translate-y-1/3 w-1/2"
-            viewBox="0 0 70.87 70.87"
-          >
-            <circle cx="35.43" cy="35.43" r="7" />
-            <g>
-              <path
-                d="M17.61,31.4c1.84-8.15,9.11-14.25,17.82-14.25s15.98,6.1,17.82,14.25h17.44C68.69,13.69,53.67-.07,35.43-.07S2.17,13.69.17,31.4h17.44Z"
-              />
-              <path
-                d="M53.27,39.4c-1.81,8.19-9.11,14.32-17.84,14.32s-16.03-6.13-17.84-14.32H.16c1.97,17.74,17.01,31.53,35.27,31.53s33.3-13.8,35.27-31.53h-17.43Z"
-              />
-            </g>
-          </svg>
-        </a>
-        <a
-          class="col-span-2 lg:col-span-1 group bg-neutral-200 max-h-96 h-48 md:h-60 lg:h-64 xl:h-80 2xl:h-96 rounded-2xl p-8 flex flex-col justify-end items-start overflow-hidden relative hover:translate-x-1 hover:-translate-y-1 hover:bg-blue-500 transition-all"
-          href="/pokemon/compare"
-        >
-          <h1
-            class="font-Pokemon text-4xl lg:text-5xl 2xl:text-6xl text-neutral-950 tracking-wider mb-6 2xl:mb-12 group-hover:text-neutral-50 z-10"
-          >
-            Compare
-          </h1>
-          <h2
-            class="font-Raleway font-black text-neutral-500 text-xl md:text-3xl 2xl:text-4xl group-hover:text-neutral-50 z-10"
-          >
-            Vergelijk pokemons
-          </h2>
-        </a>
-        <a
-          class="col-span-2 group bg-neutral-200 max-h-96 h-48 md:h-60 lg:h-64 xl:h-80 2xl:h-96 rounded-2xl p-8 flex flex-col justify-end items-start overflow-hidden relative hover:translate-x-1 hover:-translate-y-1 hover:bg-yellow-500 transition-all"
-          href="/PokemonBattle"
-        >
-          <h1
-            class="font-Pokemon text-6xl 2xl:text-8xl text-neutral-950 tracking-wider mb-8 2xl:mb-12 group-hover:text-neutral-50 z-10"
-          >
-            Battle
-          </h1>
-          <h2
-            class="font-Raleway font-black text-neutral-500 text-xl md:text-3xl 2xl:text-4xl lg:text-2xl group-hover:text-neutral-50 z-10"
-          >
-            Vecht tegen pokemons
-          </h2>
-          <img
-            src="assets/images/Pokemon_Trainer.webp"
-            alt=""
-            class="absolute top-0 right-0 translate-x-1/3 -translate-y-9"
-          />
-        </a>
-        <a
-          class="col-span-2 lg:col-span-1 group bg-neutral-200 max-h-96 h-48 md:h-60 lg:h-64 xl:h-80 2xl:h-96 rounded-2xl p-8 flex flex-col justify-end items-start overflow-hidden relative hover:translate-x-1 hover:-translate-y-1 hover:bg-blue-500 transition-all"
-          href="/quiz"
-        >
-          <h1
-            class="font-Pokemon text-4xl lg:text-5xl 2xl:text-8xl text-neutral-950 tracking-wider mb-6 2xl:mb-12 group-hover:text-neutral-50 z-10"
-          >
-            Quiz
-          </h1>
-          <h2
-            class="font-Raleway font-black text-neutral-500 text-xl md:text-3xl 2xl:text-4xl group-hover:text-neutral-50 z-10"
-          >
-            Test jezelf!
-          </h2>
-          <span
-            class="text-neutral-400 group-hover:text-neutral-50 absolute top-0 right-0 md:-top-6 md:right-10 lg:-right-5 text-[10rem] md:text-[15rem] leading-[100%] font-Pokemon"
-          >
-            ?</span
-          >
-        </a>
-      </section>
-    </main>
-    <footer class="bg-neutral-100 h-28 flex justify-start items-center">
-      <ul class="max-w-[1864px] px-8 w-full mx-auto">
-        <li
-          class="font-Pokemon cursor-pointer text-lg font-bold hover:border-b"
-        >
-          <a href="/">Terug naar alle games</a>
-        </li>
-      </ul>
-    </footer>
+<%- include('partials/head') %>
+  <main class="max-w-[1864px] px-8 mx-auto font-Pokemon">
+    <section class="grid grid-cols-2 lg:grid-cols-4 grid-flow-row gap-8 py-8">
+      <a class="col-span-2 group bg-neutral-200 max-h-96 h-48 md:h-60 lg:h-64 xl:h-80 2xl:h-96 rounded-2xl p-8 flex flex-col justify-end items-start overflow-hidden relative hover:translate-x-1 hover:-translate-y-1 hover:bg-red-500 transition-all"
+        href="/pokemon/capture">
+        <h1
+          class="font-Pokemon text-6xl 2xl:text-8xl text-neutral-950 tracking-wider mb-8 2xl:mb-12 group-hover:text-neutral-50 z-10">
+          Pokéjacht
+        </h1>
+        <h2
+          class="font-Raleway font-black text-neutral-500 text-xl md:text-3xl 2xl:text-4xl lg:text-2xl group-hover:text-neutral-50 z-10">
+          Vang pokemons
+        </h2>
+        <img src="assets/images/Pokemon_Trainer_2.png" alt=""
+          class="absolute top-0 w-[50rem] -right-5 translate-x-1/4" />
+      </a>
+      <a class="col-span-2 group bg-neutral-200 max-h-96 h-48 md:h-60 lg:h-64 xl:h-80 2xl:h-96 rounded-2xl p-8 flex flex-col justify-end items-start overflow-hidden relative hover:translate-x-1 hover:-translate-y-1 hover:bg-red-500 transition-all"
+        href="/pokemon/pokedex">
+        <h1
+          class="font-Pokemon text-6xl 2xl:text-8xl text-neutral-950 tracking-wider mb-8 2xl:mb-12 group-hover:text-neutral-50 z-10">
+          Pokedex
+        </h1>
+        <h2
+          class="font-Raleway font-black text-neutral-500 text-xl md:text-3xl 2xl:text-4xl lg:text-2xl group-hover:text-neutral-50 z-10">
+          Bekijk al jouw pokemons
+        </h2>
+        <svg
+          class="fill-red-500 group-hover:fill-neutral-50 absolute top-0 right-0 translate-x-1/3 -translate-y-1/3 w-1/2"
+          viewBox="0 0 70.87 70.87">
+          <circle cx="35.43" cy="35.43" r="7" />
+          <g>
+            <path
+              d="M17.61,31.4c1.84-8.15,9.11-14.25,17.82-14.25s15.98,6.1,17.82,14.25h17.44C68.69,13.69,53.67-.07,35.43-.07S2.17,13.69.17,31.4h17.44Z" />
+            <path
+              d="M53.27,39.4c-1.81,8.19-9.11,14.32-17.84,14.32s-16.03-6.13-17.84-14.32H.16c1.97,17.74,17.01,31.53,35.27,31.53s33.3-13.8,35.27-31.53h-17.43Z" />
+          </g>
+        </svg>
+      </a>
+      <a class="col-span-2 lg:col-span-1 group bg-neutral-200 max-h-96 h-48 md:h-60 lg:h-64 xl:h-80 2xl:h-96 rounded-2xl p-8 flex flex-col justify-end items-start overflow-hidden relative hover:translate-x-1 hover:-translate-y-1 hover:bg-blue-500 transition-all"
+        href="/pokemon/compare">
+        <h1
+          class="font-Pokemon text-4xl lg:text-5xl 2xl:text-6xl text-neutral-950 tracking-wider mb-6 2xl:mb-12 group-hover:text-neutral-50 z-10">
+          Compare
+        </h1>
+        <h2
+          class="font-Raleway font-black text-neutral-500 text-xl md:text-3xl 2xl:text-4xl group-hover:text-neutral-50 z-10">
+          Vergelijk pokemons
+        </h2>
+      </a>
+      <a class="col-span-2 group bg-neutral-200 max-h-96 h-48 md:h-60 lg:h-64 xl:h-80 2xl:h-96 rounded-2xl p-8 flex flex-col justify-end items-start overflow-hidden relative hover:translate-x-1 hover:-translate-y-1 hover:bg-yellow-500 transition-all"
+        href="/Pokemon/Battle">
+        <h1
+          class="font-Pokemon text-6xl 2xl:text-8xl text-neutral-950 tracking-wider mb-8 2xl:mb-12 group-hover:text-neutral-50 z-10">
+          Battle
+        </h1>
+        <h2
+          class="font-Raleway font-black text-neutral-500 text-xl md:text-3xl 2xl:text-4xl lg:text-2xl group-hover:text-neutral-50 z-10">
+          Vecht tegen pokemons
+        </h2>
+        <img src="assets/images/Pokemon_Trainer.webp" alt=""
+          class="absolute top-0 right-0 translate-x-1/3 -translate-y-9" />
+      </a>
+      <a class="col-span-2 lg:col-span-1 group bg-neutral-200 max-h-96 h-48 md:h-60 lg:h-64 xl:h-80 2xl:h-96 rounded-2xl p-8 flex flex-col justify-end items-start overflow-hidden relative hover:translate-x-1 hover:-translate-y-1 hover:bg-blue-500 transition-all"
+        href="/pokemon/quiz">
+        <h1
+          class="font-Pokemon text-4xl lg:text-5xl 2xl:text-8xl text-neutral-950 tracking-wider mb-6 2xl:mb-12 group-hover:text-neutral-50 z-10">
+          Quiz
+        </h1>
+        <h2
+          class="font-Raleway font-black text-neutral-500 text-xl md:text-3xl 2xl:text-4xl group-hover:text-neutral-50 z-10">
+          Test jezelf!
+        </h2>
+        <span
+          class="text-neutral-400 group-hover:text-neutral-50 absolute top-0 right-0 md:-top-6 md:right-10 lg:-right-5 text-[10rem] md:text-[15rem] leading-[100%] font-Pokemon">
+          ?</span>
+      </a>
+    </section>
+  </main>
+  <footer class="bg-neutral-100 h-28 flex justify-start items-center">
+    <ul class="max-w-[1864px] px-8 w-full mx-auto">
+      <li class="font-Pokemon cursor-pointer text-lg font-bold hover:border-b">
+        <a href="/">Terug naar alle games</a>
+      </li>
+    </ul>
+  </footer>
   </body>
-</html>
+
+  </html>

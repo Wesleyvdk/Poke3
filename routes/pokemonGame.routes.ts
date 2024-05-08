@@ -1,9 +1,16 @@
 import express from "express";
+import { secureMiddleware } from "../middleware/secureMiddleware";
 
-export default function pokemonGameRoutes(){
+export default function pokemonGameRoutes() {
   const router = express.Router();
 
-  router.get("", (req, res) => {
+  router.get("/landing", (req, res) => {
+    let user = req.session.user!;
+    console.log(user);
+    if (!user) {
+      res.redirect("/login");
+      return;
+    }
     res.render("landing");
   });
 

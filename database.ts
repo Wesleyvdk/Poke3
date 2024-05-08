@@ -4,7 +4,7 @@ import { randomPokemon } from "./app";
 import dotenv from "dotenv";
 dotenv.config();
 
-const uri = process.env.MONGO_URI ? process.env.MONGO_URI : "";
+const uri = process.env.MONGO_URI ?? "";
 const client = new MongoClient(uri);
 
 const pokemonCollection: Collection = client.db("pokemon").collection("pokemon");

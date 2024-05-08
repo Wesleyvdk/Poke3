@@ -1,5 +1,6 @@
 import express from "express";
-import {Connect} from "./database";
+import {connect, getPokemons, seed} from "./database";
+import { Pokemon } from "./types";
 import loginRoutes from "./routes/login.routes";
 import registerRoutes from "./routes/register.routes";
 import indexRouter from "./routes/index.routes";
@@ -25,9 +26,13 @@ app.use((req, res) => {
 );
 
 app.listen(app.get("port"), async () => {
-    Connect();
+    connect();
     let response = await fetch("https://pokeapi.co/api/v2/pokemon");
-    // Gebruik het juiste type voor data
+    console.log(response);
     let data: any = await response.json();
+    let count = data.count;
+    let random = Math.floor(Math.random() * count) + 1;
+    response = await fetch(`https://pokeapi.co/api/v2/pokemon/${random}`);
+    return response.json();
     console.log("The application is listening on http://localhost:" + app.get("port"));
 })

@@ -1,50 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Poke3</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Raleway:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./public/styles/global.css" />
-    <script src="public/js/capture.js" defer></script>
-  </head>
-  <body class="bg-neutral-50">
-    <header class="h-20 w-full shadow-sm py-4">
-      <div
-        class="max-w-[1864px] px-8 flex mx-auto justify-between items-center"
-      >
-        <a href="./landing.html" class="flex justify-center items-center">
-          <!-- <img class="h-10 aspect-auto" src="./public/assets/images/Pokemon_Logo.png" alt=""> -->
-          <svg
-            class="h-10 w-10 fill-neutral-900"
-            viewBox="0 0 1024 1024"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z" />
-            <path
-              d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"
-            />
-          </svg>
-          <h1
-            class="font-black text-neutral-800 invisible sm:visible sm:text-xl md:text-2xl lg:text-3xl ml-4 tracking-wider"
-          >
-            Terug naar menu
-          </h1>
-        </a>
-        <a href="./pokedex.html" class="bg-gray-200 rounded-full w-12 h-12">
-          <img
-            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
-            alt=""
-          />
-        </a>
-      </div>
-    </header>
+<%- include("partials/head") %>
+<%- include("partials/nav") %>
     <main
       class="relative h-[calc(100vh-5rem)] flex flex-col justify-center mx-auto"
     >
@@ -52,7 +7,7 @@
         <p class="absolute pt-5 left-1/2 -translate-x-1/2 text-4xl">Ditto</p>
         <figure>
           <img
-            src="public/assets/images/grass.png"
+            src="/assets/images/grass.png"
             class="absolute top-1/3 left-1/2 -translate-y-4 -translate-x-1/2 w-80 h-auto"
           />
           <img

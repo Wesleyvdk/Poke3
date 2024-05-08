@@ -1,14 +1,17 @@
 import { Collection, MongoClient } from "mongodb";
 import { Pokemon, User } from "./types";
 import { randomPokemon } from "./app";
+import bcrypt from "bcrypt";
 import dotenv from "dotenv";
+import session from "./session";
 dotenv.config();
 
 const uri = process.env.MONGO_URI ?? "";
 const client = new MongoClient(uri);
 
-const pokemonCollection: Collection = client.db("pokemon").collection("pokemon");
-const userCollection: Collection = client.db("pokemon").collection("users");
+const userCollection: Collection = client.db("poke3").collection("users");
+
+const saltRounds : number = 10;
 
 export async function exit() {
     try {
@@ -21,51 +24,59 @@ export async function exit() {
 }
 
 export async function seed(){
-    let users: User[] = [{
-        id: "1",
-        email: "pri@test.com",
-        password: "123"
-    },{
-        id: "2",
-        email: "test@test.com",
-        password: "test"
-    }];
-if(await userCollection.countDocuments() === 0){
-    await userCollection.insertMany(users);
-}
-if (await pokemonCollection.countDocuments() === 0) {
-    let pokemon: Pokemon[] = [];
-    for(let i = 0; i < 10; i++){
+if (await userCollection.countDocuments() === 0) {
+    let pokemons: Pokemon[] = [];
+    for(let i = 0; i < 5; i++){
         let response = await randomPokemon();
-        let data: Pokemon =  {userid: "1", name: response.name, attack: response.stats[1].base_stat, defense: response.stats[2].base_stat};
-        pokemon.push(data);
+        console.log(response)
+        let data: Pokemon =  {name: response.name, attack: response.stats[1].base_stat, defense: response.stats[2].base_stat};
+        pokemons.push(data);
     }
-    await pokemonCollection.insertMany(pokemon);
+    let users: User[] = [{
+        email: "pri@test.com",
+        password: await bcrypt.hash("123", saltRounds),
+        pokemons: pokemons
+    },{
+        email: "test@test.com",
+        password: await bcrypt.hash("test", saltRounds)
+    }];
+    await userCollection.insertMany(users);
 }}
 
 export async function authenticate(email: string, password: string){
-    let user = await userCollection.findOne({email: email, password: password});
+    if(email ==="" || password === ""){
+        throw new Error("Email and password required");
+    }
+    let user: User | null = await userCollection.findOne<User>({email: email});
     if(user){
-        return user;
+        if(await bcrypt.compare(password, user.password!)){
+            return user;
+        }
+        else{
+            throw new Error("Invalid password");
+        }
+    }else {
+        throw new Error("User not found");
     }
 }
 
 export async function register(email: string, password: string){
-    if(await userCollection.findOne({email: email})){
-        return "User already exists"
+    let userExists = await userCollection.findOne({email: email})
+    if(userExists){
+        return userExists;
     }else{
-        let user = await userCollection.insertOne({email: email, password: password});
+        let user = await userCollection.insertOne({email: email, password: await bcrypt.hash(password, saltRounds)});
         return user;
     }
 }
 
 export async function getPokemons(user: string){
-    let pokemons = await pokemonCollection.find({userid: user}).toArray();
+    let pokemons = await userCollection.find({email: user}).toArray();
     return pokemons;
 }
 export async function levelUp(){
-    let pokemons = await pokemonCollection.findOne({name: "unown"});
-    await pokemonCollection.updateOne({name: "unown"}, {$set: {attack: pokemons?.attack + 1, defense: pokemons?.defense + 1}});
+    let pokemons = await userCollection.findOne({name: "unown"});
+    await userCollection.updateOne({name: "unown"}, {$set: {attack: pokemons?.attack + 1, defense: pokemons?.defense + 1}});
 }
 
 export async function connect() {

@@ -15,8 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.use("/", indexRouter());
-app.use("/login", loginRoutes());
-app.use("/register", registerRoutes());
 app.use("/pokemon", pokemonGameRoutes());
 
 app.use((req, res) => {

@@ -20,6 +20,14 @@ export default function indexRoutes(){
   router.get("/", (req, res) => {
     res.render("index", {projects: projects});
   });
+  
+  router.get("/login", (req, res) => {
+    res.render("login");
+  });
+  
+  router.get("/register", (req, res) => {
+    res.render("register");
+  });
 
   return router;
 }

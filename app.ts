@@ -44,7 +44,13 @@ export async function randomPokemon() {
   let data: any = await response.json();
   let count = data.count;
   let random = Math.floor(Math.random() * count) + 1;
-  response = await fetch(`https://pokeapi.co/api/v2/pokemon/${random}`);
+  console.log(random);
+  try {
+    response = await fetch(`https://pokeapi.co/api/v2/pokemon/${random}`);
+  } catch (e) {
+    randomPokemon();
+  }
+
   return response.json().catch((e: any) => {
     console.log(e.message);
     console.log(response);

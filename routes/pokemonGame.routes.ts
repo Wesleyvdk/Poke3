@@ -1,14 +1,11 @@
 import express from "express";
 
-export default function pokemonGameRoutes(){
+export default function pokemonGameRoutes() {
   const router = express.Router();
 
   router.get("", (req, res) => {
-
     res.render("landing");
   });
-
-  
 
   router.get("/capture", (req, res) => {
     res.render("capture");
@@ -33,12 +30,7 @@ export default function pokemonGameRoutes(){
   router.get("/starter", (req, res) => {
     res.render("starter");
   });
-  
-  router.get('/starter/:name', (req, res) => {
-    const pokemonName = req.params.name;
-    console.log(pokemonName);
-    res.redirect('/pokemon');
-  });
+  router.post("/starter", (req, res) => {});
 
   return router;
 }

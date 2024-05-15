@@ -10,10 +10,8 @@
       <section
         class="flex flex-wrap md:flex-nowrap justify-center items-center gap-5 py-8 px-8 mx-auto"
       >
-        <a
-          href="/pokemon/starter/Squirtle"
-          class="group bg-neutral-200 max-h-96 rounded-2xl p-14 flex flex-col justify-center items-center aspect-square min-w-60 hover:bg-blue-500"
-        >
+      <form action="/pokemon/starter/Squirtle" method="post">
+        <button type="submit" class="group bg-neutral-200 max-h-96 rounded-2xl p-14 flex flex-col justify-center items-center aspect-square min-w-60 hover:bg-blue-500"
           <img
             class="w-20 md:w-full"
             src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png"
@@ -24,9 +22,11 @@
           >
             Squirtle
           </p>
-        </a>
-        <a
-          href="/pokemon/starter/Bulbasaur"
+        </button>
+      </form>
+      <form action="/pokemon/starter/Bulbasaur" method="post">
+        <button
+          type="submit"
           class="group bg-neutral-200 max-h-96 rounded-2xl p-14 flex flex-col justify-center items-center aspect-square min-w-60 hover:bg-green-500"
         >
           <img
@@ -39,10 +39,11 @@
           >
             Bulbasaur
           </p>
-        </a>
-
-        <a
-          href="/pokemon/starter/Charmander"
+        </button>
+      </form>
+      <form action="/pokemon/starter/Charmander" method="post">
+        <button
+         type="submit"
           class="group bg-neutral-200 max-h-96 rounded-2xl p-14 flex flex-col justify-center items-center aspect-square min-w-60 hover:bg-red-500"
         >
           <img
@@ -55,7 +56,8 @@
           >
             Charmander
           </p>
-        </a>
+        </button>
+      </form>
       </section>
     </main>
   </body>

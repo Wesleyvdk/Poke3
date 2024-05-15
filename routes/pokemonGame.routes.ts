@@ -4,37 +4,64 @@ import { randomPokemon } from "../app";
 
 export default function pokemonGameRoutes() {
   const router = express.Router();
-
-  router.get("/", (req, res) => {
+  router.get("/", async (req, res) => {
     let user = req.session.user!;
     if (!user) {
       res.redirect("/login");
       return;
     }
+
     res.render("landing");
   });
 
-  router.get("/capture", (req, res) => {
-    res.render("capture");
+  router.get("/capture", async (req, res) => {
+    let currentPokemon = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${req.session.user!.currentPokemon}`
+    );
+    let current: any = await currentPokemon.json();
+    res.render("capture", {
+      currentPokemon:
+        current.sprites.other["official-artwork"]["front_default"],
+    });
   });
 
-  router.get("/compare", (req, res) => {
-    res.render("compare");
+  router.get("/compare", async (req, res) => {
+    let currentPokemon = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${req.session.user!.currentPokemon}`
+    );
+    let current: any = await currentPokemon.json();
+    res.render("compare", {
+      currentPokemon:
+        current.sprites.other["official-artwork"]["front_default"],
+    });
   });
 
-  router.get("/pokedex", (req, res) => {
-    res.render("pokedex");
+  router.get("/pokedex", async (req, res) => {
+    let currentPokemon = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${req.session.user!.currentPokemon}`
+    );
+    let current: any = await currentPokemon.json();
+    res.render("pokedex", {
+      currentPokemon:
+        current.sprites.other["official-artwork"]["front_default"],
+    });
   });
 
-  router.get("/quiz", (req, res) => {
-    randomPokemon().then((data) => {
+  router.get("/quiz", async (req, res) => {
+    randomPokemon().then(async (data) => {
+      let currentPokemon = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${req.session.user!.currentPokemon}`
+      );
+      let current: any = await currentPokemon.json();
       req.session.answer = data.name;
       res.render("quiz", {
         image: data.sprites.other["official-artwork"]["front_default"],
         answer: data.name,
         pokemon: "pikachu",
+        currentPokemon:
+          current.sprites.other["official-artwork"]["front_default"],
       });
-      console.log(data.name);
+      /* currentPokemon = await currentPokemon.json(); */
     });
   });
   router.post("/quiz", (req, res) => {
@@ -45,13 +72,21 @@ export default function pokemonGameRoutes() {
     }
   });
 
-  router.get("/battle", (req, res) => {
-    res.render("battle");
+  router.get("/battle", async (req, res) => {
+    let currentPokemon = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${req.session.user!.currentPokemon}`
+    );
+    let current: any = await currentPokemon.json();
+    res.render("battle", {
+      currentPokemon:
+        current.sprites.other["official-artwork"]["front_default"],
+    });
   });
 
   router.get("/starter", (req, res) => {
     res.render("starter");
   });
+  router.post("/starter", (req, res) => {});
 
   return router;
 }

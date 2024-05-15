@@ -1,5 +1,4 @@
 <%- include("partials/head") %>
-
   <body class="font-Raleway h-screen bg-neutral-900">
     <%- include("partials/projectsHeader") %>
 
@@ -7,7 +6,7 @@
         <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 gap-y-6 my-8">
           <% for (const item of projects) { %>
             <% if(item.title == "Pokemon") { %> 
-            <a href="/pokemon/landing" class="overflow-hidden relative block rounded-lg shadow-md group">
+            <a href="/pokemon" class="overflow-hidden relative block rounded-lg shadow-md group">
               <img alt="<%= item.title %>"
                 class="w-full object-cover object-center hover:brightness-75 brightness-75 sm:brightness-100 transition-all duration-300 pointer-events-auto"
                 src="<%= item.imageUrl %>" />

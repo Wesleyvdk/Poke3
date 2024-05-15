@@ -3,8 +3,11 @@ import {connect, getPokemons, seed} from "./database";
 import { Pokemon } from "./types";
 import indexRouter from "./routes/index.routes";
 import pokemonGameRoutes from "./routes/pokemonGame.routes";
+import { getAllPokemons } from "./services/pokemonService";
 
+export let pokemons: any = [];
 const app = express();
+
 
 app.set("view engine", "ejs");
 app.set("port", 3000);
@@ -14,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.use("/", indexRouter());
-app.use("/pokemon", pokemonGameRoutes());
+app.use("/pokemon", pokemons, pokemonGameRoutes());
 
 app.use((req, res) => {
     res.type("text/html");
@@ -23,10 +26,11 @@ app.use((req, res) => {
     }
 );
 
+
+
 app.listen(app.get("port"), async () => {
     connect();
-    let response = await fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=1400");
-    console.log(await response.json());
+    pokemons = await getAllPokemons();
     console.log("The application is listening on http://localhost:" + app.get("port"));
 })
 

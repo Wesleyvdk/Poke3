@@ -1,4 +1,5 @@
 import express from "express";
+import { pokemons } from "../app";
 
 export default function pokemonGameRoutes(){
   const router = express.Router();
@@ -16,7 +17,8 @@ export default function pokemonGameRoutes(){
   });
 
   router.get("/pokedex", (req, res) => {
-    res.render("pokedex");
+    
+    res.render("pokedex", {pokemons});
   });
 
   router.get("/quiz", (req, res) => {

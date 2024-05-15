@@ -1,6 +1,7 @@
 import express from "express";
 import { authenticate, register } from "../database";
 import { User } from "../types";
+import { secureMiddleware } from "../middleware/secureMiddleware";
 
 interface projectProps {
   title: string;
@@ -20,7 +21,8 @@ export default function indexRoutes() {
   const router = express.Router();
 
   router.get("/", (req, res) => {
-    res.render("index", { projects: projects });
+    let user = req.session.user ?? null;
+    res.render("index", { user: user, projects: projects });
   });
 
   router.get("/login", (req, res) => {
@@ -42,6 +44,12 @@ export default function indexRoutes() {
     }
   });
 
+  router.get("/logout", (req, res) => {
+    req.session.destroy(() => {
+      res.redirect("/");
+    });
+  });
+
   router.get("/register", (req, res) => {
     res.render("register");
   });
@@ -50,6 +58,7 @@ export default function indexRoutes() {
     const email: string = req.body.email;
     const password: string = req.body.password;
     const confirm: string = req.body.confirm;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email format check
     try {
       if (password !== confirm) {
         throw new Error("Passwords do not match");
@@ -62,8 +71,9 @@ export default function indexRoutes() {
         message: "Registration successful",
       };
       res.redirect("/");
-    } catch (e) {
+    } catch (e: any) {
       req.session.message = { type: "error", message: e.message };
+      console.log(e.message);
       res.redirect("/register");
     }
   });

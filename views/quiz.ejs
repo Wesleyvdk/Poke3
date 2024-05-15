@@ -7,13 +7,13 @@
         role="alert"
       >
         <p id="notificationText">
-          Bulbasaur verdediging en aanval ging omhoog!
+          <%= pokemon %> verdediging en aanval ging omhoog!
         </p>
       </article>
       <section class="text-center">
         <figure class="mb-4">
           <img
-            src="/public/assets/images/Whos-that-Pokemon.png"
+            src="/assets/images/Whos-that-Pokemon.png"
             alt="Pokémon"
             class="mx-auto h-20 w-auto"
           />
@@ -21,14 +21,14 @@
 
         <img
           id="pokemon"
-          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png"
+          src=<%= image %>
           alt="Who's that Pokémon"
           class="mx-auto brightness-0"
         />
 
         <form
           id="quizForm"
-          action="#"
+          action="/quiz"
           method="post"
           class="flex flex-col justify-center items-center mb-4 mx-auto gap-4 w-1/2"
         >
@@ -56,3 +56,6 @@
     </main>
   </body>
 </html>
+<script>
+  let answer = "<%= answer %>";
+</script>

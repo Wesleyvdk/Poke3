@@ -15,7 +15,7 @@ loginForm.addEventListener("submit", (event) => {
   }
 
   if (email === testEmail && password === testPassword) {
-    window.location.href = "./index.html";
+    window.location.href = "./index";
     localStorage.setItem("isLoggedIn", true);
     email.value = "";
     password.value = "";

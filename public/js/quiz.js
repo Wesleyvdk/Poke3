@@ -4,7 +4,7 @@ form.addEventListener("submit", function (e) {
   e.preventDefault();
 
   const guess = document.getElementById("input").value.toLowerCase();
-  const correctAnswer = "ditto";
+  const correctAnswer = answer;
   const next = document.getElementById("next");
 
   if (guess === correctAnswer) {
@@ -28,5 +28,5 @@ form.addEventListener("submit", function (e) {
 });
 
 next.addEventListener("click", function () {
-  window.location.href = "quiz.html";
+  window.location.href = "quiz";
 });

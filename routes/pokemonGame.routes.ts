@@ -6,7 +6,6 @@ export default function pokemonGameRoutes() {
 
   router.get("/landing", (req, res) => {
     let user = req.session.user!;
-    console.log(user);
     if (!user) {
       res.redirect("/login");
       return;

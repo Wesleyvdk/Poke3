@@ -44,6 +44,12 @@ export default function indexRoutes() {
     }
   });
 
+  router.get("/logout", (req, res) => {
+    req.session.destroy(() => {
+      res.redirect("/");
+    });
+  });
+
   router.get("/register", (req, res) => {
     res.render("register");
   });
@@ -52,6 +58,7 @@ export default function indexRoutes() {
     const email: string = req.body.email;
     const password: string = req.body.password;
     const confirm: string = req.body.confirm;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email format check
     try {
       if (password !== confirm) {
         throw new Error("Passwords do not match");

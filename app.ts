@@ -1,9 +1,8 @@
 import express from "express";
-import {connect, getPokemons, seed} from "./database";
-import { Pokemon } from "./types";
+import {connect, getAllPokemons, getPokemons, seed} from "./database";
+import { APIPokemon, Pokemon } from "./types";
 import indexRouter from "./routes/index.routes";
 import pokemonGameRoutes from "./routes/pokemonGame.routes";
-import { getAllPokemons } from "./services/pokemonService";
 
 export let pokemons: any = [];
 const app = express();

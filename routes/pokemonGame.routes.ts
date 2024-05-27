@@ -17,7 +17,6 @@ export default function pokemonGameRoutes(){
   });
 
   router.get("/pokedex", (req, res) => {
-    
     res.render("pokedex", {pokemons});
   });
 

@@ -28,7 +28,7 @@ app.use((req, res) => {
 
 
 app.listen(app.get("port"), async () => {
-    connect();
+    //connect();
     pokemons = await getAllPokemons();
     console.log("The application is listening on http://localhost:" + app.get("port"));
 })

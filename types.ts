@@ -28,11 +28,11 @@ export interface APIPokemon {
     types: Type[];
     weight: number;
   }
-  interface Type {
+export interface Type {
     slot: number;
     type: Stat;
   }
-  interface Stats {
+export interface Stats {
     base_stat: number;
     effort: number;
     stat: Stat;

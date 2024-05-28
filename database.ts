@@ -60,16 +60,21 @@ export async function register(email: string, password: string){
 }
 
 export const getAllPokemons = async () => {
-    let pokemonData: APIPokemon[] = [];
-    let response = await (await fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=1400")).json();
-    let promises =  response.results.map(async (element: { url: string | URL | Request; }, index: number) => {
-      let pokemonDetails: APIPokemon = await (await fetch(element.url)).json();
-      pokemonDetails.id = index + 1;
-      return pokemonDetails;
-    });
-    pokemonData = await Promise.all(promises);
-    pokemonData.sort((a, b) => a.id - b.id);
-    return pokemonData;
+    try{
+        let pokemonData: APIPokemon[] = [];
+        let response = await (await fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=1400")).json();
+        let promises =  response.results.map(async (element: { url: string | URL | Request; }, index: number) => {
+            let pokemonDetails: APIPokemon = await (await fetch(element.url)).json();
+            pokemonDetails.id = index + 1;
+            return pokemonDetails;
+        });
+        pokemonData = await Promise.all(promises);
+        pokemonData.sort((a, b) => a.id - b.id);
+        return pokemonData;
+    } catch(error){
+        console.error(error);
+    }
+    
 };
 
 export async function getPokemons(user: string){

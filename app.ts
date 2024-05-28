@@ -1,6 +1,7 @@
 import express from "express";
-import {connect, getAllPokemons, getPokemons, seed} from "./database";
-import { APIPokemon, Pokemon } from "./types";
+import { connect, getPokemons, getAllPokemons, seed } from "./database";
+import { Pokemon } from "./types";
+
 import indexRouter from "./routes/index.routes";
 import pokemonGameRoutes from "./routes/pokemonGame.routes";
 import session from "./session";
@@ -31,26 +32,40 @@ app.use((req, res) => {
 
 
 app.listen(app.get("port"), async () => {
-    await connect();
-    seed();
-    pokemons = await getAllPokemons();
-    console.log("The application is listening on http://localhost:" + app.get("port"));
+  await connect();
+  seed();
+  pokemons = await getAllPokemons();
+  console.log(
+    "The application is listening on http://localhost:" + app.get("port")
+  );
 });
 
 export async function randomPokemon() {
-  let response = await fetch("https://pokeapi.co/api/v2/pokemon");
-  let data: any = await response.json();
-  let count = data.count;
-  let random = Math.floor(Math.random() * count) + 1;
-  console.log(random);
   try {
+    // Fetch the total count of Pokémon
+    let response = await fetch("https://pokeapi.co/api/v2/pokemon");
+    if (!response.ok) throw new Error('Failed to fetch Pokémon count');
+    
+    let data: any = await response.json();
+    let count = data.count;
+    
+    // Generate a random Pokémon ID
+    let random = Math.floor(Math.random() * count) + 1;
+    console.log(`Fetching Pokémon with ID: ${random}`);
+    
+    // Fetch the Pokémon data by ID
     response = await fetch(`https://pokeapi.co/api/v2/pokemon/${random}`);
-  } catch (e) {
-    randomPokemon();
+    
+    // Check if the response is OK, if not throw an error
+    if (!response.ok){
+      randomPokemon();
+      throw new Error(`Failed to fetch Pokémon with ID: ${random}`);
+    }   
+    
+    data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    return randomPokemon();
   }
-
-  return response.json().catch((e: any) => {
-    console.log(e.message);
-    console.log(response);
-  });
 }

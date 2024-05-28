@@ -11,7 +11,7 @@ export interface User {
     _id?: ObjectId;
   email?: string;
   password?: string;
-  currentPokemon?: string;
+  currentPokemon?: Pokemon;
   pokemons?: Pokemon[];
 }
 

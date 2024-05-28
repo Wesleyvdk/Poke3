@@ -3,107 +3,157 @@
     <main
       class="relative h-[calc(100vh-5rem)] flex flex-col justify-center mx-auto"
     >
+    <% if (message === "escaped") { %>  
+      <h3 class="w-80 rounded-lg bg-red-400 px-6 py-2 mt-2 mx-auto">The pokemon escaped, try again.</h3>
+      <% } %>
       <section class="relative h-1/2">
-        <p class="absolute pt-5 left-1/2 -translate-x-1/2 text-4xl">Ditto</p>
+        <p class="absolute pt-5 left-1/2 -translate-x-1/2 text-4xl"><%= randomPokemon.name %></p>
         <figure>
           <img
             src="/assets/images/grass.png"
-            class="absolute top-1/3 left-1/2 -translate-y-4 -translate-x-1/2 w-80 h-auto"
+            class="absolute top-1/3 left-1/2 translate-y-20 -translate-x-1/2 w-80 h-auto"
           />
           <img
             class="absolute top-1/3 left-1/2 -translate-x-1/2 w-80 h-auto"
-            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"
+            src=<%= randomPokemon.sprites.other["official-artwork"]["front_default"] %>
           />
         </figure>
       </section>
 
       <section class="relative h-1/2">
-        <button id="pokeball" class="absolute left-1/2">
-          <div
-            id="redhalf"
-            class="absolute top-[10.5rem] h-[4.5rem] w-36 -translate-x-1/2 rounded-t-full bg-red-600 border-black border-4"
-          ></div>
-          <svg
-            id="svg-container"
-            class="absolute top-[11rem] w-10 h-10 -translate-x-1/2"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+        <form method="post" action="/pokemon/capture" >
+          <% if(!alreadyCaptured) { %> 
+            <button type="submit" id="pokeball" class="absolute left-1/2">
+              <div
+                id="redhalf"
+                class="absolute top-[10.5rem] h-[4.5rem] w-36 -translate-x-1/2 rounded-t-full bg-red-600 border-black border-4"
+              ></div>
+              <svg
+                id="svg-container"
+                class="absolute top-[11rem] w-10 h-10 -translate-x-1/2"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect width="24" height="24" />
+                <path
+                  d="M7 17L16.8995 7.10051"
+                  stroke="#000000"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M7 7.00001L16.8995 16.8995"
+                  stroke="#000000"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <div
+                class="absolute top-60 h-[4.5rem] w-36 -translate-x-1/2 rounded-b-full bg-white border-black border-4"
+              ></div>
+              <div
+                class="absolute top-[12.25rem] h-10 w-10 -translate-x-1/2 translate-y-6 transform rounded-full border-4 border-black bg-white"
+              ></div>
+              <div
+                class="absolute top-[12.25rem] h-6 w-6 -translate-x-1/2 translate-y-8 rounded-full bg-black"
+              ></div>
+            </button>
+            <%} else { %> 
+              <button id="pokeball" class="absolute left-1/2">
+                <div
+                  id="redhalf"
+                  class="bg-green-500 absolute top-[10.5rem] h-[4.5rem] w-36 -translate-x-1/2 rounded-t-full border-black border-4"
+                ></div>
+                <svg
+                  id="svg-container"
+                  class="absolute top-[11rem] w-10 h-10 -translate-x-1/2"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                <rect width="24" height="24"/>
+                <path d="M5 13.3636L8.03559 16.3204C8.42388 16.6986 9.04279 16.6986 9.43108 16.3204L19 7" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+                <div
+                  class="absolute top-60 h-[4.5rem] w-36 -translate-x-1/2 rounded-b-full bg-white border-black border-4"
+                ></div>
+                <div
+                  class="absolute top-[12.25rem] h-10 w-10 -translate-x-1/2 translate-y-6 transform rounded-full border-4 border-black bg-white"
+                ></div>
+                <div
+                  class="absolute top-[12.25rem] h-6 w-6 -translate-x-1/2 translate-y-8 rounded-full bg-black"
+                ></div>
+              </button>
+            </form>
+        <% } %>
+        <% if (message === "release") { %>
+          <dialog
+          open
+          id="alreadyCaptured"
+          class="backdrop:bg-neutral-900 backdrop:opacity-75 rounded-lg bg-neutral-800"
+        >
+          <article
+            class="flex flex-col bg-white p-4 rounded-lg shadow-lg text-center"
           >
-            <rect width="24" height="24" />
-            <path
-              d="M7 17L16.8995 7.10051"
-              stroke="#000000"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M7 7.00001L16.8995 16.8995"
-              stroke="#000000"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-          <div
-            class="absolute top-60 h-[4.5rem] w-36 -translate-x-1/2 rounded-b-full bg-white border-black border-4"
-          ></div>
-          <div
-            class="absolute top-[12.25rem] h-10 w-10 -translate-x-1/2 translate-y-6 transform rounded-full border-4 border-black bg-white"
-          ></div>
-          <div
-            class="absolute top-[12.25rem] h-6 w-6 -translate-x-1/2 translate-y-8 rounded-full bg-black"
-          ></div>
-        </button>
-      </section>
-      <dialog
-        id="caughtPokemon"
-        class="backdrop:bg-neutral-900 backdrop:opacity-75 rounded-lg bg-neutral-800"
-      >
+            <p>Je hebt deze Pokemon al gevangen. Wil je deze vrijlaten?</p>
+            <form method="post" action="/pokemon/release">
+              <button
+              type="submit"
+              name="action"
+              value="yesRelease"
+              id="yesRelease"
+              class="bg-red-500 text-white py-2 px-4 rounded-lg m-2"
+              >
+              Ja
+              </button>
+              <button
+              type="submit"
+              name="action"
+              value="noRelease"
+              id="noRelease"
+              class="bg-blue-500 text-white py-2 px-4 rounded-lg m-2"
+              >
+              Nee
+              </button>
+              </form>
+          </article>
+        </dialog>
+        <%
+        } %>
+        <% if (message === "caught") { %>       
+        <dialog
+          open
+          id="giveNickname"
+          class="backdrop:bg-neutral-900 backdrop:opacity-75 rounded-lg bg-neutral-800"
+        >
         <article
-          class="flex flex-col bg-white p-4 rounded-lg shadow-lg text-center"
-        >
-          <p>Je hebt de Pokemon gevangen! Wil je deze een naam geven?</p>
-          <button
-            id="giveName"
-            class="bg-green-500 text-white py-2 px-4 rounded-lg m-2"
-          >
-            Ja
-          </button>
-          <button
-            id="defaultName"
-            class="bg-blue-500 text-white py-2 px-4 rounded-lg m-2"
-          >
-            Nee
-          </button>
-        </article>
-      </dialog>
-      <dialog
-        id="giveNickname"
-        class="backdrop:bg-neutral-900 backdrop:opacity-75 rounded-lg bg-neutral-800"
+        class="flex flex-col bg-white p-4 rounded-lg shadow-lg text-center"
       >
-        <form
-          id="nameForm"
-          action="#"
-          method="post"
-          class="flex flex-col bg-white p-4 rounded-lg shadow-lg text-center"
-        >
-          <label for="name">Vul een naam in</label><br />
-          <input
-            type="text"
-            name="name"
-            id="input"
-            placeholder="Ditto"
-            class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-          <button
-            type="submit"
-            class="bg-green-500 text-white py-2 px-4 rounded-lg m-2"
+          <form
+            id="nameForm"
+            action="#"
+            method="post"
+            class="flex flex-col bg-white p-4 rounded-lg shadow-lg text-center"
           >
-            Accept
-          </button>
-        </form>
-      </dialog>
-      <dialog
+            <label for="name">Vul een naam in</label><br />
+            <input
+              type="text"
+              name="name"
+              id="input"
+              placeholder=<%= randomPokemon.name %>
+              class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+            <button
+              type="submit"
+              class="bg-green-500 text-white py-2 px-4 rounded-lg m-2"
+            >
+              Accept
+            </button>
+          </form>
+        </article>
+        </dialog>
+          
+        <dialog
         id="nextModal"
         class="backdrop:bg-neutral-900 backdrop:opacity-75 rounded-lg bg-neutral-800"
       >
@@ -125,28 +175,33 @@
           </button>
         </article>
       </dialog>
-      <dialog
-        id="alreadyCaptured"
+          <% }  if( message === "out_of_attempts") { %>  
+              
+        <dialog open
+        id="nextModal"
         class="backdrop:bg-neutral-900 backdrop:opacity-75 rounded-lg bg-neutral-800"
       >
         <article
           class="flex flex-col bg-white p-4 rounded-lg shadow-lg text-center"
         >
-          <p>Je hebt deze Pokemon al gevangen. Wil je deze vrijlaten?</p>
-          <button
-            id="yesRelease"
-            class="bg-red-500 text-white py-2 px-4 rounded-lg m-2"
+          <p>Je hebt geen kansen meer om deze pokemon te vangen. Wat wil je nu doen?</p>
+          <a href="/pokemon"
+            id="showPokemon"
+            class="bg-green-500 text-white py-2 px-4 rounded-lg m-2"
           >
-            Ja
-          </button>
-          <button
-            id="noRelease"
+            Home
+          </a>
+          <a href="/pokemon/capture"
+            id="catchAnother"
             class="bg-blue-500 text-white py-2 px-4 rounded-lg m-2"
           >
-            Nee
-          </button>
+            Vang een nieuwe Pokemon
+          </a>
         </article>
       </dialog>
+              <% } %>
+          
+      </section>
     </main>
   </body>
 </html>

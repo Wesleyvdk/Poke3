@@ -1,15 +1,17 @@
 <%- include('partials/head') %>
 <%- include("partials/nav") %>
     <main class="flex items-center justify-center py-8">
+      <% if (result === 'correct') { %>
       <article
         id="notification"
-        class="hidden fixed top-24 right-5 bg-green-200 border-green-600 text-green-600 border-l-4 p-4 rounded"
+        class="fixed top-24 right-5 bg-green-200 border-green-600 text-green-600 border-l-4 p-4 rounded"
         role="alert"
       >
         <p id="notificationText">
           <%= pokemon %> verdediging en aanval ging omhoog!
         </p>
       </article>
+      <% } %>
       <section class="text-center">
         <figure class="mb-4">
           <img
@@ -26,9 +28,9 @@
           class="mx-auto brightness-0"
         />
 
-        <form
+        <form  
           id="quizForm"
-          action="/quiz"
+          action="/pokemon/quiz"
           method="post"
           class="flex flex-col justify-center items-center mb-4 mx-auto gap-4 w-1/2"
         >
@@ -46,16 +48,20 @@
             Doe een gok
           </button>
         </form>
-        <button
-          id="next"
-          class="hidden ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        >
+        <% if (result === 'correct') { %>
+          <button id="next" class="hidden ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
           Volgende
         </button>
+        <% } %>
+        
       </section>
     </main>
   </body>
 </html>
 <script>
-  let answer = "<%= answer %>";
+  let notification = document.getElementById("notification");
+  setTimeout(function () {
+      notification.classList.add("opacity-0");
+      notification.classList.add("hidden");
+    }, 3000);
 </script>

@@ -1,20 +1,17 @@
-<%- include('partials/header') %>
-<%- include('partials/nav') %>
+<%- include('partials/head') %>
     <main
-      class="max-w-[2120px] mx-auto flex flex-col justify-center items-center"
+      class="max-w-[2120px] min-h-dvh mx-auto flex flex-col justify-center items-center"
     >
       <h1
-        class="mt-8 font-Pokemon tracking-wider text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl mb-0 sm:mb-4 lg-mb-8 xl:mb-12"
+        class="mt-8 font-Pokemon tracking-wider text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl mb-0 sm:mb-8 lg-mb-12 xl:mb-16"
       >
         Kies jouw starter!
       </h1>
       <section
         class="flex flex-wrap md:flex-nowrap justify-center items-center gap-5 py-8 px-8 mx-auto"
       >
-        <a
-          href="landing.html"
-          class="group bg-neutral-200 max-h-96 rounded-2xl p-14 flex flex-col justify-center items-center aspect-square min-w-60 hover:bg-blue-500"
-        >
+      <form action="/pokemon/starter" method="post">
+        <button type="submit" class="group bg-neutral-200 max-h-96 rounded-2xl p-14 flex flex-col justify-center items-center aspect-square min-w-60 hover:bg-blue-500"
           <img
             class="w-20 md:w-full"
             src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png"
@@ -25,9 +22,12 @@
           >
             Squirtle
           </p>
-        </a>
-        <a
-          href="landing.html"
+          <input type="hidden" name="starter" value="squirtle" />
+        </button>
+      </form>
+      <form action="/pokemon/starter" method="post">
+        <button
+          type="submit"
           class="group bg-neutral-200 max-h-96 rounded-2xl p-14 flex flex-col justify-center items-center aspect-square min-w-60 hover:bg-green-500"
         >
           <img
@@ -40,10 +40,12 @@
           >
             Bulbasaur
           </p>
-        </a>
-
-        <a
-          href="landing.html"
+          <input type="hidden" name="starter" value="bulbasaur" />
+        </button>
+      </form>
+      <form action="/pokemon/starter" method="post">
+        <button
+         type="submit"
           class="group bg-neutral-200 max-h-96 rounded-2xl p-14 flex flex-col justify-center items-center aspect-square min-w-60 hover:bg-red-500"
         >
           <img
@@ -56,7 +58,9 @@
           >
             Charmander
           </p>
-        </a>
+          <input type="hidden" name="starter" value="charmander" />
+        </button>
+      </form>
       </section>
     </main>
   </body>

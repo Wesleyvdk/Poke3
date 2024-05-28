@@ -1,14 +1,15 @@
 import express from "express";
-import { connect, getPokemons, seed } from "./database";
-import { Pokemon } from "./types";
-
+import {connect, getAllPokemons, getPokemons, seed} from "./database";
+import { APIPokemon, Pokemon } from "./types";
 import indexRouter from "./routes/index.routes";
 import pokemonGameRoutes from "./routes/pokemonGame.routes";
 import session from "./session";
 import { flashMiddleware } from "./middleware/flashMiddleware";
 import { secureMiddleware } from "./middleware/secureMiddleware";
 
+export let pokemons: any = [];
 const app = express();
+
 
 app.set("view engine", "ejs");
 app.set("port", 3000);
@@ -19,7 +20,7 @@ app.use(express.static("public"));
 app.use(session);
 app.use(flashMiddleware);
 app.use("/", indexRouter());
-app.use("/pokemon", secureMiddleware, pokemonGameRoutes());
+app.use("/pokemon", secureMiddleware, pokemons, pokemonGameRoutes());
 
 app.use((req, res) => {
   res.type("text/html");
@@ -27,16 +28,13 @@ app.use((req, res) => {
   res.send("404 - Not Found");
 });
 
+
+
 app.listen(app.get("port"), async () => {
-  await connect();
-  seed();
-  let response = await fetch(
-    "https://pokeapi.co/api/v2/pokemon?offset=0&limit=1400"
-  );
-  /*  console.log(await response.json()); */
-  console.log(
-    "The application is listening on http://localhost:" + app.get("port")
-  );
+    await connect();
+    seed();
+    pokemons = await getAllPokemons();
+    console.log("The application is listening on http://localhost:" + app.get("port"));
 });
 
 export async function randomPokemon() {

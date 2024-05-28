@@ -1,12 +1,12 @@
 import { Collection, MongoClient } from "mongodb";
-import { Pokemon, User } from "./types";
+import { APIPokemon, Pokemon, User } from "./types";
 import { randomPokemon } from "./app";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import session from "./session";
 dotenv.config();
 
-const uri = process.env.MONGO_URI ?? "";
+const uri = process.env.MONGODB_URI ?? "";
 const client = new MongoClient(uri);
 
 const userCollection: Collection = client.db("poke3").collection("users");
@@ -91,10 +91,29 @@ export async function register(email: string, password: string) {
   }
 }
 
+export const getAllPokemons = async () => {
+    try{
+        let pokemonData: APIPokemon[] = [];
+        let response = await (await fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=1400")).json();
+        let promises =  response.results.map(async (element: { url: string | URL | Request; }, index: number) => {
+            let pokemonDetails: APIPokemon = await (await fetch(element.url)).json();
+            pokemonDetails.id = index + 1;
+            return pokemonDetails;
+        });
+        pokemonData = await Promise.all(promises);
+        pokemonData.sort((a, b) => a.id - b.id);
+        return pokemonData;
+    } catch(error){
+        console.error(error);
+    }
+    
+};
+
 export async function getPokemons(user: string) {
   let pokemons = await userCollection.find({ email: user }).toArray();
   return pokemons;
 }
+
 export async function levelUp() {
   let pokemons = await userCollection.findOne({ name: "unown" });
   await userCollection.updateOne(

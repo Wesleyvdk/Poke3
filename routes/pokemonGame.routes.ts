@@ -20,6 +20,9 @@ export default function pokemonGameRoutes(){
   router.get("/pokedex", (req, res) => {
     const search = req.query.search ?? '';
     const type = req.query.type ?? '';
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = 20;
+    const skip = (page - 1) * limit;
     let SortedPokemons: APIPokemon[] = pokemons;
     if(search){
       const searchRegex = new RegExp(search as string, 'i');
@@ -34,7 +37,10 @@ export default function pokemonGameRoutes(){
         })
       });
     }
-    res.render("pokedex", {pokemons: SortedPokemons, search, type});
+    const totalItems = SortedPokemons.length;
+    const items = SortedPokemons.slice(skip, skip + limit);
+    const totalPages = Math.ceil(totalItems / limit);
+    res.render("pokedex", {pokemons: items, search, type, totalPages: totalPages, currentPage: page});
   });
 
   router.get("/quiz", (req, res) => {

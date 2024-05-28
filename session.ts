@@ -4,7 +4,7 @@ import mongoDbSession from "connect-mongodb-session";
 const MongoDBStore = mongoDbSession(session);
 
 const mongoStore = new MongoDBStore({
-  uri: process.env.MONGO_URI ?? "mongodb://localhost:27017",
+  uri: process.env.MONGO_URI ?? "",
   collection: "sessions",
   databaseName: "poke3",
 });

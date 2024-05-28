@@ -4,6 +4,7 @@ import { randomPokemon } from "./app";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import session from "./session";
+import exp from "constants";
 dotenv.config();
 
 const uri = process.env.MONGO_URI ?? "";
@@ -39,11 +40,13 @@ export async function seed() {
       {
         email: "pri@test.com",
         password: await bcrypt.hash("123", saltRounds),
+        currentPokemon: pokemons[0].name,
         pokemons: pokemons,
       },
       {
         email: "test@test.com",
         password: await bcrypt.hash("test", saltRounds),
+        currentPokemon: "",
         pokemons: [] as Pokemon[],
       },
     ];
@@ -97,14 +100,43 @@ export async function getPokemons(user: string) {
   let pokemons = await userCollection.find({ email: user }).toArray();
   return pokemons;
 }
+
+export async function getCurrentPokemon(user: string) {
+  let pokemon = await userCollection.findOne({ email: user });
+  return pokemon?.currentPokemon;
+}
+
 export async function levelUp(pokemonName: string) {
-  let pokemons = await userCollection.findOne({ name: pokemonName });
+  const query = { "pokemons.name": pokemonName };
+
+  // Projection to return only the Pokémon details that match the name
+  const projection = {
+    projection: {
+      pokemons: {
+        $elemMatch: { name: pokemonName },
+      },
+    },
+  };
+
+  // Find the document
+  let pokemons = await userCollection.findOne(query, projection);
   console.log(pokemons);
-  let updatePokemon = await userCollection.updateOne(
-    { name: pokemonName },
-    { $set: { attack: pokemons!.attack + 1, defense: pokemons!.defense + 1 } }
-  );
-  console.log(updatePokemon);
+  // Update operation to increment the Pokémon's attack and defense values by 1
+  const update = {
+    $inc: {
+      "pokemons.$[elem].attack": 1,
+      "pokemons.$[elem].defense": 1,
+    },
+  };
+
+  // Array filter to match the correct Pokémon in the array
+  const arrayFilters = [{ "elem.name": pokemonName }];
+
+  // Update the document
+  const result = await userCollection.updateOne(query, update, {
+    arrayFilters,
+  });
+  console.log(result);
 }
 
 export async function insertPokemon(user: User, pokemon: any) {

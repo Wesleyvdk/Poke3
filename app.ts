@@ -1,5 +1,5 @@
 import express from "express";
-import { connect, getPokemons, seed } from "./database";
+import { connect, getCurrentPokemon, seed } from "./database";
 import { Pokemon } from "./types";
 
 import indexRouter from "./routes/index.routes";
@@ -30,9 +30,9 @@ app.use((req, res) => {
 app.listen(app.get("port"), async () => {
   await connect();
   seed();
-  let response = await fetch(
-    "https://pokeapi.co/api/v2/pokemon?offset=0&limit=1400"
-  );
+  // let response = await fetch(
+  //   "https://pokeapi.co/api/v2/pokemon?offset=0&limit=1400"
+  // );
   /*  console.log(await response.json()); */
   console.log(
     "The application is listening on http://localhost:" + app.get("port")

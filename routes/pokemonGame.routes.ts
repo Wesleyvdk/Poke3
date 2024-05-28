@@ -2,12 +2,13 @@ import express from "express";
 import { secureMiddleware } from "../middleware/secureMiddleware";
 import { randomPokemon } from "../app";
 import { Pokemon } from "../types";
-import { insertPokemon, levelUp } from "../database";
+import { getCurrentPokemon, insertPokemon, levelUp } from "../database";
 
 export default function pokemonGameRoutes() {
   const router = express.Router();
   router.get("/", async (req, res) => {
     let user = req.session.user!;
+    let currentPokemon = getCurrentPokemon(user.email!);
     if (!user) {
       res.redirect("/login");
       return;
@@ -19,11 +20,14 @@ export default function pokemonGameRoutes() {
   });
 
   router.get("/capture", async (req, res) => {
+    let random = await randomPokemon();
     let currentPokemon = await fetch(
       `https://pokeapi.co/api/v2/pokemon/${req.session.user!.currentPokemon}`
     );
     let current: any = await currentPokemon.json();
     res.render("capture", {
+      randomPokemonName: random.name,
+      randomPokemonImage: random.sprites.other["official-artwork"]["front_default"],
       currentPokemon:
         current.sprites.other["official-artwork"]["front_default"],
     });
@@ -52,7 +56,6 @@ export default function pokemonGameRoutes() {
   });
 
   router.get("/quiz", async (req, res) => {
-    console.log(req.session.user!.currentPokemon);
     randomPokemon().then(async (data) => {
       let currentPokemon = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${req.session.user!.currentPokemon}`
@@ -66,10 +69,11 @@ export default function pokemonGameRoutes() {
         pokemon: current.name,
         currentPokemon:
           current.sprites.other["official-artwork"]["front_default"],
+        result: null,
       });
     });
   });
-  router.post("/quiz", (req, res) => {
+  router.post("/quiz", async (req, res) => {
     const guess: string = req.body.guess;
     const answer: string = req.session.answer!;
     if (guess === answer) {
@@ -77,6 +81,23 @@ export default function pokemonGameRoutes() {
       let pokemon = req.session.user!.currentPokemon ?? "";
       levelUp(pokemon);
       req.session.message = { type: "success", message: "Correct!" };
+      randomPokemon().then(async (data) => {
+        let currentPokemon = await fetch(
+          `https://pokeapi.co/api/v2/pokemon/${
+            req.session.user!.currentPokemon
+          }`
+        );
+        let current: any = await currentPokemon.json();
+        req.session.answer = data.name;
+        res.render("quiz", {
+          image: data.sprites.other["official-artwork"]["front_default"],
+          answer: data.name,
+          pokemon: current.name,
+          currentPokemon:
+            current.sprites.other["official-artwork"]["front_default"],
+          result: "correct",
+        });
+      });
     }
   });
 

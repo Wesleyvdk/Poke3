@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 import session from "./session";
 dotenv.config();
 
-const uri = process.env.MONGODB_URI ?? "";
+const uri = process.env.MONGO_URI ?? "";
 const client = new MongoClient(uri);
 
 const userCollection: Collection = client.db("poke3").collection("users");
@@ -94,13 +94,30 @@ export async function register(email: string, password: string) {
 export const getAllPokemons = async () => {
     try{
         let pokemonData: APIPokemon[] = [];
-        let response = await (await fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=1400")).json();
-        let promises =  response.results.map(async (element: { url: string | URL | Request; }, index: number) => {
-            let pokemonDetails: APIPokemon = await (await fetch(element.url)).json();
-            pokemonDetails.id = index + 1;
-            return pokemonDetails;
-        });
-        pokemonData = await Promise.all(promises);
+        let response = await (await fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=1")).json();
+        // let promises =  response.results.map(async (element: { url: string | URL | Request; }, index: number) => {
+        //     let pokemonDetails: APIPokemon = await (await fetch(element.url)).json();
+        //     pokemonDetails.id = index + 1;
+        //     return pokemonDetails;
+        // });
+
+        let count = response.count;
+        let i = 1;
+        console.log(count);
+        while (i < count) {
+          let res = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
+          if(!res.ok){
+            console.log(i);
+            i++;
+          } else{
+            let pokemonDetails: APIPokemon = await res.json();
+            console.log(i)
+            pokemonDetails.id = i+1;
+            pokemonData.push(pokemonDetails);
+            i++;
+          }
+        }
+        // pokemonData = await Promise.all(promises);
         pokemonData.sort((a, b) => a.id - b.id);
         return pokemonData;
     } catch(error){

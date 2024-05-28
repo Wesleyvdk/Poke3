@@ -38,7 +38,9 @@ export default function pokemonGameRoutes() {
     });
   });
 
-  router.get("/pokedex", (req, res) => {
+  router.get("/pokedex", async (req, res) => {
+    const currentPokemonRes = await fetch(`https://pokeapi.co/api/v2/pokemon/${req.session.user!.currentPokemon}`);
+    console.log(currentPokemonRes);
     const search = req.query.search ?? '';
     const type = req.query.type ?? '';
     const page = parseInt(req.query.page as string) || 1;
@@ -58,10 +60,11 @@ export default function pokemonGameRoutes() {
         })
       });
     }
+    const currentPokemon = await currentPokemonRes.json();
     const totalItems = SortedPokemons.length;
     const items = SortedPokemons.slice(skip, skip + limit);
     const totalPages = Math.ceil(totalItems / limit);
-    res.render("pokedex", {pokemons: items, search, type, totalPages: totalPages, currentPage: page});
+    res.render("pokedex", {pokemons: items, search, type, totalPages: totalPages, currentPage: page, currentPokemon: currentPokemon.sprites.other["official-artwork"]["front_default"]});
   });
 
   router.get("/quiz", async (req, res) => {

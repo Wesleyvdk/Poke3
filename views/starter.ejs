@@ -10,7 +10,7 @@
       <section
         class="flex flex-wrap md:flex-nowrap justify-center items-center gap-5 py-8 px-8 mx-auto"
       >
-      <form action="/pokemon/starter/Squirtle" method="post">
+      <form action="/pokemon/starter" method="post">
         <button type="submit" class="group bg-neutral-200 max-h-96 rounded-2xl p-14 flex flex-col justify-center items-center aspect-square min-w-60 hover:bg-blue-500"
           <img
             class="w-20 md:w-full"
@@ -22,9 +22,10 @@
           >
             Squirtle
           </p>
+          <input type="hidden" name="starter" value="squirtle" />
         </button>
       </form>
-      <form action="/pokemon/starter/Bulbasaur" method="post">
+      <form action="/pokemon/starter" method="post">
         <button
           type="submit"
           class="group bg-neutral-200 max-h-96 rounded-2xl p-14 flex flex-col justify-center items-center aspect-square min-w-60 hover:bg-green-500"
@@ -39,9 +40,10 @@
           >
             Bulbasaur
           </p>
+          <input type="hidden" name="starter" value="bulbasaur" />
         </button>
       </form>
-      <form action="/pokemon/starter/Charmander" method="post">
+      <form action="/pokemon/starter" method="post">
         <button
          type="submit"
           class="group bg-neutral-200 max-h-96 rounded-2xl p-14 flex flex-col justify-center items-center aspect-square min-w-60 hover:bg-red-500"
@@ -56,6 +58,7 @@
           >
             Charmander
           </p>
+          <input type="hidden" name="starter" value="charmander" />
         </button>
       </form>
       </section>

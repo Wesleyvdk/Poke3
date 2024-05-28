@@ -44,6 +44,7 @@ export async function seed() {
       {
         email: "test@test.com",
         password: await bcrypt.hash("test", saltRounds),
+        pokemons: [] as Pokemon[],
       },
     ];
     await userCollection.insertMany(users);
@@ -75,6 +76,7 @@ export async function register(email: string, password: string) {
     let result = await userCollection.insertOne({
       email: email,
       password: await bcrypt.hash(password, saltRounds),
+      pokemons: [] as Pokemon[],
     });
     if (!result.acknowledged) {
       throw new Error("Insertion failed");
@@ -95,12 +97,26 @@ export async function getPokemons(user: string) {
   let pokemons = await userCollection.find({ email: user }).toArray();
   return pokemons;
 }
-export async function levelUp() {
-  let pokemons = await userCollection.findOne({ name: "unown" });
-  await userCollection.updateOne(
-    { name: "unown" },
-    { $set: { attack: pokemons?.attack + 1, defense: pokemons?.defense + 1 } }
+export async function levelUp(pokemonName: string) {
+  let pokemons = await userCollection.findOne({ name: pokemonName });
+  console.log(pokemons);
+  let updatePokemon = await userCollection.updateOne(
+    { name: pokemonName },
+    { $set: { attack: pokemons!.attack + 1, defense: pokemons!.defense + 1 } }
   );
+  console.log(updatePokemon);
+}
+
+export async function insertPokemon(user: User, pokemon: any) {
+  let result = await userCollection.updateOne(
+    { email: user.email },
+    { $push: { pokemons: pokemon } },
+    { upsert: true }
+  );
+  if (!result.acknowledged) {
+    throw new Error("Insertion failed");
+  }
+  return result.upsertedId;
 }
 
 export async function connect() {

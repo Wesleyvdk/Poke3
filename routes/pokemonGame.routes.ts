@@ -1,6 +1,8 @@
 import express from "express";
 import { secureMiddleware } from "../middleware/secureMiddleware";
 import { randomPokemon } from "../app";
+import { Pokemon } from "../types";
+import { insertPokemon, levelUp } from "../database";
 
 export default function pokemonGameRoutes() {
   const router = express.Router();
@@ -10,7 +12,9 @@ export default function pokemonGameRoutes() {
       res.redirect("/login");
       return;
     }
-
+    if (!user.currentPokemon) {
+      res.redirect("pokemon/starter");
+    }
     res.render("landing");
   });
 
@@ -48,26 +52,30 @@ export default function pokemonGameRoutes() {
   });
 
   router.get("/quiz", async (req, res) => {
+    console.log(req.session.user!.currentPokemon);
     randomPokemon().then(async (data) => {
       let currentPokemon = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${req.session.user!.currentPokemon}`
       );
       let current: any = await currentPokemon.json();
       req.session.answer = data.name;
+      console.log(req.session.answer);
       res.render("quiz", {
         image: data.sprites.other["official-artwork"]["front_default"],
         answer: data.name,
-        pokemon: "pikachu",
+        pokemon: current.name,
         currentPokemon:
           current.sprites.other["official-artwork"]["front_default"],
       });
-      /* currentPokemon = await currentPokemon.json(); */
     });
   });
   router.post("/quiz", (req, res) => {
     const guess: string = req.body.guess;
     const answer: string = req.session.answer!;
     if (guess === answer) {
+      console.log("Correct!");
+      let pokemon = req.session.user!.currentPokemon ?? "";
+      levelUp(pokemon);
       req.session.message = { type: "success", message: "Correct!" };
     }
   });
@@ -84,9 +92,24 @@ export default function pokemonGameRoutes() {
   });
 
   router.get("/starter", (req, res) => {
+    console.log(req.session.user!.currentPokemon);
     res.render("starter");
   });
-  router.post("/starter", (req, res) => {});
+  router.post("/starter", async (req, res) => {
+    console.log(req.body.starter);
+    let response = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${req.body.starter}`
+    );
+    let data = await response.json();
+    let pokemon: Pokemon = {
+      name: data.name,
+      attack: data.stats[1].base_stat,
+      defense: data.stats[2].base_stat,
+    };
+    insertPokemon(req.session.user!, pokemon);
+    req.session.user!.currentPokemon = pokemon.name;
+    res.redirect("/pokemon");
+  });
 
   return router;
 }

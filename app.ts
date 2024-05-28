@@ -51,8 +51,9 @@ export async function randomPokemon() {
     randomPokemon();
   }
 
-  return response.json().catch((e: any) => {
+  return await response.json().catch((e: any) => {
     console.log(e.message);
     console.log(response);
+    randomPokemon();
   });
 }

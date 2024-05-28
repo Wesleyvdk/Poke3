@@ -6,15 +6,16 @@
         <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 gap-y-6 my-8">
           <% for (const item of projects) { %>
             <% if(item.title == "Pokemon") { %> 
-            <a href="/pokemon" class="overflow-hidden relative block rounded-lg shadow-md group">
-              <img alt="<%= item.title %>"
-                class="w-full object-cover object-center hover:brightness-75 brightness-75 sm:brightness-100 transition-all duration-300 pointer-events-auto"
-                src="<%= item.imageUrl %>" />
-              <h1
-                class="absolute top-1/2 left-1/2 text-neutral-50 uppercase text-4xl lg:text-5xl md:text-5xl sm:text-7xl text-center font-semibold -translate-x-1/2 -translate-y-1/2 pointer-events-none visible sm:invisible group-hover:visible">
-                <%= item.title %>
-              </h1>
-            </a>
+              
+                <a href="/pokemon" class="overflow-hidden relative block rounded-lg shadow-md group">
+                  <img alt="<%= item.title %>"
+                    class="w-full object-cover object-center hover:brightness-75 brightness-75 sm:brightness-100 transition-all duration-300 pointer-events-auto"
+                    src="<%= item.imageUrl %>" />
+                  <h1
+                    class="absolute top-1/2 left-1/2 text-neutral-50 uppercase text-4xl lg:text-5xl md:text-5xl sm:text-7xl text-center font-semibold -translate-x-1/2 -translate-y-1/2 pointer-events-none visible sm:invisible group-hover:visible">
+                    <%= item.title %>
+                  </h1>
+                </a>
             <% } else {  %>
               <a href="#" class="overflow-hidden relative block rounded-lg shadow-md group">
                 <img alt="<%= item.title %>"

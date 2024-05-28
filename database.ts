@@ -29,24 +29,30 @@ export async function seed() {
     let pokemons: Pokemon[] = [];
     for (let i = 0; i < 5; i++) {
       let response = await randomPokemon();
-      let data: Pokemon = {
-        name: response.name,
-        attack: response.stats[1].base_stat,
-        defense: response.stats[2].base_stat,
-      };
-      pokemons.push(data);
+      if (response) {
+        let data: Pokemon = {
+          name: response.name,
+          attack: response.stats[1].base_stat,
+          defense: response.stats[2].base_stat,
+        };
+        console.log(data);
+        pokemons.push(data);
+      } else {
+        console.log('Retrying to fetch a valid Pokémon...');
+        i--;
+      }
     }
     let users: User[] = [
       {
         email: "pri@test.com",
         password: await bcrypt.hash("123", saltRounds),
-        currentPokemon: pokemons[0].name,
+        currentPokemon: pokemons[0],
         pokemons: pokemons,
       },
       {
         email: "test@test.com",
         password: await bcrypt.hash("test", saltRounds),
-        currentPokemon: "",
+        currentPokemon: undefined,
         pokemons: [] as Pokemon[],
       },
     ];
@@ -101,19 +107,31 @@ export async function getPokemons(user: string) {
   return pokemons;
 }
 
+export async function releasePokemon(email: string, pokemon: string) {
+  
+  let result = await userCollection
+    .updateOne(
+      { email: email},
+      // @ts-ignore
+      { $pull: { pokemons: { name: pokemon } } }
+    )
+    .then((result) => {
+      console.log(result);
+    });
+}
 export async function getCurrentPokemon(user: string) {
   let pokemon = await userCollection.findOne({ email: user });
   return pokemon?.currentPokemon;
 }
 
-export async function levelUp(pokemonName: string) {
-  const query = { "pokemons.name": pokemonName };
+export async function levelUp(pokemon: Pokemon) {
+  const query = { "pokemons.name": pokemon.name };
 
   // Projection to return only the Pokémon details that match the name
   const projection = {
     projection: {
       pokemons: {
-        $elemMatch: { name: pokemonName },
+        $elemMatch: { name: pokemon.name },
       },
     },
   };
@@ -130,7 +148,7 @@ export async function levelUp(pokemonName: string) {
   };
 
   // Array filter to match the correct Pokémon in the array
-  const arrayFilters = [{ "elem.name": pokemonName }];
+  const arrayFilters = [{ "elem.name": pokemon.name }];
 
   // Update the document
   const result = await userCollection.updateOne(query, update, {
@@ -139,6 +157,28 @@ export async function levelUp(pokemonName: string) {
   console.log(result);
 }
 
+export async function capturedPokemon(user: User, pokemon: any) {
+  const query = { "pokemons.name": pokemon};
+
+  // Projection to return only the Pokémon details that match the name
+  const projection = {
+    projection: {
+      pokemons: {
+        $elemMatch: { name: pokemon },
+      },
+    },
+  };
+
+  // Find the document
+  let alreadyCaught = await userCollection.findOne(query, projection);
+
+  if(!alreadyCaught){
+    return false;
+  }
+  else{
+    return true;
+  }
+}
 export async function insertPokemon(user: User, pokemon: any) {
   let result = await userCollection.updateOne(
     { email: user.email },

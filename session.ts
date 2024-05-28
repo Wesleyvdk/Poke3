@@ -14,6 +14,9 @@ declare module "express-session" {
     user?: User;
     message?: FlashMessage;
     answer?: string;
+    randomPokemon?: any;
+    attempts?: number;
+    alreadyCaught?: boolean;
   }
 }
 

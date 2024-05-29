@@ -6,6 +6,7 @@ import pokemonGameRoutes from "./routes/pokemonGame.routes";
 import session from "./session";
 import { flashMiddleware } from "./middleware/flashMiddleware";
 import { secureMiddleware } from "./middleware/secureMiddleware";
+import { sessionMiddleware } from "./middleware/sessionMiddleware";
 
 export let pokemons: any;
 const app = express();
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(session);
 app.use(flashMiddleware);
+app.use(sessionMiddleware);
 app.use("/", indexRouter());
 app.use("/pokemon" , secureMiddleware, pokemonGameRoutes());
 

@@ -5,6 +5,7 @@ import { secureMiddleware } from "../middleware/secureMiddleware";
 import { randomPokemon } from "../app";
 import {
   capturedPokemon,
+  getAllPokemons,
   getCurrentPokemon,
   insertPokemon,
   levelUp,
@@ -190,7 +191,9 @@ export default function pokemonGameRoutes() {
       `https://pokeapi.co/api/v2/pokemon/${req.session.user!.currentPokemon?.name}`
     );
     let current: any = await currentPokemon.json();
+    let sortedPokemons: APIPokemon[] = pokemons;
     res.render("compare", {
+      pokemons: sortedPokemons,
       currentPokemon:
         current.sprites.other["official-artwork"]["front_default"],
     });
@@ -316,9 +319,4 @@ export default function pokemonGameRoutes() {
   });
 
   return router;
-}
-function sleep(ms: number) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
 }

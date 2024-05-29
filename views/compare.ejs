@@ -43,26 +43,13 @@
             class="absolute p-2 w-full border-b border-gray-300"
           />
           <ul id="pokemonItems1" class="absolute top-10 w-full overflow-auto">
-            <li
+            <% for(pokemon of pokemons) { %> 
+              <li
               class="p-2 bg-slate-50 border border-gray-600 flex justify-center"
             >
-              <a class="block w-full text-center" href="#">Pikachu</a>
+              <a class="block w-full text-center" href="#"><%= pokemon.name %></a>
             </li>
-            <li
-              class="p-2 bg-slate-50 border border-gray-600 flex justify-center"
-            >
-              <a class="block w-full text-center" href="#">Pikachu</a>
-            </li>
-            <li
-              class="p-2 bg-slate-50 border border-gray-600 flex justify-center"
-            >
-              <a class="block w-full text-center" href="#">Pikachu</a>
-            </li>
-            <li
-              class="p-2 bg-slate-50 border border-gray-600 rounded flex justify-center"
-            >
-              <a class="block w-full text-center" href="#">Pikachu</a>
-            </li>
+              <% } %>
           </ul>
         </article>
         <img
@@ -309,7 +296,7 @@
         </article>
         <article
           id="pokemonList2"
-          class="hidden relative w-full mt-1 bg-white border border-gray-200 rounded-lg z-10"
+          class="hidden relative w-full h-1/3 mt-1 bg-white border border-gray-200 rounded-lg z-10"
         >
           <input
             type="text"
@@ -318,26 +305,13 @@
             class="absolute p-2 w-full border-b border-gray-300"
           />
           <ul id="pokemonItems2" class="absolute top-10 w-full overflow-auto">
-            <li
+            <% for(pokemon of pokemons) { %> 
+              <li
               class="p-2 bg-slate-50 border border-gray-600 flex justify-center"
             >
-              <a class="block w-full text-center" href="#">Charmander</a>
+              <a class="block w-full text-center" href="#"><%= pokemon.name %></a>
             </li>
-            <li
-              class="p-2 bg-slate-50 border border-gray-600 flex justify-center"
-            >
-              <a class="block w-full text-center" href="#">Charmander</a>
-            </li>
-            <li
-              class="p-2 bg-slate-50 border border-gray-600 flex justify-center"
-            >
-              <a class="block w-full text-center" href="#">Charmander</a>
-            </li>
-            <li
-              class="p-2 bg-slate-50 border border-gray-600 flex justify-center"
-            >
-              <a class="block w-full text-center" href="#">Charmander</a>
-            </li>
+              <% } %>
           </ul>
         </article>
         <img

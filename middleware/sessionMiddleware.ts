@@ -6,8 +6,8 @@ export function sessionMiddleware(
   res: Response,
   next: NextFunction
 ) {
-  if (req.session.user) {
-    updateData(req.session.user);
+  if (req.session.user!.currentPokemon) {
+    updateData(req.session.user!);
   }
   next();
 }

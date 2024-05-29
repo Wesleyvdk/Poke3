@@ -46,9 +46,10 @@ export default function pokemonGameRoutes() {
 
   router.get("/capture", async (req, res) => {
     let random = await randomPokemon();
+    let currentPokemonDB = await getCurrentPokemon(req.session.user!.email!);
     let currentPokemon = await fetch(
       `https://pokeapi.co/api/v2/pokemon/${
-        req.session.user!.currentPokemon?.name
+        currentPokemonDB.name
       }`
     );
     console.log(random);
@@ -100,9 +101,10 @@ export default function pokemonGameRoutes() {
       let randomResponse = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${req.session.randomPokemon.name}`
       );
+      let currentPokemonDB = await getCurrentPokemon(req.session.user!.email!);
       let response = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${
-          req.session.user!.currentPokemon?.name
+          currentPokemonDB.name
         }`
       );
       let currentPokemon = await response.json();
@@ -170,9 +172,10 @@ export default function pokemonGameRoutes() {
       let randomRes = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${req.session.randomPokemon.name}`
       );
+      let currentPokemonDB = await getCurrentPokemon(req.session.user!.email!);
       let response = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${
-          req.session.user!.currentPokemon?.name
+          currentPokemonDB.name
         }`
       );
       let randomPokemon = await randomRes.json();
@@ -207,9 +210,10 @@ export default function pokemonGameRoutes() {
   });
 
   router.get("/compare", async (req, res) => {
+    let currentPokemonDB = await getCurrentPokemon(req.session.user!.email!);
     let currentPokemon = await fetch(
       `https://pokeapi.co/api/v2/pokemon/${
-        req.session.user!.currentPokemon?.name
+        currentPokemonDB.name
       }`
     );
     let random: APIPokemon = await randomPokemon();
@@ -226,9 +230,10 @@ export default function pokemonGameRoutes() {
 
   router.post("/compare", async (req, res) => {
     let sortedPokemons: APIPokemon[] = pokemons;
+    let currentPokemonDB = await getCurrentPokemon(req.session.user!.email!);
     let currentPokemon = await fetch(
       `https://pokeapi.co/api/v2/pokemon/${
-        req.session.user!.currentPokemon?.name
+        currentPokemonDB.name
       }`
     );
     let current: any = await currentPokemon.json();
@@ -250,9 +255,10 @@ export default function pokemonGameRoutes() {
   });
 
   router.get("/pokedex", async (req, res) => {
+    let currentPokemonDB = await getCurrentPokemon(req.session.user!.email!);
     const currentPokemonRes = await fetch(
       `https://pokeapi.co/api/v2/pokemon/${
-        req.session.user!.currentPokemon?.name
+        currentPokemonDB.name
       }`
     );
     console.log(currentPokemonRes);
@@ -299,9 +305,10 @@ export default function pokemonGameRoutes() {
 
   router.get("/quiz", async (req, res) => {
     randomPokemon().then(async (data) => {
+      let currentPokemonDB = await getCurrentPokemon(req.session.user!.email!);
       let currentPokemon = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${
-          req.session.user!.currentPokemon?.name
+          currentPokemonDB.name
         }`
       );
       let current: any = await currentPokemon.json();
@@ -323,13 +330,13 @@ export default function pokemonGameRoutes() {
     const answer: string = req.session.answer!;
     if (guess === answer) {
       console.log("Correct!");
-      let pokemon = req.session.user!.currentPokemon!;
+      let pokemon = await getCurrentPokemon(req.session.user!.email!);
       levelUp(pokemon);
       req.session.message = { type: "success", message: "Correct!" };
       randomPokemon().then(async (data) => {
         let currentPokemon = await fetch(
           `https://pokeapi.co/api/v2/pokemon/${
-            req.session.user!.currentPokemon
+            pokemon.name
           }`
         );
         let current: any = await currentPokemon.json();
@@ -347,9 +354,10 @@ export default function pokemonGameRoutes() {
   });
 
   router.get("/battlefinder", async (req, res) => {
+    let currentPokemonDB = await getCurrentPokemon(req.session.user!.email!);
     const currentPokemonRes = await fetch(
       `https://pokeapi.co/api/v2/pokemon/${
-        req.session.user!.currentPokemon?.name
+        currentPokemonDB.name
       }`
     );
     console.log(currentPokemonRes);
@@ -388,9 +396,10 @@ export default function pokemonGameRoutes() {
   });
 
   router.get("/battle", async (req, res) => {
+    let currentPokemonDB = await getCurrentPokemon(req.session.user!.email!);
     let currentPokemon = await fetch(
       `https://pokeapi.co/api/v2/pokemon/${
-        req.session.user!.currentPokemon?.name
+        currentPokemonDB.name
       }`
     );
     let current: APIPokemon = await currentPokemon.json();
@@ -416,9 +425,10 @@ export default function pokemonGameRoutes() {
 
   router.post("/battle", async (req, res) => {
     //implement attack and defense calculation
+    let currentPokemonDB = await getCurrentPokemon(req.session.user!.email!)
     let currentPokemon = await fetch(
       `https://pokeapi.co/api/v2/pokemon/${
-        req.session.user!.currentPokemon?.name
+       currentPokemonDB.name
       }`
     );
     let current: APIPokemon = await currentPokemon.json();
@@ -469,7 +479,6 @@ export default function pokemonGameRoutes() {
   });
 
   router.get("/starter", (req, res) => {
-    console.log(req.session.user!.currentPokemon);
     res.render("starter");
   });
   router.post("/starter", async (req, res) => {

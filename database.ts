@@ -139,7 +139,7 @@ export async function releasePokemon(email: string, pokemon: string) {
 }
 
 export async function updateData(user: User){
-  await userCollection.updateOne({_id: user._id}, {$set: {currentPokemon: user.currentPokemon, pokemons: user.pokemons}})
+  await userCollection.updateOne({_id: user._id}, {$set: {currentPokemon: user.currentPokemon}})
 }
 
 export async function getCurrentPokemon(user: string) {

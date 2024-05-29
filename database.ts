@@ -1,6 +1,6 @@
 import { Collection, MongoClient } from "mongodb";
 import { APIPokemon, Pokemon, User } from "./types";
-import { randomPokemon } from "./app";
+import { pokemons, randomPokemon } from "./app";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import session from "./session";
@@ -105,36 +105,18 @@ export async function register(email: string, password: string) {
 export const getAllPokemons = async () => {
     try{
         let pokemonData: APIPokemon[] = [];
-        let response = await (await fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=1")).json();
-        // let promises =  response.results.map(async (element: { url: string | URL | Request; }, index: number) => {
-        //     let pokemonDetails: APIPokemon = await (await fetch(element.url)).json();
-        //     pokemonDetails.id = index + 1;
-        //     return pokemonDetails;
-        // });
-
-        let count = response.count;
-        let i = 1;
-        console.log(count);
-        while (i < count) {
-          let res = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
-          if(!res.ok){
-            console.log(i);
-            i++;
-          } else{
-            let pokemonDetails: APIPokemon = await res.json();
-            console.log(i)
-            pokemonDetails.id = i+1;
-            pokemonData.push(pokemonDetails);
-            i++;
-          }
-        }
-        // pokemonData = await Promise.all(promises);
+        let response = await (await fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=14000")).json();
+        let promises =  response.results.map(async (element: { url: string | URL | Request; }, index: number) => {
+            let pokemonDetails: APIPokemon = await (await fetch(element.url)).json();
+            pokemonDetails.id = index + 1;
+            return pokemonDetails;
+        });
+        pokemonData = await Promise.all(promises);
         pokemonData.sort((a, b) => a.id - b.id);
         return pokemonData;
     } catch(error){
         console.error(error);
     }
-    
 };
 
 export async function getPokemons(user: string) {
@@ -224,6 +206,24 @@ export async function insertPokemon(user: User, pokemon: any) {
     throw new Error("Insertion failed");
   }
   return result.upsertedId;
+}
+
+export async function getEvolutionChain(speciesUrl: string): Promise<APIPokemon[]> {
+  let evolutionChain = await (await fetch(speciesUrl)).json();
+  console.log(evolutionChain);
+  let firstPokemon: APIPokemon = pokemons.find((pokemon: { name: string; }) => pokemon.name === evolutionChain.chain.species.name);
+  if(evolutionChain.chain.evolves_to === undefined){
+    return [firstPokemon];
+  } else {
+    let secondPokemon: APIPokemon = pokemons.find((pokemon: { name: string; }) => pokemon.name === evolutionChain.chain.evolves_to[0].species.name);
+    if(evolutionChain.chain.evolves_to[0].evolves_to === undefined){
+      return [firstPokemon, secondPokemon];
+    } else {
+      let thirdPokemon: APIPokemon = pokemons.find((pokemon: { name: string; }) => pokemon.name === evolutionChain.chain.evolves_to[0].evolves_to[0].species.name);
+      return [firstPokemon, secondPokemon, thirdPokemon];
+    }
+  }
+
 }
 
 export async function connect() {

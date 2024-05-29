@@ -1,14 +1,13 @@
 import express from "express";
-import { connect, getPokemons, getAllPokemons, seed } from "./database";
-import { Pokemon } from "./types";
-
+import { connect, getAllPokemons, seed } from "./database";
 import indexRouter from "./routes/index.routes";
 import pokemonGameRoutes from "./routes/pokemonGame.routes";
 import session from "./session";
 import { flashMiddleware } from "./middleware/flashMiddleware";
 import { secureMiddleware } from "./middleware/secureMiddleware";
+import { APIPokemon } from "./types";
 
-export let pokemons: any = [];
+export let pokemons: any;
 const app = express();
 
 
@@ -21,7 +20,7 @@ app.use(express.static("public"));
 app.use(session);
 app.use(flashMiddleware);
 app.use("/", indexRouter());
-app.use("/pokemon", secureMiddleware, pokemons, pokemonGameRoutes());
+app.use("/pokemon" , secureMiddleware, pokemonGameRoutes());
 
 app.use((req, res) => {
   res.type("text/html");
@@ -42,27 +41,14 @@ app.listen(app.get("port"), async () => {
 
 export async function randomPokemon() {
   try {
-    // Fetch the total count of Pokémon
-    let response = await fetch("https://pokeapi.co/api/v2/pokemon");
-    if (!response.ok) throw new Error('Failed to fetch Pokémon count');
-    
-    let data: any = await response.json();
-    let count = data.count;
-    
-    // Generate a random Pokémon ID
-    let random = Math.floor(Math.random() * count) + 1;
-    console.log(`Fetching Pokémon with ID: ${random}`);
-    
-    // Fetch the Pokémon data by ID
-    response = await fetch(`https://pokeapi.co/api/v2/pokemon/${random}`);
-    
-    // Check if the response is OK, if not throw an error
-    if (!response.ok){
-      randomPokemon();
-      throw new Error(`Failed to fetch Pokémon with ID: ${random}`);
-    }   
-    
-    data = await response.json();
+    // // Fetch the total count of Pokémon
+    // let count = pokemons.length;
+    // // Generate a random Pokémon ID
+    // let random = Math.floor(Math.random() * count) + 1;
+    // let data = await pokemons.find(
+    //   (pokemon: { id: number }) => pokemon.id === random
+    // );
+    const data: APIPokemon = pokemons[0];
     return data;
   } catch (error) {
     console.error(error);

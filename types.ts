@@ -20,7 +20,6 @@ export interface FlashMessage {
   message: string;
 }
 
-
 // API Pokemon Types
 
 export interface APIPokemon {
@@ -31,7 +30,7 @@ export interface APIPokemon {
     stats: Stats[];
     types: Type[];
     weight: number;
-  
+    species: species;
   }
 export interface Type {
     slot: number;
@@ -55,4 +54,9 @@ export interface Stats {
   interface Officialartwork {
     front_default: string;
     front_shiny: string;
+  }
+
+  interface species {
+    name: string;
+    url: string;
   }

@@ -1,6 +1,6 @@
 import { Collection, MongoClient } from "mongodb";
 import { APIPokemon, Pokemon, User } from "./types";
-import { pokemons, randomPokemon } from "./app";
+import { randomPokemon } from "./routes/pokemonGame.routes";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import session from "./session";
@@ -32,13 +32,14 @@ export async function seed() {
       if (response) {
         let data: Pokemon = {
           name: response.name,
+          nickname: response.name,
           attack: response.stats[1].base_stat,
           defense: response.stats[2].base_stat,
         };
         console.log(data);
         pokemons.push(data);
       } else {
-        console.log('Retrying to fetch a valid Pokémon...');
+        console.log("Retrying to fetch a valid Pokémon...");
         i--;
       }
     }
@@ -125,10 +126,9 @@ export async function getPokemons(user: string) {
 }
 
 export async function releasePokemon(email: string, pokemon: string) {
-  
   let result = await userCollection
     .updateOne(
-      { email: email},
+      { email: email },
       // @ts-ignore
       { $pull: { pokemons: { name: pokemon } } }
     )
@@ -175,7 +175,7 @@ export async function levelUp(pokemon: Pokemon) {
 }
 
 export async function capturedPokemon(user: User, pokemon: any) {
-  const query = { "pokemons.name": pokemon};
+  const query = { "pokemons.name": pokemon };
 
   // Projection to return only the Pokémon details that match the name
   const projection = {
@@ -189,10 +189,9 @@ export async function capturedPokemon(user: User, pokemon: any) {
   // Find the document
   let alreadyCaught = await userCollection.findOne(query, projection);
 
-  if(!alreadyCaught){
+  if (!alreadyCaught) {
     return false;
-  }
-  else{
+  } else {
     return true;
   }
 }
@@ -223,7 +222,6 @@ export async function getEvolutionChain(speciesUrl: string): Promise<APIPokemon[
       return [firstPokemon, secondPokemon, thirdPokemon];
     }
   }
-
 }
 
 export async function connect() {

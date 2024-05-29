@@ -1,5 +1,5 @@
 import session from "express-session";
-import { FlashMessage, User } from "./types";
+import { APIPokemon, FlashMessage, User } from "./types";
 import mongoDbSession from "connect-mongodb-session";
 const MongoDBStore = mongoDbSession(session);
 
@@ -17,6 +17,9 @@ declare module "express-session" {
     randomPokemon?: any;
     attempts?: number;
     alreadyCaught?: boolean;
+    opponent?: APIPokemon;
+    yourHP?: number;
+    opponentHP?: number;
   }
 }
 

@@ -1,0 +1,77 @@
+<%- include('partials/head') %>
+<%- include('partials/nav') %>
+<% const typeColors={ bug: 'bg-[#A8B820]' , dark: 'bg-[#705848]' , dragon: 'bg-[#7038F8]' ,
+                  electric: 'bg-[#F8D030]' , fairy: 'bg-[#F0B6BC]' , fighting: 'bg-[#C03028]' , fire: 'bg-[#F08030]' ,
+                  flying: 'bg-[#A890F0]' , ghost: 'bg-[#705898]' , grass: 'bg-[#78C850]' , ground:'bg-[#E0C068]',
+                  ice: 'bg-[#98D8D8]' , normal: 'bg-[#A8A878]' , poison: 'bg-[#A040A0]' , psychic: 'bg-[#F85888]' ,
+                  rock: 'bg-[#B8A038]' , steel: 'bg-[#B8B8D0]' , water: 'bg-[#6890F0]' }; %>
+<main class="w-full mx-auto">
+  <section class="flex flex-row mx-auto px-8 max-w-[1864px] mt-10">
+    <form class="flex flex-col sm:flex-row w-full gap-4" method="get">
+      <div class="relative w-full flex  items-center justify-between rounded-md">
+        <svg class="absolute left-4 block h-5 w-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8" class=""></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65" class=""></line>
+        </svg>
+        <input type="text" name="search" id="search" value="<%= search %>" class="h-12 w-full cursor-text rounded-lg bg-gray-200 py-4 px-12 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-500" placeholder="Zoek een pokemon op naam..." />
+      </div>
+      <div class="flex flex-col sm:flex-row w-full gap-4">
+        <div class="flex flex-row justify-center items-center gap-4 w-full ">
+          <select onchange="this.form.submit()" id="type" name="type" class="block w-full h-full min-h-12 rounded-md bg-gray-200 px-4 py-2 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-500 cursor-pointer">
+            <option disabled class="cursor-pointer" value="" <%= type == "" ? 'selected' : '' %>>Zoek op type</option>
+            <% Object.keys(typeColors).forEach(element => { %>
+            <option class="cursor-pointer" value="<%= element %>" <%= type == element ? 'selected' : '' %>><%= element %></option>
+            <% }) %>
+          </select>
+        </div>
+        <a href="/pokemon/battlefinder" class="rounded-lg inline-flex items-center justify-center bg-gray-500 px-8 py-2 font-semibold text-xl text-white outline-none hover:opacity-80 focus:ring">Resetten</a>
+      </div>
+    </form>
+  </section>
+  <section class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1  gap-4 gap-y-6 my-8 mx-auto justify-center px-8 max-w-[1864px]">
+    <% pokemons.forEach(element=> { %>
+    <a href="/pokemon/battle?opponent=<%= element.name %>" class="flex justify-between w-full bg-gray-200 rounded-lg p-4 relative">
+      <div class="flex flex-col justify-between">
+        <h1 class="font-medium text-3xl">
+          <%= element.name %>
+        </h1>
+        <p class="flex flex-row items-start text-start text-white py-2 text-xl gap-2">
+
+          <% element.types.forEach(type=> { %>
+          <% const colorClass=typeColors[type.type.name] || 'bg-green-500' ; %>
+          <span class="inline-flex items-center justify-center leading-[100%] font-medium rounded-md shadow-lg py-2 px-4 <%= colorClass %>">
+            <%= type.type.name %>
+          </span>
+          <% }) %>
+        </p>
+      </div>
+      <img class="w-32 z-10" src=<%=element.sprites.other['official-artwork']["front_default"] %> alt=<%=
+              element.name %> />
+      <span class="absolute top-0 right-5 font-black text-4xl text-neutral-400 z-0 text-black-400">#<%=
+                  element.id %> </span>
+    </a>
+    <% }) %>
+  </section>
+  <section class="flex items-center justify-center mb-8">
+    <nav>
+      <ul class="inline-flex -space-x-px text-base h-10">
+        <li>
+          <a href="?search=<%= search %>&type=<%= type %>&page=<%= currentPage - 1 %>" class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Vorige</a>
+        </li>
+        <% let startPage = Math.max(1, currentPage - 2); %>
+        <% let endPage = Math.min(totalPages, startPage + 4); %>
+        <% startPage = Math.max(1, endPage - 4); %>
+        <% for(let i = startPage; i <= endPage; i++) { %>
+          <li>
+            <a href="?search=<%= search %>&type=<%= type %>&page=<%= i %>" class="flex items-center justify-center px-4 h-10 border border-gray-300 <%= currentPage === i ? ' bg-blue-100 hover:bg-blue-200 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white' : 'leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white' %>"><%= i %></a>
+          </li>
+        <% } %>
+        <li>
+          <a href="?search=<%= search %>&type=<%= type %>&page=<%= currentPage + 1 %>" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Volgende</a>
+        </li>
+      </ul>
+    </nav>
+  </section>
+</main>
+</body>
+</html>

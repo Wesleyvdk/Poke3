@@ -9,52 +9,12 @@
       >
         <article class="flex justify-between items-center">
           <h2 class="text-2xl font-semibold flex-grow text-center mb-4">
-            Pikachu
+            <%= firstPokemon.name %>
           </h2>
-          <button
-            id="switch1"
-            class="w-10 h-10 bg-blue-400 flex-shrink-0 rounded"
-          >
-            <svg
-              class="translate-x-1 w-8 h-auto"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M18.7153 1.71609C18.3241 1.32351 18.3241 0.687013 18.7153 0.294434C19.1066 -0.0981448 19.7409 -0.0981448 20.1321 0.294434L22.4038 2.57397L22.417 2.58733C23.1935 3.37241 23.1917 4.64056 22.4116 5.42342L20.1371 7.70575C19.7461 8.09808 19.1122 8.09808 18.7213 7.70575C18.3303 7.31342 18.3303 6.67733 18.7213 6.285L20.0018 5L4.99998 5C4.4477 5 3.99998 5.44772 3.99998 6V13C3.99998 13.5523 3.55227 14 2.99998 14C2.4477 14 1.99998 13.5523 1.99998 13V6C1.99998 4.34315 3.34313 3 4.99998 3H19.9948L18.7153 1.71609Z"
-                fill="#0F0F0F"
-              />
-              <path
-                d="M22 11C22 10.4477 21.5523 10 21 10C20.4477 10 20 10.4477 20 11V18C20 18.5523 19.5523 19 19 19L4.00264 19L5.28213 17.7161C5.67335 17.3235 5.67335 16.687 5.28212 16.2944C4.8909 15.9019 4.2566 15.9019 3.86537 16.2944L1.59369 18.574L1.58051 18.5873C0.803938 19.3724 0.805727 20.6406 1.58588 21.4234L3.86035 23.7058C4.25133 24.0981 4.88523 24.0981 5.2762 23.7058C5.66718 23.3134 5.66718 22.6773 5.2762 22.285L3.99563 21L19 21C20.6568 21 22 19.6569 22 18L22 11Z"
-                fill="#0F0F0F"
-              />
-            </svg>
-          </button>
-        </article>
-        <article
-          id="pokemonList1"
-          class="hidden relative w-full mt-1 bg-white border border-gray-200 rounded-lg z-10"
-        >
-          <input
-            type="text"
-            id="searchBar"
-            placeholder="Search Pokémon..."
-            class="absolute p-2 w-full border-b border-gray-300"
-          />
-          <ul id="pokemonItems1" class="absolute top-10 w-full overflow-auto">
-            <% for(pokemon of pokemons) { %> 
-              <li
-              class="p-2 bg-slate-50 border border-gray-600 flex justify-center"
-            >
-              <a class="block w-full text-center" href="#"><%= pokemon.name %></a>
-            </li>
-              <% } %>
-          </ul>
-        </article>
+        </article>  
         <img
-          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"
-          alt="Pikachu"
+          src=<%= firstPokemon.sprites.other["official-artwork"]["front_default"] %>
+          alt=<%= firstPokemon.name %>
           class="mx-auto mb-4"
         />
         <article class="pokemon-stats grid grid-cols-2 gap-4">
@@ -74,7 +34,7 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
               /></svg
-            >Hp: <span class="text-red-500 justify-end">32</span>
+            >Hp: <span class="<%= firstPokemon.stats[0].base_stat < secondPokemon.stats[0].base_stat ? 'text-red-500' : 'text-green-500' %>"><%= firstPokemon.stats[0].base_stat %></span>
           </a>
           <a class="bg-gray-300 p-4 rounded-lg">
             <svg
@@ -86,8 +46,7 @@
               <path
                 d="M218.82812,37.17188A3.99843,3.99843,0,0,0,216,36h-.0127l-63.79882.20117a4.00014,4.00014,0,0,0-3.07129,1.45215L75.919,126.26172l-11.4336-11.4336a12.0157,12.0157,0,0,0-16.9707,0L34.8291,127.51465a11.998,11.998,0,0,0,0,16.9707l20.88672,20.88721a4.00445,4.00445,0,0,1,0,5.65674L25.77441,200.9707a12.01393,12.01393,0,0,0,0,16.97071l12.28516,12.28418a11.99918,11.99918,0,0,0,16.96973,0l29.9414-29.94141a3.99971,3.99971,0,0,1,5.65723,0l20.88672,20.8877a12.0157,12.0157,0,0,0,16.9707,0l12.68555-12.68653a11.998,11.998,0,0,0,0-16.9707l-11.43311-11.43311,88.60889-73.19873a4.001,4.001,0,0,0,1.45215-3.07129L220,40.0127A3.9979,3.9979,0,0,0,218.82812,37.17188ZM136.68652,200a3.97264,3.97264,0,0,1-1.17187,2.82812L122.8291,215.51465a4.00621,4.00621,0,0,1-5.6582,0L96.28418,194.62744a11.998,11.998,0,0,0-16.96973,0l-29.9414,29.94092a3.99974,3.99974,0,0,1-5.65723,0L31.43066,212.28418a4.00445,4.00445,0,0,1,0-5.65674l29.94141-29.94092a12.01392,12.01392,0,0,0,0-16.9707l-20.88672-20.8877a3.99854,3.99854,0,0,1,0-5.65624L53.1709,120.48535a4.00681,4.00681,0,0,1,5.6582,0l76.68555,76.68653A3.97264,3.97264,0,0,1,136.68652,200Zm75.11817-98.08984-87.74951,72.48877L105.65662,156l57.1715-57.17188a3.99957,3.99957,0,1,0-5.65624-5.65624l-57.17176,57.17138L81.60156,131.94434l72.48828-87.749,57.89746-.18261Z"
               /></svg
-            >Attack:
-            <span class="text-green-500">55</span>
+            >Attack:<span class="<%= firstPokemon.stats[1].base_stat < secondPokemon.stats[1].base_stat ? 'text-red-500' : 'text-green-500' %>"><%= firstPokemon.stats[1].base_stat %></span>
           </a>
           <a class="bg-gray-300 p-4 rounded-lg">
             <svg
@@ -103,7 +62,7 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
               /></svg
-            >Defense: <span class="text-red-500">40</span>
+            >Defense: <span class="<%= firstPokemon.stats[2].base_stat < secondPokemon.stats[2].base_stat ? 'text-red-500' : 'text-green-500' %>"><%= firstPokemon.stats[2].base_stat %></span>
           </a>
           <a class="bg-gray-300 p-4 rounded-lg">
             <svg
@@ -169,7 +128,7 @@
                   </g>
                 </g>
               </g></svg
-            >Special Attack: <span class="text-red-500">50</span>
+            >Special Attack: <span class="<%= firstPokemon.stats[3].base_stat < secondPokemon.stats[3].base_stat ? 'text-red-500' : 'text-green-500' %>"><%= firstPokemon.stats[3].base_stat %></span>
           </a>
           <a class="bg-gray-300 p-4 rounded-lg">
             <svg
@@ -188,7 +147,7 @@
              z M4.1,10.1H11V2.7L4,6.1v2.2C4,9,4,9.5,4.1,10.1z"
                 />
               </g></svg
-            >Special Defense: <span class="">50</span>
+            >Special Defense: <span class="<%= firstPokemon.stats[4].base_stat < secondPokemon.stats[4].base_stat ? 'text-red-500' : 'text-green-500' %>"><%= firstPokemon.stats[4].base_stat %></span>
           </a>
           <a class="bg-gray-300 p-4 rounded-lg">
             <svg
@@ -261,7 +220,7 @@
                   />
                 </g>
               </g></svg
-            >Speed: <span class="text-green-500">90</span>
+            >Speed: <span class="<%= firstPokemon.stats[5].base_stat < secondPokemon.stats[5].base_stat ? 'text-red-500' : 'text-green-500' %>"><%= firstPokemon.stats[5].base_stat %></span>
           </a>
         </article>
       </section>
@@ -271,52 +230,12 @@
       >
         <article class="flex justify-between items-center">
           <h2 class="text-2xl font-semibold flex-grow text-center mb-4">
-            Charmander
+            <%= secondPokemon.name %>
           </h2>
-          <button
-            id="switch2"
-            class="w-10 h-10 bg-blue-400 flex-shrink-0 rounded"
-          >
-            <svg
-              class="translate-x-1 w-8 h-auto"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M18.7153 1.71609C18.3241 1.32351 18.3241 0.687013 18.7153 0.294434C19.1066 -0.0981448 19.7409 -0.0981448 20.1321 0.294434L22.4038 2.57397L22.417 2.58733C23.1935 3.37241 23.1917 4.64056 22.4116 5.42342L20.1371 7.70575C19.7461 8.09808 19.1122 8.09808 18.7213 7.70575C18.3303 7.31342 18.3303 6.67733 18.7213 6.285L20.0018 5L4.99998 5C4.4477 5 3.99998 5.44772 3.99998 6V13C3.99998 13.5523 3.55227 14 2.99998 14C2.4477 14 1.99998 13.5523 1.99998 13V6C1.99998 4.34315 3.34313 3 4.99998 3H19.9948L18.7153 1.71609Z"
-                fill="#0F0F0F"
-              />
-              <path
-                d="M22 11C22 10.4477 21.5523 10 21 10C20.4477 10 20 10.4477 20 11V18C20 18.5523 19.5523 19 19 19L4.00264 19L5.28213 17.7161C5.67335 17.3235 5.67335 16.687 5.28212 16.2944C4.8909 15.9019 4.2566 15.9019 3.86537 16.2944L1.59369 18.574L1.58051 18.5873C0.803938 19.3724 0.805727 20.6406 1.58588 21.4234L3.86035 23.7058C4.25133 24.0981 4.88523 24.0981 5.2762 23.7058C5.66718 23.3134 5.66718 22.6773 5.2762 22.285L3.99563 21L19 21C20.6568 21 22 19.6569 22 18L22 11Z"
-                fill="#0F0F0F"
-              />
-            </svg>
-          </button>
-        </article>
-        <article
-          id="pokemonList2"
-          class="hidden relative w-full h-1/3 mt-1 bg-white border border-gray-200 rounded-lg z-10"
-        >
-          <input
-            type="text"
-            id="searchBar"
-            placeholder="Search Pokémon..."
-            class="absolute p-2 w-full border-b border-gray-300"
-          />
-          <ul id="pokemonItems2" class="absolute top-10 w-full overflow-auto">
-            <% for(pokemon of pokemons) { %> 
-              <li
-              class="p-2 bg-slate-50 border border-gray-600 flex justify-center"
-            >
-              <a class="block w-full text-center" href="#"><%= pokemon.name %></a>
-            </li>
-              <% } %>
-          </ul>
         </article>
         <img
-          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png"
-          alt="Charmander"
+          src=<%= secondPokemon.sprites.other["official-artwork"]["front_default"] %>
+          alt=<%= secondPokemon.name %>
           class="mx-auto mb-4"
         />
         <article class="pokemon-stats grid grid-cols-2 gap-4">
@@ -336,7 +255,7 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
               /></svg
-            >Hp: <span class="text-green-500">35</span>
+            >Hp: <span class="<%= firstPokemon.stats[0].base_stat > secondPokemon.stats[0].base_stat ? 'text-red-500' : 'text-green-500' %>"><%= secondPokemon.stats[0].base_stat %></span>
           </a>
           <a class="bg-gray-300 p-4 rounded-lg">
             <svg
@@ -349,7 +268,7 @@
                 d="M218.82812,37.17188A3.99843,3.99843,0,0,0,216,36h-.0127l-63.79882.20117a4.00014,4.00014,0,0,0-3.07129,1.45215L75.919,126.26172l-11.4336-11.4336a12.0157,12.0157,0,0,0-16.9707,0L34.8291,127.51465a11.998,11.998,0,0,0,0,16.9707l20.88672,20.88721a4.00445,4.00445,0,0,1,0,5.65674L25.77441,200.9707a12.01393,12.01393,0,0,0,0,16.97071l12.28516,12.28418a11.99918,11.99918,0,0,0,16.96973,0l29.9414-29.94141a3.99971,3.99971,0,0,1,5.65723,0l20.88672,20.8877a12.0157,12.0157,0,0,0,16.9707,0l12.68555-12.68653a11.998,11.998,0,0,0,0-16.9707l-11.43311-11.43311,88.60889-73.19873a4.001,4.001,0,0,0,1.45215-3.07129L220,40.0127A3.9979,3.9979,0,0,0,218.82812,37.17188ZM136.68652,200a3.97264,3.97264,0,0,1-1.17187,2.82812L122.8291,215.51465a4.00621,4.00621,0,0,1-5.6582,0L96.28418,194.62744a11.998,11.998,0,0,0-16.96973,0l-29.9414,29.94092a3.99974,3.99974,0,0,1-5.65723,0L31.43066,212.28418a4.00445,4.00445,0,0,1,0-5.65674l29.94141-29.94092a12.01392,12.01392,0,0,0,0-16.9707l-20.88672-20.8877a3.99854,3.99854,0,0,1,0-5.65624L53.1709,120.48535a4.00681,4.00681,0,0,1,5.6582,0l76.68555,76.68653A3.97264,3.97264,0,0,1,136.68652,200Zm75.11817-98.08984-87.74951,72.48877L105.65662,156l57.1715-57.17188a3.99957,3.99957,0,1,0-5.65624-5.65624l-57.17176,57.17138L81.60156,131.94434l72.48828-87.749,57.89746-.18261Z"
               /></svg
             >Attack:
-            <span class="text-red-500">52</span>
+            <span class="<%= firstPokemon.stats[1].base_stat > secondPokemon.stats[1].base_stat ? 'text-red-500' : 'text-green-500' %>"><%= secondPokemon.stats[1].base_stat %></span>
           </a>
           <a class="bg-gray-300 p-4 rounded-lg">
             <svg
@@ -365,7 +284,7 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
               /></svg
-            >Defense: <span class="text-green-500">43</span>
+            >Defense: <span class="<%= firstPokemon.stats[2].base_stat > secondPokemon.stats[2].base_stat ? 'text-red-500' : 'text-green-500' %>"><%= secondPokemon.stats[2].base_stat %></span>
           </a>
           <a class="bg-gray-300 p-4 rounded-lg">
             <svg
@@ -432,7 +351,7 @@
                 </g>
               </g></svg
             >Special Attack:
-            <span class="text-green-500">60</span>
+            <span class="<%= firstPokemon.stats[3].base_stat > secondPokemon.stats[3].base_stat ? 'text-red-500' : 'text-green-500' %>"><%= secondPokemon.stats[3].base_stat %></span>
           </a>
           <a class="bg-gray-300 p-4 rounded-lg">
             <svg
@@ -451,7 +370,7 @@
              z M4.1,10.1H11V2.7L4,6.1v2.2C4,9,4,9.5,4.1,10.1z"
                 />
               </g></svg
-            >Special Defense: <span class="">50</span>
+            >Special Defense:<span class="<%= firstPokemon.stats[4].base_stat > secondPokemon.stats[4].base_stat ? 'text-red-500' : 'text-green-500' %>"><%= secondPokemon.stats[4].base_stat %></span>
           </a>
           <a class="bg-gray-300 p-4 rounded-lg">
             <svg
@@ -524,10 +443,36 @@
                   />
                 </g>
               </g></svg
-            >Speed: <span class="text-red-500">65</span>
+            >Speed: <span class="<%= firstPokemon.stats[5].base_stat > secondPokemon.stats[5].base_stat ? 'text-red-500' : 'text-green-500' %>"><%= secondPokemon.stats[5].base_stat %></span>
           </a>
         </article>
       </section>
     </main>
+    <form method="post" action="/pokemon/compare" class="w-[70%] mx-auto">
+      <section class="flex mx-auto space-x-10 ">
+        <select 
+        id="first-pokemon"
+        name="firstPokemon"
+        class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+          <% for(pokemon of pokemons) { %>  
+            <option value="<%= pokemon.name %>"><%= pokemon.name %></option>
+            <% } %>
+        </select>
+        <select 
+        id="second-pokemon"
+        name="secondPokemon"
+        class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+          <% for(pokemon of pokemons) { %>  
+            <option value="<%= pokemon.name %>"><%= pokemon.name %></option>
+            <% } %>
+        </select>
+      </section>
+      <button
+      class="inline-flex mt-4 bg-green-400 items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+      type="submit"
+    >
+      Compare
+    </button>
+    </form>
   </body>
 </html>

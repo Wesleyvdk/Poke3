@@ -3,12 +3,13 @@ import { ObjectId } from "mongodb";
 export interface Pokemon {
   _id?: ObjectId;
   name: string;
+  nickname: string;
   attack: number;
   defense: number;
 }
 
 export interface User {
-    _id?: ObjectId;
+  _id?: ObjectId;
   email?: string;
   password?: string;
   currentPokemon?: Pokemon;
@@ -32,10 +33,11 @@ export interface APIPokemon {
     weight: number;
     species: species;
   }
+  
 export interface Type {
-    slot: number;
-    type: Stat;
-  }
+  slot: number;
+  type: Stat;
+}
 export interface Stats {
     base_stat: number;
     effort: number;

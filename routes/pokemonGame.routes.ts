@@ -422,6 +422,7 @@ export default function pokemonGameRoutes() {
       (req.session.opponent!.stats[2].base_stat - current.stats[1].base_stat);
     if (req.session.opponentHP! <= 0) {
       req.session.message = { type: "success", message: "won" };
+      insertPokemon(req.session.user!, req.session.opponent!);
       res.redirect("/pokemon/battlefinder");
     } else {
       req.session.yourHP =

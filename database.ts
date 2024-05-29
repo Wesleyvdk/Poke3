@@ -3,11 +3,6 @@ import { APIPokemon, Pokemon, User } from "./types";
 import { randomPokemon } from "./routes/pokemonGame.routes";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
-<<<<<<< HEAD
-=======
-import session from "./session";
-import exp from "constants";
->>>>>>> a9a371a4e88bf12ea07f5397cf80f4f75df5f6b5
 import { pokemons } from "./app";
 dotenv.config();
 

@@ -223,8 +223,9 @@ export default function pokemonGameRoutes() {
     const totalItems = SortedPokemons.length;
     const items = SortedPokemons.slice(skip, skip + limit);
     const totalPages = Math.ceil(totalItems / limit);
-    res.render("pokedex", {pokemons: items, search, type, totalPages: totalPages, currentPage: page, currentPokemon: currentPokemon.sprites.other["official-artwork"]["front_default"]});
+    res.render("pokedex", {pokemons: items, search, type, totalPages: totalPages, currentPage: page, currentPokemon: currentPokemon});
   });
+
 
   router.get("/pokedex/:name", async (req, res) => {
     const name = req.params.name;

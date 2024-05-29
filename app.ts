@@ -1,6 +1,6 @@
 import express from "express";
 import { connect, getPokemons, getAllPokemons, seed } from "./database";
-import { Pokemon } from "./types";
+import { APIPokemon, Pokemon } from "./types";
 
 import indexRouter from "./routes/index.routes";
 import pokemonGameRoutes from "./routes/pokemonGame.routes";
@@ -36,30 +36,3 @@ app.listen(app.get("port"), async () => {
     "The application is listening on http://localhost:" + app.get("port")
   );
 });
-
-export async function randomPokemon() {
-  try {
-    // Fetch the total count of Pokémon
-    let count = pokemons.length;
-
-    // Generate a random Pokémon ID
-    let random = Math.floor(Math.random() * count) + 1;
-    /* console.log(`Fetching Pokémon with ID: ${random}`); */
-
-    // Fetch the Pokémon data by ID
-
-    // Check if the response is OK, if not throw an error
-    /* if (!response.ok) {
-      randomPokemon();
-      throw new Error(`Failed to fetch Pokémon with ID: ${random}`);
-    } */
-
-    let data = await pokemons.find(
-      (pokemon: { id: number }) => pokemon.id === random
-    );
-    return data;
-  } catch (error) {
-    console.error(error);
-    return randomPokemon();
-  }
-}

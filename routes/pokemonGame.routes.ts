@@ -337,20 +337,68 @@ export default function pokemonGameRoutes() {
     }
   });
 
+  router.get("/battlefinder", async (req, res) => {
+    const currentPokemonRes = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${
+        req.session.user!.currentPokemon?.name
+      }`
+    );
+    console.log(currentPokemonRes);
+    const search = req.query.search ?? "";
+    const type = req.query.type ?? "";
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = 20;
+    const skip = (page - 1) * limit;
+    let SortedPokemons: APIPokemon[] = pokemons;
+    if (search) {
+      const searchRegex = new RegExp(search as string, "i");
+      SortedPokemons = SortedPokemons.filter((pokemon: APIPokemon) => {
+        return searchRegex.test(pokemon.name);
+      });
+    }
+    if (type) {
+      SortedPokemons = SortedPokemons.filter((pokemon: APIPokemon) => {
+        return pokemon.types.some((pokemonType: Type) => {
+          return pokemonType.type.name === type;
+        });
+      });
+    }
+    const currentPokemon = await currentPokemonRes.json();
+    const totalItems = SortedPokemons.length;
+    const items = SortedPokemons.slice(skip, skip + limit);
+    const totalPages = Math.ceil(totalItems / limit);
+    res.render("battlefinder", {
+      pokemons: items,
+      search,
+      type,
+      totalPages: totalPages,
+      currentPage: page,
+      currentPokemon:
+        currentPokemon.sprites.other["official-artwork"]["front_default"],
+    });
+  });
+
   router.get("/battle", async (req, res) => {
     let currentPokemon = await fetch(
       `https://pokeapi.co/api/v2/pokemon/${
         req.session.user!.currentPokemon?.name
       }`
     );
-    let current = await currentPokemon.json();
-    let opponent = await randomPokemon();
+    let current: APIPokemon = await currentPokemon.json();
+    console.log(`opponent: ` + req.query.opponent);
+    let opponent: APIPokemon = await pokemons.find(
+      (pokemon: { name: string }) => pokemon.name === req.query.opponent
+    );
+    console.log(`opponent: ` + req.query.opponent);
+    req.session.yourHP = current.stats[0].base_stat;
+    req.session.opponentHP = opponent.stats[0].base_stat;
+    req.session.opponent = opponent;
     res.render("battle", {
       yourPokemon: current,
-      yourHP: current.stats[0].base_stat - 5,
+      yourHP: req.session.yourHP,
       yourMaxHP: current.stats[0].base_stat,
       opponentPokemon: opponent,
-      opponentHP: opponent.stats[0].base_stat - 12,
+      opponentHP: req.session.opponentHP,
       opponentMaxHP: opponent.stats[0].base_stat,
       currentPokemon:
         current.sprites.other["official-artwork"]["front_default"],
@@ -359,6 +407,55 @@ export default function pokemonGameRoutes() {
 
   router.post("/battle", async (req, res) => {
     //implement attack and defense calculation
+    let currentPokemon = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${
+        req.session.user!.currentPokemon?.name
+      }`
+    );
+    let current: APIPokemon = await currentPokemon.json();
+    console.log(
+      (await req.session.opponentHP!) -
+        (req.session.opponent!.stats[2].base_stat - current.stats[1].base_stat)
+    );
+    req.session.opponentHP =
+      (await req.session.opponentHP!) -
+      (req.session.opponent!.stats[2].base_stat - current.stats[1].base_stat);
+    if (req.session.opponentHP! <= 0) {
+      req.session.message = { type: "success", message: "won" };
+      res.redirect("/pokemon/battlefinder");
+    } else {
+      req.session.yourHP =
+        (await req.session.yourHP!) -
+        (current.stats[2].base_stat - req.session.opponent!.stats[1].base_stat);
+      console.log(
+        (await req.session.yourHP!) -
+          (current.stats[2].base_stat -
+            req.session.opponent!.stats[1].base_stat)
+      );
+      if (req.session.yourHP! <= 0) {
+        req.session.message = { type: "error", message: "lost" };
+        res.redirect("/pokemon/battlefinder");
+      } else {
+        if (req.session.yourHP! > current.stats[0].base_stat) {
+          req.session.yourHP = current.stats[0].base_stat;
+        }
+        if (
+          req.session.opponentHP! > req.session.opponent!.stats[0].base_stat
+        ) {
+          req.session.opponentHP = req.session.opponent!.stats[0].base_stat;
+        }
+        res.render("battle", {
+          yourPokemon: current,
+          yourHP: req.session.yourHP,
+          yourMaxHP: current.stats[0].base_stat,
+          opponentPokemon: req.session.opponent,
+          opponentHP: req.session.opponentHP,
+          opponentMaxHP: req.session.opponent!.stats[0].base_stat,
+          currentPokemon:
+            current.sprites.other["official-artwork"]["front_default"],
+        });
+      }
+    }
   });
 
   router.get("/starter", (req, res) => {

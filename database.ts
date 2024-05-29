@@ -38,7 +38,7 @@ export async function seed() {
         console.log(data);
         pokemons.push(data);
       } else {
-        console.log('Retrying to fetch a valid Pokémon...');
+        console.log("Retrying to fetch a valid Pokémon...");
         i--;
       }
     }
@@ -103,38 +103,26 @@ export async function register(email: string, password: string) {
 }
 
 export const getAllPokemons = async () => {
-    try{
-        let pokemonData: APIPokemon[] = [];
-        let response = await (await fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=1")).json();
-        // let promises =  response.results.map(async (element: { url: string | URL | Request; }, index: number) => {
-        //     let pokemonDetails: APIPokemon = await (await fetch(element.url)).json();
-        //     pokemonDetails.id = index + 1;
-        //     return pokemonDetails;
-        // });
-
-        let count = response.count;
-        let i = 1;
-        console.log(count);
-        while (i < count) {
-          let res = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
-          if(!res.ok){
-            console.log(i);
-            i++;
-          } else{
-            let pokemonDetails: APIPokemon = await res.json();
-            console.log(i)
-            pokemonDetails.id = i+1;
-            pokemonData.push(pokemonDetails);
-            i++;
-          }
-        }
-        // pokemonData = await Promise.all(promises);
-        pokemonData.sort((a, b) => a.id - b.id);
-        return pokemonData;
-    } catch(error){
-        console.error(error);
-    }
-    
+  try {
+    let pokemonData: APIPokemon[] = [];
+    let response = await (
+      await fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=1400")
+    ).json();
+    let promises = response.results.map(
+      async (element: { url: string | URL | Request }, index: number) => {
+        let pokemonDetails: APIPokemon = await (
+          await fetch(element.url)
+        ).json();
+        pokemonDetails.id = index + 1;
+        return pokemonDetails;
+      }
+    );
+    pokemonData = await Promise.all(promises);
+    pokemonData.sort((a, b) => a.id - b.id);
+    return pokemonData;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export async function getPokemons(user: string) {
@@ -143,10 +131,9 @@ export async function getPokemons(user: string) {
 }
 
 export async function releasePokemon(email: string, pokemon: string) {
-  
   let result = await userCollection
     .updateOne(
-      { email: email},
+      { email: email },
       // @ts-ignore
       { $pull: { pokemons: { name: pokemon } } }
     )
@@ -193,7 +180,7 @@ export async function levelUp(pokemon: Pokemon) {
 }
 
 export async function capturedPokemon(user: User, pokemon: any) {
-  const query = { "pokemons.name": pokemon};
+  const query = { "pokemons.name": pokemon };
 
   // Projection to return only the Pokémon details that match the name
   const projection = {
@@ -207,10 +194,9 @@ export async function capturedPokemon(user: User, pokemon: any) {
   // Find the document
   let alreadyCaught = await userCollection.findOne(query, projection);
 
-  if(!alreadyCaught){
+  if (!alreadyCaught) {
     return false;
-  }
-  else{
+  } else {
     return true;
   }
 }

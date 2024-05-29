@@ -11,7 +11,6 @@ import { secureMiddleware } from "./middleware/secureMiddleware";
 export let pokemons: any = [];
 const app = express();
 
-
 app.set("view engine", "ejs");
 app.set("port", 3000);
 
@@ -29,8 +28,6 @@ app.use((req, res) => {
   res.send("404 - Not Found");
 });
 
-
-
 app.listen(app.get("port"), async () => {
   await connect();
   seed();
@@ -43,26 +40,23 @@ app.listen(app.get("port"), async () => {
 export async function randomPokemon() {
   try {
     // Fetch the total count of Pokémon
-    let response = await fetch("https://pokeapi.co/api/v2/pokemon");
-    if (!response.ok) throw new Error('Failed to fetch Pokémon count');
-    
-    let data: any = await response.json();
-    let count = data.count;
-    
+    let count = pokemons.length;
+
     // Generate a random Pokémon ID
     let random = Math.floor(Math.random() * count) + 1;
-    console.log(`Fetching Pokémon with ID: ${random}`);
-    
+    /* console.log(`Fetching Pokémon with ID: ${random}`); */
+
     // Fetch the Pokémon data by ID
-    response = await fetch(`https://pokeapi.co/api/v2/pokemon/${random}`);
-    
+
     // Check if the response is OK, if not throw an error
-    if (!response.ok){
+    /* if (!response.ok) {
       randomPokemon();
       throw new Error(`Failed to fetch Pokémon with ID: ${random}`);
-    }   
-    
-    data = await response.json();
+    } */
+
+    let data = await pokemons.find(
+      (pokemon: { id: number }) => pokemon.id === random
+    );
     return data;
   } catch (error) {
     console.error(error);

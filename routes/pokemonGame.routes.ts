@@ -1,5 +1,5 @@
 import express from "express";
-import { pokemons, randomPokemon } from "../app";
+import { pokemons } from "../app";
 import { APIPokemon, Pokemon, Type } from "../types";
 import { secureMiddleware } from "../middleware/secureMiddleware";
 import {

@@ -5,6 +5,7 @@ import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import session from "./session";
 import exp from "constants";
+import { pokemons } from "./app";
 dotenv.config();
 
 const uri = process.env.MONGO_URI ?? "";

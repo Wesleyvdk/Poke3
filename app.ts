@@ -1,6 +1,6 @@
 import express from "express";
 import { connect, getPokemons, getAllPokemons, seed } from "./database";
-import { Pokemon } from "./types";
+import { APIPokemon, Pokemon } from "./types";
 
 import indexRouter from "./routes/index.routes";
 import pokemonGameRoutes from "./routes/pokemonGame.routes";

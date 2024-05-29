@@ -35,6 +35,7 @@ export default function pokemonGameRoutes() {
         req.session.user!.currentPokemon?.name
       }`
     );
+    console.log(random);
     // let rand = await random.json();
     let current = await currentPokemon.json();
     req.session.alreadyCaught = await capturedPokemon(
@@ -149,7 +150,9 @@ export default function pokemonGameRoutes() {
       insertPokemon(req.session.user!, pokemon);
       res.redirect("/pokemon/capture");
     } else {
-      let randomRes = await fetch(`https://pokeapi.co/api/v2/pokemon/${req.session.randomPokemon.name}`);
+      let randomRes = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${req.session.randomPokemon.name}`
+      );
       let response = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${
           req.session.user!.currentPokemon?.name
@@ -188,7 +191,9 @@ export default function pokemonGameRoutes() {
 
   router.get("/compare", async (req, res) => {
     let currentPokemon = await fetch(
-      `https://pokeapi.co/api/v2/pokemon/${req.session.user!.currentPokemon?.name}`
+      `https://pokeapi.co/api/v2/pokemon/${
+        req.session.user!.currentPokemon?.name
+      }`
     );
     let current: any = await currentPokemon.json();
     let sortedPokemons: APIPokemon[] = pokemons;
@@ -200,38 +205,52 @@ export default function pokemonGameRoutes() {
   });
 
   router.get("/pokedex", async (req, res) => {
-    const currentPokemonRes = await fetch(`https://pokeapi.co/api/v2/pokemon/${req.session.user!.currentPokemon?.name}`);
+    const currentPokemonRes = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${
+        req.session.user!.currentPokemon?.name
+      }`
+    );
     console.log(currentPokemonRes);
-    const search = req.query.search ?? '';
-    const type = req.query.type ?? '';
+    const search = req.query.search ?? "";
+    const type = req.query.type ?? "";
     const page = parseInt(req.query.page as string) || 1;
     const limit = 20;
     const skip = (page - 1) * limit;
     let SortedPokemons: APIPokemon[] = pokemons;
-    if(search){
-      const searchRegex = new RegExp(search as string, 'i');
-       SortedPokemons = SortedPokemons.filter((pokemon: APIPokemon)=> {
+    if (search) {
+      const searchRegex = new RegExp(search as string, "i");
+      SortedPokemons = SortedPokemons.filter((pokemon: APIPokemon) => {
         return searchRegex.test(pokemon.name);
       });
     }
-    if(type){
-      SortedPokemons = SortedPokemons.filter((pokemon: APIPokemon)=> {
+    if (type) {
+      SortedPokemons = SortedPokemons.filter((pokemon: APIPokemon) => {
         return pokemon.types.some((pokemonType: Type) => {
-          return pokemonType.type.name === type
-        })
+          return pokemonType.type.name === type;
+        });
       });
     }
     const currentPokemon = await currentPokemonRes.json();
     const totalItems = SortedPokemons.length;
     const items = SortedPokemons.slice(skip, skip + limit);
     const totalPages = Math.ceil(totalItems / limit);
-    res.render("pokedex", {pokemons: items, search, type, totalPages: totalPages, currentPage: page, currentPokemon: currentPokemon.sprites.other["official-artwork"]["front_default"]});
+    res.render("pokedex", {
+      pokemons: items,
+      search,
+      type,
+      totalPages: totalPages,
+      currentPage: page,
+      currentPokemon:
+        currentPokemon.sprites.other["official-artwork"]["front_default"],
+    });
   });
 
   router.get("/quiz", async (req, res) => {
     randomPokemon().then(async (data) => {
       let currentPokemon = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/${req.session.user!.currentPokemon?.name}`
+        `https://pokeapi.co/api/v2/pokemon/${
+          req.session.user!.currentPokemon?.name
+        }`
       );
       let current: any = await currentPokemon.json();
       req.session.answer = data.name;
@@ -276,16 +295,18 @@ export default function pokemonGameRoutes() {
 
   router.get("/battle", async (req, res) => {
     let currentPokemon = await fetch(
-      `https://pokeapi.co/api/v2/pokemon/${req.session.user!.currentPokemon?.name}`
+      `https://pokeapi.co/api/v2/pokemon/${
+        req.session.user!.currentPokemon?.name
+      }`
     );
     let current = await currentPokemon.json();
-    let opponent = await randomPokemon()
+    let opponent = await randomPokemon();
     res.render("battle", {
       yourPokemon: current,
-      yourHP: current.stats[0].base_stat-5,
+      yourHP: current.stats[0].base_stat - 5,
       yourMaxHP: current.stats[0].base_stat,
       opponentPokemon: opponent,
-      opponentHP: opponent.stats[0].base_stat-12,
+      opponentHP: opponent.stats[0].base_stat - 12,
       opponentMaxHP: opponent.stats[0].base_stat,
       currentPokemon:
         current.sprites.other["official-artwork"]["front_default"],
@@ -294,8 +315,6 @@ export default function pokemonGameRoutes() {
 
   router.post("/battle", async (req, res) => {
     //implement attack and defense calculation
-
-    
   });
 
   router.get("/starter", (req, res) => {

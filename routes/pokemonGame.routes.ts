@@ -2,7 +2,6 @@ import express from "express";
 import { pokemons } from "../app";
 import { APIPokemon, Pokemon, Type } from "../types";
 import { secureMiddleware } from "../middleware/secureMiddleware";
-import { randomPokemon } from "../app";
 import {
   capturedPokemon,
   getAllPokemons,
@@ -12,6 +11,22 @@ import {
   releasePokemon,
 } from "../database";
 import e from "express";
+export async function randomPokemon() {
+  try {
+    // Fetch the total count of Pokémon
+    let count = pokemons.length;
+
+    // Generate a random Pokémon ID
+    let random = Math.floor(Math.random() * count) + 1;
+    let data = await pokemons.find(
+      (pokemon: { id: number }) => pokemon.id === random
+    );
+    return data;
+  } catch (error) {
+    console.error(error);
+    return randomPokemon();
+  }
+}
 
 export default function pokemonGameRoutes() {
   const router = express.Router();
@@ -144,6 +159,7 @@ export default function pokemonGameRoutes() {
       }
       let pokemon: Pokemon = {
         name: name,
+        nickname: name,
         attack: req.session.randomPokemon.attack,
         defense: req.session.randomPokemon.defense,
       };
@@ -195,10 +211,38 @@ export default function pokemonGameRoutes() {
         req.session.user!.currentPokemon?.name
       }`
     );
+    let random: APIPokemon = await randomPokemon();
     let current: any = await currentPokemon.json();
     let sortedPokemons: APIPokemon[] = pokemons;
     res.render("compare", {
       pokemons: sortedPokemons,
+      firstPokemon: current,
+      secondPokemon: random,
+      currentPokemon:
+        current.sprites.other["official-artwork"]["front_default"],
+    });
+  });
+
+  router.post("/compare", async (req, res) => {
+    let sortedPokemons: APIPokemon[] = pokemons;
+    let currentPokemon = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${
+        req.session.user!.currentPokemon?.name
+      }`
+    );
+    let current: any = await currentPokemon.json();
+    let pokemon1 = req.body.firstPokemon;
+    let firstPokemon: APIPokemon = await pokemons.find(
+      (pokemon: { name: string }) => pokemon.name === pokemon1
+    );
+    let pokemon2 = req.body.secondPokemon;
+    let secondPokemon: APIPokemon = await pokemons.find(
+      (pokemon: { name: string }) => pokemon.name === pokemon2
+    );
+    res.render("compare", {
+      pokemons: sortedPokemons,
+      firstPokemon: firstPokemon,
+      secondPokemon: secondPokemon,
       currentPokemon:
         current.sprites.other["official-artwork"]["front_default"],
     });
@@ -329,6 +373,7 @@ export default function pokemonGameRoutes() {
     let data = await response.json();
     let pokemon: Pokemon = {
       name: data.name,
+      nickname: data.name,
       attack: data.stats[1].base_stat,
       defense: data.stats[2].base_stat,
     };

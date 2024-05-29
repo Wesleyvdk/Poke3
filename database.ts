@@ -1,6 +1,6 @@
 import { Collection, MongoClient } from "mongodb";
 import { APIPokemon, Pokemon, User } from "./types";
-import { randomPokemon } from "./app";
+import { randomPokemon } from "./routes/pokemonGame.routes";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import session from "./session";
@@ -32,6 +32,7 @@ export async function seed() {
       if (response) {
         let data: Pokemon = {
           name: response.name,
+          nickname: response.name,
           attack: response.stats[1].base_stat,
           defense: response.stats[2].base_stat,
         };

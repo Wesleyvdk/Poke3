@@ -3,7 +3,6 @@ import { pokemons } from "../app";
 import { APIPokemon, Pokemon, Type } from "../types";
 import { secureMiddleware } from "../middleware/secureMiddleware";
 import { randomPokemon } from "../app";
-import { Pokemon } from "../types";
 import {
   capturedPokemon,
   getCurrentPokemon,
@@ -188,7 +187,7 @@ export default function pokemonGameRoutes() {
 
   router.get("/compare", async (req, res) => {
     let currentPokemon = await fetch(
-      `https://pokeapi.co/api/v2/pokemon/${req.session.user!.currentPokemon}`
+      `https://pokeapi.co/api/v2/pokemon/${req.session.user!.currentPokemon?.name}`
     );
     let current: any = await currentPokemon.json();
     res.render("compare", {
@@ -198,7 +197,7 @@ export default function pokemonGameRoutes() {
   });
 
   router.get("/pokedex", async (req, res) => {
-    const currentPokemonRes = await fetch(`https://pokeapi.co/api/v2/pokemon/${req.session.user!.currentPokemon}`);
+    const currentPokemonRes = await fetch(`https://pokeapi.co/api/v2/pokemon/${req.session.user!.currentPokemon?.name}`);
     console.log(currentPokemonRes);
     const search = req.query.search ?? '';
     const type = req.query.type ?? '';
@@ -229,7 +228,7 @@ export default function pokemonGameRoutes() {
   router.get("/quiz", async (req, res) => {
     randomPokemon().then(async (data) => {
       let currentPokemon = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/${req.session.user!.currentPokemon}`
+        `https://pokeapi.co/api/v2/pokemon/${req.session.user!.currentPokemon?.name}`
       );
       let current: any = await currentPokemon.json();
       req.session.answer = data.name;
@@ -274,13 +273,26 @@ export default function pokemonGameRoutes() {
 
   router.get("/battle", async (req, res) => {
     let currentPokemon = await fetch(
-      `https://pokeapi.co/api/v2/pokemon/${req.session.user!.currentPokemon}`
+      `https://pokeapi.co/api/v2/pokemon/${req.session.user!.currentPokemon?.name}`
     );
-    let current: any = await currentPokemon.json();
+    let current = await currentPokemon.json();
+    let opponent = await randomPokemon()
     res.render("battle", {
+      yourPokemon: current,
+      yourHP: current.stats[0].base_stat-5,
+      yourMaxHP: current.stats[0].base_stat,
+      opponentPokemon: opponent,
+      opponentHP: opponent.stats[0].base_stat-12,
+      opponentMaxHP: opponent.stats[0].base_stat,
       currentPokemon:
         current.sprites.other["official-artwork"]["front_default"],
     });
+  });
+
+  router.post("/battle", async (req, res) => {
+    //implement attack and defense calculation
+
+    
   });
 
   router.get("/starter", (req, res) => {

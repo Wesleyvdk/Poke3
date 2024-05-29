@@ -1,5 +1,5 @@
 import express from "express";
-import { pokemons, randomPokemon } from "../app";
+import { pokemons } from "../app";
 import { APIPokemon, Pokemon, Type } from "../types";
 import { secureMiddleware } from "../middleware/secureMiddleware";
 import {
@@ -33,7 +33,7 @@ export default function pokemonGameRoutes() {
   const router = express.Router();
   router.get("/", async (req, res) => {
     let user = req.session.user!;
-    let currentPokemon = getCurrentPokemon(user.email!);
+    let currentPokemon = await pokemons[0];
     if (!user) {
       res.redirect("/login");
       return;
@@ -41,7 +41,7 @@ export default function pokemonGameRoutes() {
     if (!user.currentPokemon) {
       res.redirect("pokemon/starter");
     }
-    res.render("landing");
+    res.render("landing", {currentPokemon});
   });
 
   router.get("/capture", async (req, res) => {

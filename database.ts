@@ -3,15 +3,12 @@ import { APIPokemon, Pokemon, User } from "./types";
 import { randomPokemon } from "./routes/pokemonGame.routes";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
-import session from "./session";
-import exp from "constants";
+import { pokemons } from "./app";
 dotenv.config();
 
 const uri = process.env.MONGO_URI ?? "";
 const client = new MongoClient(uri);
-
 const userCollection: Collection = client.db("poke3").collection("users");
-
 const saltRounds: number = 10;
 
 export async function exit() {
